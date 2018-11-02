@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" serie="B" folio="149218" fecha="2016-07-12T16:43:05" sello="aglEW3qDrY2Y5XSYVEnEh1y6GQ0dAqfrbGxk0vM3iHsHzru4JTHNUTVCtVQ6LpMNdmJ6oF7/PlZmm+Tgg6mZ13aRgDC+zo9wOBqW1BP/Ixxi70ArYPj3s1lmGRvetwUwn0LNWgDqgh/9LWmCbsUYnjpl1klO7jeUmyxklJlr5mM=" formaDePago="PAGO EN UNA SOLA EXHIBICION" noCertificado="00001000000202508313" certificado="MIIEqTCCA5GgAwIBAgIUMDAwMDEwMDAwMDAyMDI1MDgzMTMwDQYJKoZIhvcNAQEFBQAwggGVMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSEwHwYJKoZIhvcNAQkBFhJhc2lzbmV0QHNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxFDASBgNVBAcMC0N1YXVodMOpbW9jMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxPjA8BgkqhkiG9w0BCQIML1Jlc3BvbnNhYmxlOiBDZWNpbGlhIEd1aWxsZXJtaW5hIEdhcmPDrWEgR3VlcnJhMB4XDTEyMTIwNDIxMTM1MVoXDTE2MTIwNDIxMTM1MVowgeoxIzAhBgNVBAMTGkNBU0NPIFRSQU5TUE9SVEVTIFNBIERFIENWMSMwIQYDVQQpExpDQVNDTyBUUkFOU1BPUlRFUyBTQSBERSBDVjEjMCEGA1UEChMaQ0FTQ08gVFJBTlNQT1JURVMgU0EgREUgQ1YxJTAjBgNVBC0THENUUjAzMDEyM0lDQSAvIEdBR0E1OTAzMTU2STcxHjAcBgNVBAUTFSAvIEdBR0E1OTAzMTVITkxSUlAxNjEyMDAGA1UECxMpQ0FSUkVURVJBIE1JR1VFTCBBTEVNQU4gS00gMjQgQ09MLiBDRU5UUk8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMBYWFqB/fqt8n319XFhhEb6KjRBT23V3A9rxKdsQ/vi374RBxAsZTRhRCQniP6Lf7ludhiorWMKsVDfq0rsDVlgGDecfgCRgcEVSohcr2WZLuzlxpYunXSv5kel6X4xqpwrwTQR716ZTOGxiB3lYJYLnIvBly7oCE5stoF2myyXAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQBuKz3kUSnH9Z/6xVtAYrlPtFIlfHBpRH3yvGOjc6PttrsFS6GiQbvJoKIu7uaszjfylxdOfp+InnsC+MIaV83jKX73uVt/3QSEugDS4EHSz9KLRoKgtOYIVms+thh4DjwxBz9koPIGVpAIPcFYzNk3wHfdaBoXnreZd5+UCujM0QRx3qU8vNULfmZZyiwhTkd/kTxRVuXfgXWkKiXlrn3+14p/PD3SkdhsEJfyoVjS9l3lVInhH7Bphr4hpXyoKcWTRf50cKAw+kzjgwxBfDheCPYuJFPVNAptYuP/ID66E9v1XHXTLRQjM7QClvK/+RcnvWwt1OSaOjS0a64cCZxQ" subTotal="270.00" total="270.00" tipoDeComprobante="ingreso" metodoDePago="EFECTIVO" LugarExpedicion="APODACA">
+  <cfdi:Emisor rfc="CTR030123ICA" nombre="CASCO TRANSPORTES SA DE CV">
+    <cfdi:DomicilioFiscal calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:ExpedidoEn calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:RegimenFiscal Regimen="REGIMEN GENERAL DE LEY PERSONAS MORALES" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="BBS001025HP2" nombre="BBVA BANCOMER SERVICIOS ADMINISTRATIVOS, S.A. DE C.V.">
+    <cfdi:Domicilio calle="AV. PASEO DE LA REFORMA" noExterior="510" colonia="JUAREZ" localidad="CUAUHTEMOC" municipio="MEXICO" estado="DISTRITO FEDERAL" pais="MEXICO" codigoPostal="06600" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1.00" unidad="NO APLICA" noIdentificacion="65316070805400115" descripcion="Transporte Público Terrestre de Personas. Servicio del 08/07/2016" valorUnitario="270.00" importe="270.00" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosRetenidos="0.00" totalImpuestosTrasladados="0.00">
+    <cfdi:Retenciones>
+      <cfdi:Retencion impuesto="IVA" importe="0.00" />
+    </cfdi:Retenciones>
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="0.00" importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="21105dd5-ecb3-4bd2-a2bc-2c1fbd3666e9" FechaTimbrado="2016-07-12T17:43:18" selloCFD="aglEW3qDrY2Y5XSYVEnEh1y6GQ0dAqfrbGxk0vM3iHsHzru4JTHNUTVCtVQ6LpMNdmJ6oF7/PlZmm+Tgg6mZ13aRgDC+zo9wOBqW1BP/Ixxi70ArYPj3s1lmGRvetwUwn0LNWgDqgh/9LWmCbsUYnjpl1klO7jeUmyxklJlr5mM=" noCertificadoSAT="00001000000202693892" selloSAT="sduduUmB+RdUSQo+uba/s0yvRci3FAMxf4VNKd8aGl51Rx0t+VEjYLiS+0dT3Wc5SLpFL7SmHimsrYOeJLNdPxxPT/MnK+AOtN2CM3pDs8X2FnFkywUoFT0i+TyBUO9V/JyBcJK0ISse2bqY97m/xS3JSzzKENspoJ7EWLl6vpE=" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

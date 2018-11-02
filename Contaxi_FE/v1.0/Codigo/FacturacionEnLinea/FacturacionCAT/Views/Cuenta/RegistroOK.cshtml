@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Registro Exitoso";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<article class="PanelBcoRedondeado">
+    <header><h2>Registro Exitoso</h2></header>
+    <br />
+    <div>
+        Sus datos han sido recibidos por el sistema, sin embargo es necesario que confirme su dirección de correo electronico, 
+        por favor revise la siguiente cuenta de correo electrónico <strong>@Session["Registro_CorreoElectronico"]</strong> y siga las instrucciones para activar su cuenta.
+
+        <br />
+        <h2>@Html.ActionLink("Continuar", "Login", "Cuenta")</h2>
+    </div>
+</article>

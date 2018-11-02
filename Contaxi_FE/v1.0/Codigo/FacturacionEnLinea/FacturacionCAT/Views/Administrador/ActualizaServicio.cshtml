@@ -1,0 +1,187 @@
+﻿@{
+    ViewBag.Title = "Actualiza Información del Servicio";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Actualizar Información del Servicio
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2 lblSmall" for="txtID"># Servicio</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txtID" placeholder="..." />
+                        </div>
+                        <div class="col-sm-7">
+                            <button type="button" id="btnConsultar" class="btn btn-default btn-lg">Consultar</button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2 lblSmall" for="txtFolio"># Servicio</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtFolio" readonly />
+                        </div>
+                        <label class="control-label col-sm-2 lblSmall" for="txtEmisor">Emisor</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="txtEmisor">
+                                <option value="CTR030123ICA">CASCO TRANSPORTES SA DE CV</option>
+                                <option value="TEM9211234J0" selected>Taxis Económicos de Monterrey SA de CV</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2 lblSmall" for="txtMP">Método de Pago</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="txtMP">
+                                <option value="1" selected>01 EFECTIVO</option>
+                                <option value="4">04 TARJETA DE CREDITO</option>
+                                <option value="5">05 MONEDERO ELECTRONICO</option>
+                                <option value="7">08 VALES DE DESPENSA</option>
+                                <option value="8">28 TARJETA DE DEBITO</option>
+                                <option value="9">29 TARJETA DE SERVICIO</option>
+                                <option value="10">99 OTROS</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2 lblSmall" for="txtCtaBanco">Cuenta Banco</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtCtaBanco" />
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2 lblSmall" for="txtMonto">Monto</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtMonto" />
+                        </div>
+                        <label class="control-label col-sm-2 lblSmall" for="txtFecha">Fecha</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtFecha" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <button type="button" id="btnActualizar" class="btn btn-default btn-lg">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+
+@section scripts
+ {
+    <script type="text/javascript">
+        var rutaActualizaServicio = '@Url.Action("ActualizaInfoServicio", "Administrador")';
+        var rutaConsultaServicio = '@Url.Action("ConsultaInfoServicio", "Administrador")';
+        var rutaEmisores = '@Url.Action("ObtieneEmisores", "Administrador")';
+        var servicio_act;
+
+        $(document).ready(function () {
+            $('#btnConsultar').on('click', ConsultaServicio);
+            $('#btnActualizar').on('click', ActualizaInformacion);
+
+            SetEmisores();
+
+            $('#txtMonto').numeric();
+            $('#txtID').numeric().on('keypress', function (evt, hdl) {
+                if (evt.which == 13) {
+                    evt.preventDefault();
+                    $('#btnConsultar').trigger('click');
+                }
+            }).focus();
+        });
+
+        function SetEmisores() {
+            $.ajax({
+                type: "POST",
+                url: rutaEmisores,
+                cache: false,
+                dataType: 'json',
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var cmb = $("#txtEmisor");
+                    cmb.empty();
+                    $.each(data, function (idx, obj) {
+                        var opt = $('<option value="' + obj.Value + '">' + obj.Text + '</option>');
+                        opt.appendTo(cmb);
+                    });
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+
+        function ConsultaServicio(evt, hdl) {
+            var sservicio = $('#txtID').val();
+
+            if (sservicio.length <= 0) {
+                alert("Es necesario introducir el número de servicio");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: rutaConsultaServicio,
+                cache: false,
+                dataType: 'json',
+                data: JSON.stringify({ servicio: sservicio }),
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: SetInfoServicios,
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+
+        function SetInfoServicios(servicio) {
+            servicio_act = servicio;
+            $("#txtFolio").val(servicio_act.Folio);
+            $("#txtEmisor").val(servicio_act.RFC_Emisor);
+            $("#txtMP").val(servicio_act.MetodoPago_ID);
+            $("#txtCtaBanco").val(servicio_act.CtaBanco);
+            $("#txtMonto").val(servicio_act.Monto);
+            $("#txtFecha").val(servicio_act.Fecha);
+        }
+
+        function GetInfoServicio() {
+            servicio_act.Folio = $("#txtFolio").val();
+            servicio_act.RFC_Emisor = $("#txtEmisor").val();
+            servicio_act.MetodoPago_ID = $("#txtMP").val();
+            servicio_act.CtaBanco = $("#txtCtaBanco").val();
+            servicio_act.Monto = $("#txtMonto").val();
+            return servicio_act;
+        }
+
+        function ActualizaInformacion(evt, hdl) {
+            var s = GetInfoServicio();
+
+            $.ajax({
+                type: "POST",
+                url: rutaActualizaServicio,
+                cache: false,
+                dataType: 'json',
+                data: JSON.stringify({ servicio: s }),
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (!data.Resultado) {
+                        alert(data.Mensaje);
+                    }
+                    else {
+                        alert("Servicio Actualizado con éxito.");
+                    }
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+    </script>
+}

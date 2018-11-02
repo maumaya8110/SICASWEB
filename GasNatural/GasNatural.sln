@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GasNatural", "GasNatural.csproj", "{4FD0449E-D22B-43DA-B8B2-E6DE686007E2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASCO.DAO", "..\CASCO.DAO\CASCO.DAO.csproj", "{1412DAB3-C1D9-42ED-97C9-0898B6382775}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CASCO.EN", "..\CASCO.EN\CASCO.EN.csproj", "{C93BD3E0-017B-42F5-98B6-9158ED42F725}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FD0449E-D22B-43DA-B8B2-E6DE686007E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FD0449E-D22B-43DA-B8B2-E6DE686007E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FD0449E-D22B-43DA-B8B2-E6DE686007E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FD0449E-D22B-43DA-B8B2-E6DE686007E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1412DAB3-C1D9-42ED-97C9-0898B6382775}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1412DAB3-C1D9-42ED-97C9-0898B6382775}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1412DAB3-C1D9-42ED-97C9-0898B6382775}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1412DAB3-C1D9-42ED-97C9-0898B6382775}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C93BD3E0-017B-42F5-98B6-9158ED42F725}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C93BD3E0-017B-42F5-98B6-9158ED42F725}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C93BD3E0-017B-42F5-98B6-9158ED42F725}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C93BD3E0-017B-42F5-98B6-9158ED42F725}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

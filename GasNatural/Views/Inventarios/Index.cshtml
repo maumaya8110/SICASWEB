@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Inventarios";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 style="font-size:28px !important;"><span class="glyphicon glyphicon-list"></span> &nbsp;Levantamiento de Inventario</h1>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1" for="cmbBodegas">Bodega:</label>
+                        <div class="col-sm-4" id="selectBodegas">
+                            <select class="form-control" id="cmbBodegas" multiple data-placeholder="Seleccione una Bodega"></select>
+                        </div>
+                        <label class="control-label col-sm-1" for="dteFecha">Fecha:</label>
+                        <div class="col-sm-2">
+                            <div class='input-group date' id='dteFecha'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <button class="btn btn-sm" title="Consultar" id="btnConsulta"><span class="glyphicon glyphicon-search"></span>Consultar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Funciones/General.js")
+    <script type="text/javascript">
+        var rutaConsultaBodegas = "@Url.Action("ObtieneListaBodegas", "Inventarios")";
+
+        $(document).ready(function () {
+            $('#dteFecha').datetimepicker({ defaultDate: new Date(), format: 'DD/MM/YYYY' });
+            $('#btnConsulta').on('click', Consultar);
+
+            var lbodegas = ObtieneListaJson(null, rutaConsultaBodegas);
+            var cmb = $("#cmbBodegas");
+            RenderOpcionesEnComboWithEvents(cmb, lbodegas, null, false);
+
+            hideLoading();
+            $('#btnConsulta').trigger('click');
+        });
+
+        function Consultar(evt, hdl) {
+            evt.preventDefault();
+            alert('Consultando');
+        }
+
+    </script>
+}

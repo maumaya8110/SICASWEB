@@ -1,0 +1,197 @@
+﻿
+@{
+    ViewBag.Title = "Master";
+}
+<div class="row" style="padding-top:10px !important;">
+    <div class="col-sm-8">
+    </div>
+    <div class="col-sm-2">
+        <button class="gj-button" title="Exportar Información a Excel" id="btnExport"><span class="glyphicon glyphicon-export"></span>Exportar</button>
+    </div>
+    <div class="col-sm-2">
+        <button class="gj-button" title="Agrega un nuevo registro al Master" id="btnAdd"><span class="glyphicon glyphicon-plus"></span>Nuevo</button>
+    </div>
+</div>
+<div class="row" style="padding-top:10px !important;">
+    <div class="col-sm-12">
+        <div class="gj-margin-top-10" id="grid">
+            <table id="gridConsulta"></table>
+        </div>
+    </div>
+</div>
+
+<div id="dialog" class="gj-display-none">
+    <input type="hidden" id="ID" />
+    <form>
+        <div>
+            <label for="NumeroEconomico" class="gj-bold">Economico:</label>
+            <input type="text" class="gj-frm-ctrl gj-width-240" id="NumeroEconomico">
+        </div>
+        <div style="padding-top:10px !important;" ">
+            <label for="SerieRegulador" class="gj-bold">Regulador:</label>
+            <input type="text" class="gj-frm-ctrl gj-width-240" id="SerieRegulador" />
+        </div>
+        <div style="padding-top:10px !important;">
+            <label for="SerieCilindro" class="gj-bold">Cilindro:</label>
+            <input type="text" class="gj-frm-ctrl gj-width-240" id="SerieCilindro" />
+        </div>
+        <div style="padding-top:10px !important;">
+            <button type="button" id="btnSave" class="gj-button">Guardar</button>
+            <button type="button" id="btnCancel" class="gj-button">Cancelar</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Funciones/General.js")
+    <script type="text/javascript">
+        var dgrid, dialog;
+        var lResult;
+        var rutaConsultaMaster = "@Url.Action("ObtieneMaster", "Master")";
+        var rutaInsertaRegistroMaster = "@Url.Action("InsertaRegistro", "Master")";
+        var lCols = [
+                    { title: 'Empresa', field: 'Empresa', width: 35 },
+                    { title: 'Estación', field: 'Estacion', width: 35 },
+                    { title: '#', field: 'NumeroEconomico', width: 15, sortable: true },
+                    { title: 'Regulador', field: 'SerieRegulador', width: 30, sortable: true },
+                    { title: 'Cilindro', field: 'SerieCilindro', width: 35, sortable: true },
+                    { title: 'Conductor', field: 'Conductor', width: 80 },
+                    { title: 'Locacion', field: 'Locacion', width: 40 },
+                    { title: 'Modelo', field: 'Modelo', width: 40 },
+                    { title: 'Placas', field: 'Placas', width: 35 },
+                    { title: 'Numero de Serie', field: 'NumeroSerie', width: 55 },
+                    { width: 50, tmpl: '<a href="#">Editar</a>', align: 'center', events: { 'click': Edit } }
+        ];
+
+        $(document).ready(function () {
+            dialog = $('#dialog').dialog({
+                title: 'Agregar / Editar Registro',
+                autoOpen: false,
+                resizable: false,
+                modal: true
+            });
+
+            $('#btnExport').on('click', ExportaJSON);
+
+            $('#btnAdd').on('click', function () {
+                $('#ID').val('');
+                $('#NumeroEconomico').val('');
+                $('#SerieRegulador').val('');
+                $('#SerieCilindro').val('');
+                dialog.open();
+            });
+
+            $('#btnSave').on('click', Save);
+
+            $('#btnCancel').on('click', function () { dialog.close(); });
+
+            Consultar();
+            hideLoading();
+        });
+
+        function Consultar(evt, hdl) {
+            if (evt != undefined && evt != null)
+                evt.preventDefault();
+            lResult = ObtieneListaJson(null, rutaConsultaMaster);
+            var arrsizes = [];
+            var auxInc = 15;
+            var iinc = auxInc;
+            if (lResult.length > 0) {
+                while (iinc <= 90 && iinc < lResult.length) {
+                    arrsizes.push(iinc);
+                    iinc = iinc + 15;
+                }
+            }
+            if (lResult.length > iinc) {
+                arrsizes.push(lResult.length);
+            }
+            var grid = $('#grid');
+            grid.empty();
+            dgrid = $('<table id="gridConsulta"></table>');
+            dgrid.grid({
+                uiLibrary: 'bootstrap'
+                , title: 'Master Equipos de Gas'
+                , primaryKey: 'id'
+                , dataSource: lResult
+                , resizableColumns: true
+                , notFoundText: 'No hay información con los parámetros indicados'
+                , columns: lCols
+                , pager: { limit: auxInc, sizes: arrsizes }
+                , responsive: true
+            }).appendTo(grid);
+        };
+
+        function Edit(e) {
+            if (e != undefined && e != null)
+                e.preventDefault();
+            $('#ID').val(e.data.id);
+            $('#NumeroEconomico').val(e.data.record.NumeroEconomico);
+            $('#SerieRegulador').val(e.data.record.SerieRegulador);
+            $('#SerieCilindro').val(e.data.record.SerieCilindro);
+            dialog.open();
+        }
+
+        function Save(e) {
+            if (e != undefined && e != null)
+                e.preventDefault();
+            var record = {
+                ID: $('#ID').val(),
+                NumeroEconomico: $('#NumeroEconomico').val(),
+                SerieRegulador: $('#SerieRegulador').val(),
+                SerieCilindro: $('#SerieCilindro').val()
+            };
+            $.ajax({
+                method: 'POST',
+                url: rutaInsertaRegistroMaster,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(record),
+                success: function (data) {
+                    if (data != undefined){
+                        if (data != true) {
+                            alert(data);
+                        }
+                    }
+                }
+            }).done(function () {
+                dialog.close();
+                Consultar();
+            }).fail(function (xhr, status, error) {
+                alert(error);
+                dialog.close();
+            });
+        }
+
+        function ExportaJSON(e, h) {
+            e.preventDefault();
+            if (lResult == "null" || lResult == null || lResult.length == 0) {
+                alert('No hay información para exportar');
+                return;
+            }
+            var ret = [];
+            $.each(lResult, function (ixdx, xrow) {
+                var filaaux_n = {};
+                for (jdx = 0; jdx < (lCols.length - 1); jdx++) {
+                    var sncampo = lCols[jdx].field;
+                    var sncolumna = lCols[jdx].title;
+                    var xxooo = xrow[sncampo];
+                    if (lCols[jdx].type == "date") {
+                        var moment_campofecha = moment(xxooo);
+                        var moment_minfecha = moment(new Date(-62135575200000));
+                        if (!moment_campofecha.isSame(moment_minfecha))
+                            xxooo = moment(xxooo).format("DD/MM/YYYY");
+                        else
+                            xxooo = "";
+                    }
+                    if (!xxooo)
+                        xxooo = "";
+                    filaaux_n[sncolumna] = xxooo;
+                };
+                ret.push(filaaux_n);
+            });
+            JSONToCSVConvertor(ret, "Master Equipos de Gas", true);
+        }
+    </script>
+}

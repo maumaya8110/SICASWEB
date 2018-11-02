@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd</title><link href="http%20_www.sat.gob.mx_sitio_internet_cfd_3_cfdv32.xsd%20Archivos/viewsource.css" type="text/css" rel="stylesheet" /></head><body style="-moz-tab-size: 4" class="highlight" id="viewsource" contextmenu="actions"><pre id="line1"><span></span><span class="pi">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span><span>
+<span id="line2"></span></span><span class="comment">&lt;!-- edited with XMLSpy v2010 rel. 3 (http://www.altova.com) by SAT (SAT) --&gt;</span><span>
+<span id="line3"></span></span><span>&lt;<span class="start-tag">xs:schema</span> <span class="attribute-name">xmlns:cfdi</span>="<a class="attribute-value">http://www.sat.gob.mx/cfd/3</a>" <span class="attribute-name">xmlns:xs</span>="<a class="attribute-value">http://www.w3.org/2001/XMLSchema</a>" <span class="attribute-name">targetNamespace</span>="<a class="attribute-value">http://www.sat.gob.mx/cfd/3</a>" <span class="attribute-name">elementFormDefault</span>="<a class="attribute-value">qualified</a>" <span class="attribute-name">attributeFormDefault</span>="<a class="attribute-value">unqualified</a>"&gt;</span><span>
+<span id="line4"></span>	</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Comprobante</a>"&gt;</span><span>
+<span id="line5"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line6"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Estándar de Comprobante fiscal digital a través de Internet.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line7"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line8"></span>		</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line9"></span>			</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line10"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Emisor</a>"&gt;</span><span>
+<span id="line11"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line12"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo requerido para expresar la información del contribuyente emisor del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line13"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line14"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line15"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line16"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">DomicilioFiscal</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_UbicacionFiscal</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line17"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line18"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para precisar la información de ubicación del domicilio fiscal del contribuyente emisor</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line19"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line20"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line21"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">ExpedidoEn</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Ubicacion</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line22"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line23"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para precisar la información de ubicación del domicilio en donde es emitido el comprobante fiscal en caso de que sea distinto del domicilio fiscal del contribuyente emisor.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line24"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line25"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line26"></span>							</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line27"></span>								</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">RegimenFiscal</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line28"></span>									</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line29"></span>										</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo requerido para incorporar los regímenes en los que tributa el contribuyente emisor. Puede contener más de un régimen.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line30"></span>									</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line31"></span>									</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line32"></span>										</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">Regimen</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line33"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line34"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para incorporar el nombre del régimen en el que tributa el contribuyente emisor.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line35"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line36"></span>											</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line37"></span>												</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line38"></span>													</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line39"></span>													</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line40"></span>												</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line41"></span>											</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line42"></span>										</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line43"></span>									</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line44"></span>								</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line45"></span>							</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line46"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line47"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">rfc</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_RFC</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line48"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line49"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para la Clave del Registro Federal de Contribuyentes correspondiente al contribuyente emisor del comprobante sin guiones o espacios.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line50"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line51"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line52"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">nombre</a>"&gt;</span><span>
+<span id="line53"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line54"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para el nombre, denominación o razón social del contribuyente emisor del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line55"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line56"></span>							</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line57"></span>								</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line58"></span>									</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line59"></span>									</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line60"></span>								</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line61"></span>							</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line62"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line63"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line64"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line65"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Receptor</a>"&gt;</span><span>
+<span id="line66"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line67"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo requerido para precisar la información del contribuyente receptor del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line68"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line69"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line70"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line71"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Domicilio</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Ubicacion</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line72"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line73"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para la definición de la ubicación donde se da el domicilio del receptor del comprobante fiscal.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line74"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line75"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line76"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line77"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">rfc</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_RFC</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line78"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line79"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la Clave del Registro Federal de Contribuyentes correspondiente al contribuyente receptor del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line80"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line81"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line82"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">nombre</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line83"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line84"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para el nombre, denominación o razón social del contribuyente receptor del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line85"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line86"></span>							</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line87"></span>								</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line88"></span>									</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line89"></span>									</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line90"></span>								</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line91"></span>							</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line92"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line93"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line94"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line95"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Conceptos</a>"&gt;</span><span>
+<span id="line96"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line97"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo requerido para enlistar los conceptos cubiertos por el comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line98"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line99"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line100"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line101"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Concepto</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line102"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line103"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo para introducir la información detallada de un bien o servicio amparado en el comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line104"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line105"></span>								</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line106"></span>									</span><span>&lt;<span class="start-tag">xs:choice</span> <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line107"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">InformacionAduanera</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_InformacionAduanera</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line108"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line109"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para introducir la información aduanera aplicable cuando se trate de ventas de primera mano de mercancías importadas.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line110"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line111"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line112"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">CuentaPredial</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line113"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line114"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para asentar el número de cuenta predial con el que fue registrado el inmueble, en el sistema catastral de la entidad federativa de que trate, o bien para incorporar los datos de identificación del certificado de participación inmobiliaria no amortizable.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line115"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line116"></span>											</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line117"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">numero</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line118"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line119"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar el número de la cuenta predial del inmueble cubierto por el presente concepto, o bien para incorporar los datos de identificación del certificado de participación inmobiliaria no amortizable, tratándose de arrendamiento.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line120"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line121"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line122"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line123"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line124"></span>															</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line125"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line126"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line127"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line128"></span>											</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line129"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line130"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">ComplementoConcepto</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line131"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line132"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional donde se incluirán los nodos complementarios de extensión al concepto, definidos por el SAT, de acuerdo a disposiciones particulares a un sector o actividad especifica.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line133"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line134"></span>											</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line135"></span>												</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line136"></span>													</span><span>&lt;<span class="start-tag">xs:any</span> <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"<span>/</span>&gt;</span><span>
+<span id="line137"></span>												</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line138"></span>											</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line139"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line140"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Parte</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line141"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line142"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para expresar las partes o componentes que integran la totalidad del concepto expresado en el comprobante fiscal digital a través de Internet</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line143"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line144"></span>											</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line145"></span>												</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line146"></span>													</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">InformacionAduanera</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_InformacionAduanera</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line147"></span>														</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line148"></span>															</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para introducir la información aduanera aplicable cuando se trate de partes o componentes importados vendidos de primera mano.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line149"></span>														</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line150"></span>													</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line151"></span>												</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line152"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">cantidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line153"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line154"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la cantidad de bienes o servicios del tipo particular definido por la presente parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line155"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line156"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line157"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:decimal</a>"&gt;</span><span>
+<span id="line158"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line159"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line160"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line161"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line162"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">unidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line163"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line164"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para precisar la unidad de medida aplicable para la cantidad expresada en la parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line165"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line166"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line167"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line168"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line169"></span>															</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line170"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line171"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line172"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line173"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noIdentificacion</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line174"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line175"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar el número de serie del bien o identificador del servicio amparado por la presente parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line176"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line177"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line178"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line179"></span>															</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line180"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line181"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line182"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line183"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line184"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">descripcion</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line185"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line186"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la descripción del bien o servicio cubierto por la presente parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line187"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line188"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line189"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line190"></span>															</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line191"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line192"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line193"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line194"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line195"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">valorUnitario</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line196"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line197"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para precisar el valor o precio unitario del bien o servicio cubierto por la presente parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line198"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line199"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line200"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">importe</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line201"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line202"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para precisar el importe total de los bienes o servicios de la presente parte. Debe ser equivalente al resultado de multiplicar la cantidad por el valor unitario expresado en la parte.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line203"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line204"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line205"></span>											</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line206"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line207"></span>									</span><span>&lt;/<span class="end-tag">xs:choice</span>&gt;</span><span>
+<span id="line208"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">cantidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line209"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line210"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la cantidad de bienes o servicios del tipo particular definido por el presente concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line211"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line212"></span>										</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line213"></span>											</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:decimal</a>"&gt;</span><span>
+<span id="line214"></span>												</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line215"></span>											</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line216"></span>										</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line217"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line218"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">unidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line219"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line220"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la unidad de medida aplicable para la cantidad expresada en el concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line221"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line222"></span>										</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line223"></span>											</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line224"></span>												</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line225"></span>												</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line226"></span>											</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line227"></span>										</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line228"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line229"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noIdentificacion</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line230"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line231"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar el número de serie del bien o identificador del servicio amparado por el presente concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line232"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line233"></span>										</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line234"></span>											</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line235"></span>												</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line236"></span>												</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line237"></span>											</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line238"></span>										</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line239"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line240"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">descripcion</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line241"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line242"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la descripción del bien o servicio cubierto por el presente concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line243"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line244"></span>										</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line245"></span>											</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line246"></span>												</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line247"></span>												</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line248"></span>											</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line249"></span>										</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line250"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line251"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">valorUnitario</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line252"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line253"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar el valor o precio unitario del bien o servicio cubierto por el presente concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line254"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line255"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line256"></span>									</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">importe</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line257"></span>										</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line258"></span>											</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar el importe total de los bienes o servicios del presente concepto. Debe ser equivalente al resultado de multiplicar la cantidad por el valor unitario expresado en el concepto.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line259"></span>										</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line260"></span>									</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line261"></span>								</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line262"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line263"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line264"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line265"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line266"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Impuestos</a>"&gt;</span><span>
+<span id="line267"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line268"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo requerido para capturar los impuestos aplicables.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line269"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line270"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line271"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line272"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Retenciones</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line273"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line274"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para capturar los impuestos retenidos aplicables</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line275"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line276"></span>								</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line277"></span>									</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line278"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Retencion</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line279"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line280"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo para la información detallada de una retención de impuesto específico</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line281"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line282"></span>											</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line283"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">impuesto</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line284"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line285"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para señalar el tipo de impuesto retenido</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line286"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line287"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line288"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line289"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line290"></span>															</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">ISR</a>"&gt;</span><span>
+<span id="line291"></span>																</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line292"></span>																	</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Impuesto sobre la renta</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line293"></span>																</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line294"></span>															</span><span>&lt;/<span class="end-tag">xs:enumeration</span>&gt;</span><span>
+<span id="line295"></span>															</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">IVA</a>"&gt;</span><span>
+<span id="line296"></span>																</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line297"></span>																	</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Impuesto al Valor Agregado</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line298"></span>																</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line299"></span>															</span><span>&lt;/<span class="end-tag">xs:enumeration</span>&gt;</span><span>
+<span id="line300"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line301"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line302"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line303"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">importe</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line304"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line305"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para señalar el importe o monto del impuesto retenido</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line306"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line307"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line308"></span>											</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line309"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line310"></span>									</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line311"></span>								</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line312"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line313"></span>							</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Traslados</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line314"></span>								</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line315"></span>									</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para asentar o referir los impuestos trasladados aplicables</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line316"></span>								</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line317"></span>								</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line318"></span>									</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line319"></span>										</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Traslado</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"&gt;</span><span>
+<span id="line320"></span>											</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line321"></span>												</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo para la información detallada de un traslado de impuesto específico</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line322"></span>											</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line323"></span>											</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line324"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">impuesto</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line325"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line326"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para señalar el tipo de impuesto trasladado</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line327"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line328"></span>													</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line329"></span>														</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line330"></span>															</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line331"></span>															</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">IVA</a>"&gt;</span><span>
+<span id="line332"></span>																</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line333"></span>																	</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Impuesto al Valor Agregado</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line334"></span>																</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line335"></span>															</span><span>&lt;/<span class="end-tag">xs:enumeration</span>&gt;</span><span>
+<span id="line336"></span>															</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">IEPS</a>"&gt;</span><span>
+<span id="line337"></span>																</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line338"></span>																	</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Impuesto especial sobre productos y servicios</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line339"></span>																</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line340"></span>															</span><span>&lt;/<span class="end-tag">xs:enumeration</span>&gt;</span><span>
+<span id="line341"></span>														</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line342"></span>													</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line343"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line344"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">tasa</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line345"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line346"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para señalar la tasa del impuesto que se traslada por cada concepto amparado en el comprobante</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line347"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line348"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line349"></span>												</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">importe</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line350"></span>													</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line351"></span>														</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para señalar el importe del impuesto trasladado</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line352"></span>													</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line353"></span>												</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line354"></span>											</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line355"></span>										</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line356"></span>									</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line357"></span>								</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line358"></span>							</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line359"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line360"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">totalImpuestosRetenidos</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line361"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line362"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar el total de los impuestos retenidos que se desprenden de los conceptos expresados en el comprobante fiscal digital a través de Internet.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line363"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line364"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line365"></span>						</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">totalImpuestosTrasladados</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line366"></span>							</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line367"></span>								</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar el total de los impuestos trasladados que se desprenden de los conceptos expresados en el comprobante fiscal digital a través de Internet.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line368"></span>							</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line369"></span>						</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line370"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line371"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line372"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Complemento</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line373"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line374"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional donde se incluirá el complemento Timbre Fiscal Digital de manera obligatoria y los nodos complementarios determinados por el SAT, de acuerdo a las disposiciones particulares a un sector o actividad específica.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line375"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line376"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line377"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line378"></span>							</span><span>&lt;<span class="start-tag">xs:any</span> <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"<span>/</span>&gt;</span><span>
+<span id="line379"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line380"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line381"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line382"></span>				</span><span>&lt;<span class="start-tag">xs:element</span> <span class="attribute-name">name</span>="<a class="attribute-value">Addenda</a>" <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>"&gt;</span><span>
+<span id="line383"></span>					</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line384"></span>						</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Nodo opcional para recibir las extensiones al presente formato que sean de utilidad al contribuyente. Para las reglas de uso del mismo, referirse al formato de origen.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line385"></span>					</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line386"></span>					</span><span>&lt;<span class="start-tag">xs:complexType</span>&gt;</span><span>
+<span id="line387"></span>						</span><span>&lt;<span class="start-tag">xs:sequence</span>&gt;</span><span>
+<span id="line388"></span>							</span><span>&lt;<span class="start-tag">xs:any</span> <span class="attribute-name">minOccurs</span>="<a class="attribute-value">0</a>" <span class="attribute-name">maxOccurs</span>="<a class="attribute-value">unbounded</a>"<span>/</span>&gt;</span><span>
+<span id="line389"></span>						</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line390"></span>					</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line391"></span>				</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line392"></span>			</span><span>&lt;/<span class="end-tag">xs:sequence</span>&gt;</span><span>
+<span id="line393"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">version</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>" <span class="attribute-name">fixed</span>="<a class="attribute-value">3.2</a>"&gt;</span><span>
+<span id="line394"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line395"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido con valor prefijado a 3.2 que indica la versión del estándar bajo el que se encuentra expresado el comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line396"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line397"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line398"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line399"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line400"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line401"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line402"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line403"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">serie</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line404"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line405"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para precisar la serie para control interno del contribuyente. Este atributo acepta una cadena de caracteres alfabéticos de 1 a 25 caracteres sin incluir caracteres acentuados.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line406"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line407"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line408"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line409"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line410"></span>						</span><span>&lt;<span class="start-tag">xs:maxLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">25</a>"<span>/</span>&gt;</span><span>
+<span id="line411"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line412"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line413"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line414"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line415"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">folio</a>"&gt;</span><span>
+<span id="line416"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line417"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para control interno del contribuyente que acepta un valor numérico entero superior a 0 que expresa el folio del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line418"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line419"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line420"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line421"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line422"></span>						</span><span>&lt;<span class="start-tag">xs:maxLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">20</a>"<span>/</span>&gt;</span><span>
+<span id="line423"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line424"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line425"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line426"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line427"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">fecha</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line428"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line429"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para la expresión de la fecha y hora de expedición  del comprobante fiscal. Se expresa en la forma aaaa-mm-ddThh:mm:ss, de acuerdo con la especificación ISO 8601.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line430"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line431"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line432"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:dateTime</a>"&gt;</span><span>
+<span id="line433"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line434"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line435"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line436"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line437"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">sello</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line438"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line439"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para contener el sello digital del comprobante fiscal, al que hacen referencia las reglas de resolución miscelánea aplicable. El sello deberá ser expresado cómo una cadena de texto en formato Base 64.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line440"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line441"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line442"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line443"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line444"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line445"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line446"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line447"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">formaDePago</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line448"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line449"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para precisar la forma de pago que aplica para este comprobnante fiscal digital a través de Internet. Se utiliza para expresar Pago en una sola exhibición o número de parcialidad pagada contra el total de parcialidades, Parcialidad 1 de X. </span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line450"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line451"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line452"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line453"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line454"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line455"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line456"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line457"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noCertificado</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line458"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line459"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span> Atributo requerido para expresar el número de serie del certificado de sello digital que ampara al comprobante, de acuerdo al acuse correspondiente a 20 posiciones otorgado por el sistema del SAT.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line460"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line461"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line462"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line463"></span>						</span><span>&lt;<span class="start-tag">xs:length</span> <span class="attribute-name">value</span>="<a class="attribute-value">20</a>"<span>/</span>&gt;</span><span>
+<span id="line464"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line465"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line466"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line467"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line468"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">certificado</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line469"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line470"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para expresar el certificado de sello digital que ampara al comprobante como texto, en formato base 64.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line471"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line472"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line473"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line474"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line475"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line476"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line477"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line478"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">condicionesDePago</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line479"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line480"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar las condiciones comerciales aplicables para el pago del comprobante fiscal digital a través de Internet.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line481"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line482"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line483"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line484"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line485"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line486"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line487"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line488"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line489"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">subTotal</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line490"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line491"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para representar la suma de los importes antes de descuentos e impuestos.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line492"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line493"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line494"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">descuento</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line495"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line496"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para representar el importe total de los descuentos aplicables antes de impuestos.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line497"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line498"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line499"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">motivoDescuento</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line500"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line501"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar el motivo del descuento aplicable.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line502"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line503"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line504"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line505"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line506"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line507"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line508"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line509"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line510"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">TipoCambio</a>"&gt;</span><span>
+<span id="line511"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line512"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para representar el tipo de cambio conforme a la moneda usada</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line513"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line514"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line515"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line516"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line517"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line518"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line519"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line520"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">Moneda</a>"&gt;</span><span>
+<span id="line521"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line522"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar la moneda utilizada para expresar los montos </span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line523"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line524"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line525"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line526"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line527"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line528"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line529"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line530"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">total</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line531"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line532"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para representar la suma del subtotal, menos los descuentos aplicables, más los impuestos trasladados, menos los impuestos retenidos.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line533"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line534"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line535"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">tipoDeComprobante</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line536"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line537"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para expresar el efecto del comprobante fiscal para el contribuyente emisor.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line538"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line539"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line540"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line541"></span>						</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">ingreso</a>"<span>/</span>&gt;</span><span>
+<span id="line542"></span>						</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">egreso</a>"<span>/</span>&gt;</span><span>
+<span id="line543"></span>						</span><span>&lt;<span class="start-tag">xs:enumeration</span> <span class="attribute-name">value</span>="<a class="attribute-value">traslado</a>"<span>/</span>&gt;</span><span>
+<span id="line544"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line545"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line546"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line547"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">metodoDePago</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line548"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line549"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido de texto libre para expresar el método de pago de los bienes o servicios amparados por el comprobante. Se entiende como método de pago leyendas tales como: cheque, tarjeta de crédito o debito, depósito en cuenta, etc.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line550"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line551"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line552"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line553"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line554"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line555"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line556"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line557"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line558"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">LugarExpedicion</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line559"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line560"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para incorporar el lugar de expedición del comprobante.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line561"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line562"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line563"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line564"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line565"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line566"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line567"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line568"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line569"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">NumCtaPago</a>"&gt;</span><span>
+<span id="line570"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line571"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo Opcional para incorporar al menos los cuatro últimos digitos del número de cuenta con la que se realizó el pago.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line572"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line573"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line574"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line575"></span>						</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">4</a>"<span>/</span>&gt;</span><span>
+<span id="line576"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line577"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line578"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line579"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line580"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">FolioFiscalOrig</a>"&gt;</span><span>
+<span id="line581"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line582"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para señalar el número de folio fiscal del comprobante que se hubiese expedido por el valor total del comprobante, tratándose del pago en parcialidades.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line583"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line584"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line585"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line586"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line587"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line588"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line589"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line590"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">SerieFolioFiscalOrig</a>"&gt;</span><span>
+<span id="line591"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line592"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para señalar la serie del folio del comprobante que se hubiese expedido por el valor total del comprobante, tratándose del pago en parcialidades.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line593"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line594"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line595"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line596"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line597"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line598"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line599"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line600"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">FechaFolioFiscalOrig</a>"&gt;</span><span>
+<span id="line601"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line602"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para señalar la fecha de expedición del comprobante que se hubiese emitido por el valor total del comprobante, tratándose del pago en parcialidades. Se expresa en la forma aaaa-mm-ddThh:mm:ss, de acuerdo con la especificación ISO 8601.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line603"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line604"></span>				</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line605"></span>					</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:dateTime</a>"&gt;</span><span>
+<span id="line606"></span>						</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line607"></span>					</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line608"></span>				</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line609"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line610"></span>			</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">MontoFolioFiscalOrig</a>" <span class="attribute-name">type</span>="<a class="attribute-value">cfdi:t_Importe</a>"&gt;</span><span>
+<span id="line611"></span>				</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line612"></span>					</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para señalar el total del comprobante que se hubiese expedido por el valor total de la operación, tratándose del pago en parcialidades</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line613"></span>				</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line614"></span>			</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line615"></span>		</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line616"></span>	</span><span>&lt;/<span class="end-tag">xs:element</span>&gt;</span><span>
+<span id="line617"></span>	</span><span>&lt;<span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span>="<a class="attribute-value">t_Ubicacion</a>"&gt;</span><span>
+<span id="line618"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line619"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Tipo definido para expresar domicilios o direcciones</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line620"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line621"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">calle</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line622"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line623"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para precisar la avenida, calle, camino o carretera donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line624"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line625"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line626"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line627"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line628"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line629"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line630"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line631"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line632"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noExterior</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line633"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line634"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para expresar el número particular en donde se da la ubicación sobre una calle dada.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line635"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line636"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line637"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line638"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line639"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line640"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line641"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line642"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line643"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noInterior</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line644"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line645"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para expresar información adicional para especificar la ubicación cuando calle y número exterior (noExterior) no resulten suficientes para determinar la ubicación de forma precisa.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line646"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line647"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line648"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line649"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line650"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line651"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line652"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line653"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line654"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">colonia</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line655"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line656"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para precisar la colonia en donde se da la ubicación cuando se desea ser más específico en casos de ubicaciones urbanas.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line657"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line658"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line659"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line660"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line661"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line662"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line663"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line664"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line665"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">localidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line666"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line667"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional que sirve para precisar la ciudad o población donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line668"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line669"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line670"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line671"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line672"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line673"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line674"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line675"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line676"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">referencia</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line677"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line678"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar una referencia de ubicación adicional.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line679"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line680"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line681"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line682"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line683"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line684"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line685"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line686"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line687"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">municipio</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line688"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line689"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional que sirve para precisar el municipio o delegación (en el caso del Distrito Federal) en donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line690"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line691"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line692"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line693"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line694"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line695"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line696"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line697"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line698"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">estado</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line699"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line700"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional que sirve para precisar el estado o entidad federativa donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line701"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line702"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line703"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line704"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line705"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line706"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line707"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line708"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line709"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">pais</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line710"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line711"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para precisar el país donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line712"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line713"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line714"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line715"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line716"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line717"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line718"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line719"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line720"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">codigoPostal</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line721"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line722"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional que sirve para asentar el código postal en donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line723"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line724"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line725"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line726"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line727"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line728"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line729"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line730"></span>	</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line731"></span>	</span><span>&lt;<span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span>="<a class="attribute-value">t_UbicacionFiscal</a>"&gt;</span><span>
+<span id="line732"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line733"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Tipo definido para expresar domicilios o direcciones</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line734"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line735"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">calle</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line736"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line737"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo requerido sirve para precisar la avenida, calle, camino o carretera donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line738"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line739"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line740"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line741"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line742"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line743"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line744"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line745"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line746"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noExterior</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line747"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line748"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para expresar el número particular en donde se da la ubicación sobre una calle dada.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line749"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line750"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line751"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line752"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line753"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line754"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line755"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line756"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line757"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">noInterior</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line758"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line759"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para expresar información adicional para especificar la ubicación cuando calle y número exterior (noExterior) no resulten suficientes para determinar la ubicación de forma precisa.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line760"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line761"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line762"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line763"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line764"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line765"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line766"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line767"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line768"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">colonia</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line769"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line770"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Este atributo opcional sirve para precisar la colonia en donde se da la ubicación cuando se desea ser más específico en casos de ubicaciones urbanas.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line771"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line772"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line773"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line774"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line775"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line776"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line777"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line778"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line779"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">localidad</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line780"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line781"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional que sirve para precisar la ciudad o población donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line782"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line783"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line784"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line785"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line786"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line787"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line788"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line789"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line790"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">referencia</a>" <span class="attribute-name">use</span>="<a class="attribute-value">optional</a>"&gt;</span><span>
+<span id="line791"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line792"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para expresar una referencia de ubicación adicional.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line793"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line794"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line795"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line796"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line797"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line798"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line799"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line800"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line801"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">municipio</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line802"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line803"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para precisar el municipio o delegación (en el caso del Distrito Federal) en donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line804"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line805"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line806"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line807"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line808"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line809"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line810"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line811"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line812"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">estado</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line813"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line814"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para precisar el estado o entidad federativa donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line815"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line816"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line817"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line818"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line819"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line820"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line821"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line822"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line823"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">pais</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line824"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line825"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para precisar el país donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line826"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line827"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line828"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line829"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line830"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line831"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line832"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line833"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line834"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">codigoPostal</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line835"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line836"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido que sirve para asentar el código postal en donde se da la ubicación.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line837"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line838"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line839"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line840"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line841"></span>					</span><span>&lt;<span class="start-tag">xs:length</span> <span class="attribute-name">value</span>="<a class="attribute-value">5</a>"<span>/</span>&gt;</span><span>
+<span id="line842"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line843"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line844"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line845"></span>	</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line846"></span>	</span><span>&lt;<span class="start-tag">xs:simpleType</span> <span class="attribute-name">name</span>="<a class="attribute-value">t_RFC</a>"&gt;</span><span>
+<span id="line847"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line848"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Tipo definido para expresar claves del Registro Federal de Contribuyentes</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line849"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line850"></span>		</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line851"></span>			</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">12</a>"<span>/</span>&gt;</span><span>
+<span id="line852"></span>			</span><span>&lt;<span class="start-tag">xs:maxLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">13</a>"<span>/</span>&gt;</span><span>
+<span id="line853"></span>			</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line854"></span>			</span><span>&lt;<span class="start-tag">xs:pattern</span> <span class="attribute-name">value</span>="<a class="attribute-value">[A-Z,Ñ,<span class="entity"><span>&amp;</span>amp;</span>]{3,4}[0-9]{2}[0-1][0-9][0-3][0-9][A-Z,0-9]?[A-Z,0-9]?[0-9,A-Z]?</a>"<span>/</span>&gt;</span><span>
+<span id="line855"></span>		</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line856"></span>	</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line857"></span>	</span><span>&lt;<span class="start-tag">xs:simpleType</span> <span class="attribute-name">name</span>="<a class="attribute-value">t_Importe</a>"&gt;</span><span>
+<span id="line858"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line859"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Tipo definido para expresar importes numéricos con fracción hasta seis decimales</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line860"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line861"></span>		</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:decimal</a>"&gt;</span><span>
+<span id="line862"></span>			</span><span>&lt;<span class="start-tag">xs:fractionDigits</span> <span class="attribute-name">value</span>="<a class="attribute-value">6</a>"<span>/</span>&gt;</span><span>
+<span id="line863"></span>			</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line864"></span>		</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line865"></span>	</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line866"></span>	</span><span>&lt;<span class="start-tag">xs:complexType</span> <span class="attribute-name">name</span>="<a class="attribute-value">t_InformacionAduanera</a>"&gt;</span><span>
+<span id="line867"></span>		</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line868"></span>			</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Tipo definido para expresar información aduanera</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line869"></span>		</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line870"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">numero</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line871"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line872"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para expresar el número del documento aduanero que ampara la importación del bien.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line873"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line874"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line875"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line876"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line877"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line878"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line879"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line880"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line881"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">fecha</a>" <span class="attribute-name">use</span>="<a class="attribute-value">required</a>"&gt;</span><span>
+<span id="line882"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line883"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo requerido para expresar la fecha de expedición del documento aduanero que ampara la importación del bien. Se expresa en el formato aaaa-mm-dd</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line884"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line885"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line886"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:date</a>"&gt;</span><span>
+<span id="line887"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line888"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line889"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line890"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line891"></span>		</span><span>&lt;<span class="start-tag">xs:attribute</span> <span class="attribute-name">name</span>="<a class="attribute-value">aduana</a>"&gt;</span><span>
+<span id="line892"></span>			</span><span>&lt;<span class="start-tag">xs:annotation</span>&gt;</span><span>
+<span id="line893"></span>				</span><span>&lt;<span class="start-tag">xs:documentation</span>&gt;</span><span>Atributo opcional para precisar el nombre de la aduana por la que se efectuó la importación del bien.</span><span>&lt;/<span class="end-tag">xs:documentation</span>&gt;</span><span>
+<span id="line894"></span>			</span><span>&lt;/<span class="end-tag">xs:annotation</span>&gt;</span><span>
+<span id="line895"></span>			</span><span>&lt;<span class="start-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line896"></span>				</span><span>&lt;<span class="start-tag">xs:restriction</span> <span class="attribute-name">base</span>="<a class="attribute-value">xs:string</a>"&gt;</span><span>
+<span id="line897"></span>					</span><span>&lt;<span class="start-tag">xs:minLength</span> <span class="attribute-name">value</span>="<a class="attribute-value">1</a>"<span>/</span>&gt;</span><span>
+<span id="line898"></span>					</span><span>&lt;<span class="start-tag">xs:whiteSpace</span> <span class="attribute-name">value</span>="<a class="attribute-value">collapse</a>"<span>/</span>&gt;</span><span>
+<span id="line899"></span>				</span><span>&lt;/<span class="end-tag">xs:restriction</span>&gt;</span><span>
+<span id="line900"></span>			</span><span>&lt;/<span class="end-tag">xs:simpleType</span>&gt;</span><span>
+<span id="line901"></span>		</span><span>&lt;/<span class="end-tag">xs:attribute</span>&gt;</span><span>
+<span id="line902"></span>	</span><span>&lt;/<span class="end-tag">xs:complexType</span>&gt;</span><span>
+<span id="line903"></span></span><span>&lt;/<span class="end-tag">xs:schema</span>&gt;</span><span>
+<span id="line904"></span></span></pre><menu type="context" id="actions"><menuitem id="goToLine" label="Ir a la línea…" accesskey="L"></menuitem><menuitem id="wrapLongLines" label="Ajustar líneas largas" type="checkbox"></menuitem><menuitem id="highlightSyntax" label="Resaltar sintaxis" type="checkbox" checked="true"></menuitem></menu></body></html>

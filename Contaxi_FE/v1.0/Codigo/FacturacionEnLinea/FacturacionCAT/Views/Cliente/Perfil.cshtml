@@ -1,0 +1,374 @@
+﻿@model List<FacturacionCAT.Models.DatosFiscales>
+@{
+    ViewBag.Title = "Mi Información";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+
+<article>
+    <ul class="nav nav-pills">
+        <li class="active"><a data-toggle="pill" href="#tabs-1">Mis Datos</a></li>
+        <li><a data-toggle="pill" href="#tabs-2">Mis Domicilios Fiscales</a></li>
+    </ul>
+    <div class="tab-content" style="margin-top:10px;">
+        <div id="tabs-1" class="tab-pane fade in active">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="control-label col-sm-2 lblSmall" for="txtNombre"> Nombre: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="txtNombre" title="Capture su nombre completo" value="@ViewBag.Nombre">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-2 lblSmall" for="txtEmail"> E-mail: </label>
+                    <div class="col-sm-4">
+                        <input class="form-control" id="txtEmail" title="A esta dirección será enviada la Factura" value="@ViewBag.Mail" disabled>
+                    </div>
+                </div>
+                <div class="form-group" style="margin-top:10px;">
+                    <button type="button" id="cmdCambiarContrasena" class="btn btn-default btn-md">Cambiar Contraseña</button>
+                    <button type="button" id="cmdGuardar" class="btn btn-default btn-md">Guardar Nombre</button>
+                </div>
+            </form>
+        </div>
+        <div id="tabs-2" class="tab-pane fade">
+            <button type="button" id="cmdNuevoRegistro" class="btn btn-default btn-md" style="margin-top:10px;margin-bottom:10px;">Agregar Registro Nuevo</button>
+            <div id="gridRazones" class="table-responsive">
+                <table id="tblRazones" class="table-striped table-hover" style="width:100%;">
+                    <thead>
+                        <tr style="text-align:center; font-weight:bold;">
+                            <td style="width:30%;">Alias</td>
+                            <td style="width:25%;">RFC</td>
+                            <td style="width:35%;">Razón Social</td>
+                            <td style="width:5%;"></td>
+                            <td style="width:7%;"></td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbRazones">
+                        @foreach (FacturacionCAT.Models.DatosFiscales df in Model)
+                        {
+                            <tr>
+                                <td>@df.Alias</td>
+                                <td>@df.RFC</td>
+                                <td>@df.RazonSocial</td>
+                                <td>
+                                    <button type="button" title="Edita el Registro" class="btn btn-default btn-md cmdEditar" data-datosfiscales='@(new HtmlString(Json.Encode(df)))' id="cmdEditar">Editar</button>
+                                </td>
+                                <td>
+                                    <button type="button" title="Elimina el Registro" class="btn btn-default btn-md cmdEliminar" data-datosfiscales='@(new HtmlString(Json.Encode(df)))' id="cmdEliminar">Eliminar</button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</article>
+
+<div class="modal modal-lg fade" id="dlgActPwd" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span>Actualizar Contraseña</h4>
+            </div>
+            <div class="modal-body">
+                <div id="dlgCuerpo"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancelar</button>
+                <button id="btnActualizarContrasena" type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-ok"></span>Actualizar Contraseña</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-lg fade" id="dlgEditaRegistro" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 style="color:red;"><span class="glyphicon glyphicon-lock"></span>Datos Fiscales</h4>
+            </div>
+            <div class="modal-body">
+                <div id="dlgEditaRegistroCuerpo"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span>Cancelar</button>
+                <button id="btnGuardaRegistro" type="submit" class="btn btn-default btn-default pull-right" data-dismiss="modal"><span cl*ass="glyphicon glyphicon-ok"></span>Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+ {
+    <script type="text/javascript">
+        var rutaGuardaNombre = '@Url.Action("GuardaNombre", "Cliente")';
+        var rutacambiaContrasena = '@Url.Action("CambiarContrasena","Cliente")';
+        var rutaActPwd = '@Url.Action("ActPwd","Cliente")';
+        var rutaNuevoRegistro = '@Url.Action("EditarDatosFiscales","Cliente")';
+        var rutaGuardaRegistro = '@Url.Action("GuardaRegistro","Cliente")';
+        var rutaRazonesSociales = '@Url.Action("ObtieneRazonesSocialesPorUsuario","Cliente")';
+        var rutaEliminaRazonSocial = '@Url.Action("EliminaRazonSocial", "Cliente")';
+        var dialog;
+        var dialogoRegistro;
+
+        $(document).ready(function () {
+            $('button.cmdEditar').on("click", EditarRazon);
+            $('button.cmdEliminar').on("click", EliminarRazon);
+            $('#cmdGuardar').on('click',GuardaNombre);
+            $('#cmdCambiarContrasena').on('click',CambiaContrasena);
+            $('#cmdNuevoRegistro').on('click', NuevoRegistro);
+            $('#btnActualizarContrasena').on('click', ActPwd);
+            $('#btnGuardaRegistro').on('click', GuardaRegistro);
+            dialog = $("#dlgActPwd").on('shown.bs.modal', function () { $('#txtContrasenaActual').focus(); });
+            dialogoRegistro = $("#dlgEditaRegistro").on('shown.bs.modal', function () { $('#txtAlias').focus(); });
+            $('input.requerido').on('blur', CampoRequerido);
+        });
+
+        function EditarRazon(obj){
+            var df = $(obj.target).data("datosfiscales");
+
+            $.ajax({
+                type: "POST",
+                url: rutaNuevoRegistro,
+                cache: false,
+                success: function(data){
+                    $('#dlgEditaRegistroCuerpo').html(data);
+                    $('input.requerido').on("blur", CampoRequerido);
+                    $('#txtRFC').on("blur", ValidRFC);
+                    $("#txtAlias").val(df.Alias);
+                    $("#txtRazonSocial").val(df.RazonSocial);
+                    $("#txtRFC").val(df.RFC);
+                    $("#txtCalle").val(df.Calle);
+                    $("#txtNumeroExt").val(df.NumeroExterior);
+                    $("#txtNumeroInt").val(df.NumeroInterior);
+                    $("#txtColonia").val(df.Colonia);
+                    $("#txtCP").val(df.Cp);
+                    $("#txtCiudad").val(df.Ciudad);
+                    $("#txtLocalidad").val(df.Localidad);
+                    $("#cmbEstado option[text='" + df.Estado + "']").attr('selected', 'selected');
+                    $("#txtToken").val(df.Token);
+
+                    dialogoRegistro.modal("show");
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function EliminarRazon(obj){
+            var df = $(obj.target).data("datosfiscales");
+            if(confirm('Confirma la eliminación del registro ' + df.Alias + '?')){
+                $.ajax({
+                    type: "POST",
+                    url: rutaEliminaRazonSocial,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(df),
+                    success: function(data){
+                        RefreshRazonesSociales();
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+            return false;
+        };
+
+        function NuevoRegistro(){
+            $.ajax({
+                type: "POST",
+                url: rutaNuevoRegistro,
+                cache: false,
+                success: function(data){
+                    $('#dlgEditaRegistroCuerpo').html(data);
+                    $('input.requerido').on("blur", CampoRequerido);
+                    $('#txtRFC').on("blur", ValidRFC);
+                    dialogoRegistro.modal("show");
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function ActPwd(){
+            var ActualPwd = $("#txtContrasenaActual").val();
+            var NewPwd = $("#txtContrasenaNueva").val();
+            var ConfPwd = $("#txtConfirmacionContrasenaNueva").val();
+
+            if (ActualPwd.length == 0 ||
+                NewPwd.length == 0 ||
+                ConfPwd.length == 0 ) {
+                alert('Falta información que es requerida. Favor de verificar los campos.');
+                return false;
+            }
+
+            if (NewPwd != ConfPwd) {
+                alert("La nueva contraseña y su confirmación no coinciden. Favor de Verificar");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: rutaActPwd,
+                cache: false,
+                data: { actualPwd: ActualPwd, newPwd: NewPwd},
+                success: function(data){
+                    alert(data);
+                    dialog.dialog( "close" );
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function GuardaRegistro(evt, hdl){
+            var Registro = {};
+            Registro = ValidaDatos();
+            if(!Registro.Valido){
+                alert('Falta información que es requerida. Favor de verificar los campos.');
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: rutaGuardaRegistro,
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                data: JSON.stringify(Registro),
+                success: function(data){
+                    alert(data);
+                    dialogoRegistro.modal("hide")
+                    RefreshRazonesSociales();
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function RefreshRazonesSociales(){
+            $.ajax({
+                type: "POST",
+                url: rutaRazonesSociales,
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json; charset=utf-8',
+                success: function(data){
+                    var tblBody = $("#gridRazones tbody");
+                    tblBody.empty();
+
+                    $.each(data, function(i, o){
+                        var tmpTR = $('<tr></tr>');
+
+                        var tmpTD = $('<td>'+ o.Alias + '</td>');
+                        tmpTD.appendTo(tmpTR);
+
+                        tmpTD = $('<td>' + o.RFC + '</td>');
+                        tmpTD.appendTo(tmpTR);
+
+                        tmpTD = $('<td>' + o.RazonSocial + '</td>');
+                        tmpTD.appendTo(tmpTR);
+
+                        tmpTD = $('<td></td>');
+                        var tmpInput = $('<button type="button" title="Edita el Registro" class="btn btn-default btn-md cmdEditar">Editar</button>');
+                        tmpInput.data("datosfiscales", o);
+                        tmpInput.appendTo(tmpTD);
+                        tmpTD.appendTo(tmpTR);
+
+                        tmpTD = $('<td></td>');
+                        tmpInput = $('<button type="button" title="Elimina el Registro" class="btn btn-default btn-md cmdEliminar">Eliminar</button>');
+                        tmpInput.data("datosfiscales", o);
+                        tmpInput.appendTo(tmpTD);
+                        tmpTD.appendTo(tmpTR);
+
+                        tmpTR.appendTo(tblBody);
+                    });
+                    $('button.cmdEditar').on("click", EditarRazon);
+                    $('button.cmdEliminar').on("click", EliminarRazon);
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+
+        function ValidaDatos(){
+            var DatosFiscales = new Object();
+            DatosFiscales.Alias = $("#txtAlias").val();
+            DatosFiscales.RazonSocial = $("#txtRazonSocial").val();
+            DatosFiscales.RFC = $("#txtRFC").val();
+            DatosFiscales.Calle = $("#txtCalle").val();
+            DatosFiscales.NumeroExterior = $("#txtNumeroExt").val();
+            DatosFiscales.NumeroInterior = $("#txtNumeroInt").val();
+            DatosFiscales.Colonia = $("#txtColonia").val();
+            DatosFiscales.Cp = $("#txtCP").val();
+            DatosFiscales.Ciudad = $("#txtCiudad").val();
+            DatosFiscales.Localidad = $("#txtLocalidad").val();
+            DatosFiscales.Estado = $("#cmbEstado option:selected").text().toUpperCase();
+            DatosFiscales.Token = $('#txtToken').val();
+
+            DatosFiscales.Valido = true;
+            if(DatosFiscales.Alias.length == 0 ||
+                DatosFiscales.RazonSocial.length == 0 ||
+                DatosFiscales.RFC.length == 0 ||
+                DatosFiscales.Calle.length == 0 ||
+                DatosFiscales.NumeroExterior.length == 0 ||
+                DatosFiscales.Colonia.length == 0 ||
+                DatosFiscales.Cp.length == 0 ||
+                DatosFiscales.Ciudad.length == 0 ||
+                DatosFiscales.Localidad.length == 0 ||
+                DatosFiscales.Estado.length == 0) {
+                DatosFiscales.Valido = false;
+            }
+
+            return DatosFiscales;
+        }
+
+        function GuardaNombre(evt, hdl){
+            var sNombre = $("#txtNombre").val();
+            if(sNombre.length == 0){
+                alert("Es necesario introducir un Nombre.");
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: rutaGuardaNombre,
+                cache: false,
+                data: {nombre: sNombre},
+                success: function(data){
+                    alert(data);
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function CambiaContrasena(evt, hdl){
+            $.ajax({
+                type: "POST",
+                url: rutacambiaContrasena,
+                cache: false,
+                success: function(data){
+                    $('#dlgCuerpo').html(data);
+                    dialog.modal("show");
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+    </script>
+}

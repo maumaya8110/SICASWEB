@@ -1,0 +1,81 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Descarga de Documentos</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/site.css")
+    <link href="@Url.Content("~/Content/LoginDlg.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .imgDescarga {
+            cursor: pointer;
+        }
+
+        .panel-heading {
+            font-weight: bold !important;
+        }
+    </style>
+</head>
+<body>
+    <header class="row">
+        <div class="container" style="border-bottom: 1px solid black; padding-bottom:5px;">
+            <div id="logo" class="float-left">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Content/images/logo.png")" class="img-responsive" style="width:150px; height:100px;" />
+                </a>
+            </div>
+            <div class="float-left">
+                <h2>Facturación Sin Registro</h2>
+            </div>
+        </div>
+    </header>
+    <div class="container body-content" style="margin-top:5px;">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        @ViewBag.Message
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            Acontinuación se presentan los link para descargar los archivos de su Comprobante Fiscal Digital.
+                        </p>
+                        <img src="@Url.Content("~/Images/xml.png")" alt="Descargar Archivo XML" title="Descarga el Archivo XML del CFDI" data-servicio='@ViewBag.Token' data-tipo='xml' class="imgDescarga" />
+                        <img src="@Url.Content("~/Images/pdf.png")" alt="Descargar Archivo PDF" title="Descarga el Archivo PDF del CFDI" data-servicio='@ViewBag.Token' data-tipo='pdf' class="imgDescarga" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+
+    <script type="text/javascript">
+        var rutaDescagaDocto = '@Url.Action("DescargarDocumento","FacturacionLibre")';
+        var rutaHome = '@Url.Action("Index", "Home")';
+        var tmToken = '@ViewBag.Token';
+
+        $(document).ready(function () {
+            $('img.imgDescarga').on("click", DescargaDocto);
+        });
+
+        function DescargaDocto(evt, hdl) {
+            var TokenFactura = $(evt.target).data('servicio');
+            var stipo = $(evt.target).data('tipo');
+            var scontent = "text/xml";
+            var sUrl = rutaDescagaDocto + '?token=' + TokenFactura + '&tipo=' + stipo;
+            window.location = sUrl;
+        }
+    </script>
+</body>
+</html>

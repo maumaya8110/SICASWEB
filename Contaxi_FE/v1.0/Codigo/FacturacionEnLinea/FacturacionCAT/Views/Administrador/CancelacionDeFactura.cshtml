@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "Cancelacion De Factura";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    .panel-heading {
+        font-weight: bold !important;
+    }
+
+    .linesboth {
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+    }
+</style>    
+<div class="row">
+    <div class="col-sm-4"></div>
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Cancelar Factura por Folio
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2 lblSmall" for="cmbSerie">Serie</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="cmbSerie" placeholder="Serie...">
+                                <option value="B">B</option>
+                                <option value="D" selected>D</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2 lblSmall" for="txtFolio">Folio:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtFolio" placeholder="Folio..." />
+                        </div>
+                    </div>
+                    <div class="form-group" style="text-align:center;">
+                        <button type="button" id="btnCancelar" class="btn btn-default btn-lg">Cancelar Factura</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4"></div>
+</div>
+@section scripts
+ {
+    <script type="text/javascript">
+        var rutaCancelaFactura = '@Url.Action("CancelarFacturaSerieFolio", "Administrador")';
+
+        $(document).ready(function () {
+            $('#btnCancelar').on('click', ConfirmaCancelacion);
+            $('#txtFolio').numeric().on('keypress', function (evt, hdl) {
+                if (evt.which == 13) {
+                    evt.preventDefault();
+                    $('#btnCancelar').trigger('click');
+                }
+            }).focus();
+        });
+
+        function ConfirmaCancelacion(evt, hdl) {
+            var pfolio = $('#txtFolio').val().trim();
+            var sSerie = $('#cmbSerie').val();
+            if (pfolio.length == 0) {
+                alert('Es requerido que introduzca el Folio a cancelar');
+                $('#txtFolio').focus();
+                return;
+            }
+
+            var r = confirm("Confirma la Cancelación de la Factura Serie: " + sSerie + " Folio: " + pfolio);
+            if (r) {
+                $.ajax({
+                    type: "POST",
+                    url: rutaCancelaFactura,
+                    cache: false,
+                    dataType: 'json',
+                    data: JSON.stringify({ serie: sSerie, folio: pfolio }),
+                    async: false,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        alert(data.Mensaje);
+                        if (data.Resultado) {
+                            $('#txtFolio').text('').focus();
+                        }
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        }
+    </script>
+}

@@ -1,0 +1,125 @@
+﻿@{
+    ViewBag.Title = "Listado de Facturas Canceladas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style type="text/css">
+    .panel-heading {
+        font-weight: bold !important;
+    }
+
+    .linesboth {
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                CFDI's Cancelados
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2 lblSmall" for="cboMes"> Facturas de </label>
+                        <div class="col-sm-2">
+                            @Html.DropDownList("cboMes", (List<SelectListItem>)ViewBag.slMeses)
+                        </div>
+                    </div>
+                </form>
+                <div id="dFacturas" class="table-responsive" style="margin-top:10px;">
+                    <table id="tblFacturas" class="table-striped table-hover" style="width:99%">
+                        <thead>
+                            <tr style="border-bottom: 1px solid gray;">
+                                <th style="width:10%; text-align: center !important;">Folio</th>
+                                <th style="width:10%; text-align: center !important;" title="Facturación Libre">FL</th>
+                                <th style="width:10%; text-align: center !important;">Fecha Facturación</th>
+                                <th style="width:10%; text-align: center !important;">Fecha Cancelación</th>
+                                <th style="width:10%; text-align: center !important;">Total</th>
+                                <th style="width:20%; text-align: center !important;">RFC</th>
+                                <th style="width:20%; text-align: center !important;">Nombre</th>
+                                <th style="width:10%; text-align: center !important;" title="Correo Electrónico">E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbFacturas" style="border-bottom:1px solid gray;"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+ {
+    <script type="text/javascript">
+        var rutaFacturasCanceladasPorMes = '@Url.Action("GetFacturasCanceladasPorMes", "Administrador")';
+        var rutaDescagaDocto = '@Url.Action("DescargarDocumento","Cliente")';
+        var rutaCancelaFactura = '@Url.Action("CancelarFactura", "Administrador")';
+
+        $(document).ready(function () {
+            $('#cboMes').addClass('form-control').on('change',ShowFacturasPorMes).trigger('change');
+        });
+
+        function GetFacturas(dtefecha)
+        {
+            var lfacturas = {};
+            $.ajax({
+                type: "POST",
+                url: rutaFacturasCanceladasPorMes,
+                cache: false,
+                dataType: 'json',
+                data: JSON.stringify({ fecha: dtefecha }),
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    lfacturas = data;
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+            return lfacturas;
+        }
+
+        function ShowFacturasPorMes(evt, hdl)
+        {
+            var dteSel = $('#cboMes').find('option:selected').val();
+            var lfacturas = GetFacturas(dteSel);
+            var tb = $('#tbFacturas');
+            tb.empty();
+            $.each(lfacturas, function (idx, factura) {
+                var tr = $('<tr></tr>');
+                var td = $('<td class="linesboth" style="text-align: center;">' + factura.Folio + '</td>');
+                td.appendTo(tr);
+
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (factura.FacturacionLibre)
+                {
+                    var img_aux = $('<img src="@Url.Content("~/Images/check.gif")" alt="Facturación Libre" title="Facturación Libre" />');
+                    img_aux.appendTo(td);
+                }
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;">' + factura.FechaFactura + '</td>');
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;">' + factura.FechaCancelacion + '</td>');
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: right;"> $ ' + parseFloat(factura.Total).formatMoney(2, ',', '.') + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.Receptor_RFC + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.Receptor_Nombre + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.CorreoElectronico + '</td>');
+                td.appendTo(tr);
+                
+                tr.appendTo(tb);
+            })
+            $('img.imgDescarga').on("click", DescargaDocto);
+            $('button.cmdCancelar').on("click", CancelaFactura);
+        }
+    </script>
+}

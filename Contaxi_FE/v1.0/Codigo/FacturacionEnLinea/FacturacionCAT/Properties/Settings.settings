@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="FacturacionCAT.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MailRegistroBody" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">&lt;div id="frame"&gt; &lt;div class="dleft"&gt;&lt;img src="http://urgi.com.mx/wp-content/uploads/2015/12/Urgi_m.png" alt="URGI" /&gt; &lt;/div&gt; &lt;div class="dright"&gt;&lt;h1&gt;Bienvenido al Sistema de Facturaci&amp;oacute;n Aero Contaxi&lt;/h1&gt;&lt;/div&gt; &lt;br/&gt; &lt;div style="text-align:justify"&gt; Recientemente ha solicitado registrarse como usuario en el sitio facturacion.urgi.com.mx para concluir el proceso de registro es necesario validar su cuenta de correo electr&amp;oacute;nico. &lt;br/&gt;&lt;br/&gt; Le invitamos a dar clic &lt;br/&gt;&lt;br/&gt; &lt;a href="{0}?token={1}&amp;cuenta={2}"&gt;AQUI PARA ACTIVAR SU CUENTA&lt;/a&gt; &lt;/div&gt; &lt;/div&gt;</Value>
+    </Setting>
+    <Setting Name="MailRecuperacionBody" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Ha elegido cambiar su contraseña, la nueva contraseña es: &lt;br&gt;&lt;br&gt;&lt;b&gt;{0}&lt;/b&gt;&lt;br&gt;&lt;br&gt;Ingrese utilizando esta nueva contraseña y en la sección de  "Mis Datos" podrá cambiarla a la contraseña de su preferencia.</Value>
+    </Setting>
+    <Setting Name="MailRecuperacionAsunto" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Recuperación de contraseña</Value>
+    </Setting>
+    <Setting Name="MailRegistroAsunto" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Bienvenido al sitio de Facturación de Aero Contaxi!</Value>
+    </Setting>
+    <Setting Name="MensajeRegistroOK" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Sus datos han sido recibidos por el sistema, sin embargo es necesario que confirme su dirección de correo electrónico, por favor revise la siguiente cuenta de correo electrónico &lt;strong&gt;{0}&lt;/strong&gt; y siga las instrucciones para activar su cuenta.</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

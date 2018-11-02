@@ -1,0 +1,57 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/site.css")
+    <link href="@Url.Content("~/Content/LoginDlg.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container body-content">
+        <div class="jumbotron">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <img src="http://aerocontaxi.com.mx/wp-content/uploads/2015/09/logo.png" class="img-responsive">
+                        </td>
+                        <td>
+                            <h3>Validación de la Cuenta</h3>
+                            <h3>@ViewBag.Mensaje</h3>
+                        </td>
+                        <td><button type="button" id="btnContinuar" class="btn btn-outline btn-default btn-lg">Continuar</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2016 - AeroContaxi</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/tableExport.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/funciones.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/LoginDlg.js")"></script>
+
+    <script type="text/javascript">
+        var rutaInicio = '@Url.Action("Index", "Home")';
+
+        $(document).ready(function () {
+            $('#btnContinuar').on('click', function (evt) { window.location = rutaInicio; });
+        });
+    </script>
+</body>
+</html>

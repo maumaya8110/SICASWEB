@@ -1,0 +1,263 @@
+﻿@{
+    ViewBag.Title = "Listado de Facturas Emitidas";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="@Url.Content("~/Scripts/table_sorter/css/jquery.tablesorter.pager.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Scripts/table_sorter/css/filter.formatter.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Scripts/table_sorter/css/dragtable.mod.min.css")" rel="stylesheet" type="text/css">
+<link href="@Url.Content("~/Scripts/table_sorter/css/theme.bootstrap.min.css")" rel="stylesheet" type="text/css">
+<style type="text/css">
+    .panel-heading {
+        font-weight: bold !important;
+    }
+    .linesboth{
+        border-left: 1px solid #c7c5c5;
+        border-right: 1px solid #c7c5c5;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+</style>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                CFDI's Emitidos
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1 lblSmall" for="cboMes">Facturas de </label>
+                        <div class="col-sm-3">
+                            @Html.DropDownList("cboMes", (List<SelectListItem>)ViewBag.slMeses)
+                        </div>
+                        <label class="control-label col-sm-1 lblSmall" for="cboSerie"> Serie </label>
+                        <div class="col-sm-3">
+                            <select id="cboSerie" class="form-control">
+                                <option value="B">B</option>
+                                <option value="D" selected>D</option>
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-1 lblSmall" for="txtFolio"> Folio </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txtFolio" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-1 lblSmall" for="txtServicio"> # Servicio </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txtServicio" />
+                        </div>
+                        <label class="control-label col-sm-1 lblSmall" for="txtRFC"> RFC </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txtRFC" />
+                        </div>
+                        <label class="control-label col-sm-1 lblSmall" for="txtMail"> Mail </label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" id="txtMail" />
+                        </div>
+                    </div>
+                </form>
+                <div id="dFacturas" class="table-responsive" style="margin-top:10px;">
+                    <table id="tblFacturas" class="tablesorter">
+                        <thead>
+                            <tr style="border-bottom: 1px solid #c7c5c5;">
+                                <th style="width:4%; text-align: center !important;">Serie</th>
+                                <th style="width:4%; text-align: center !important;">Folio</th>
+                                <th style="width:7%; text-align: center !important;">Tickets</th>
+                                <th style="width:3%; text-align: center !important;" title="Facturación Libre">FL</th>
+                                <th style="width:10%; text-align: center !important;">Fecha</th>
+                                <th style="width:5%; text-align: center !important;">Total</th>
+                                <th style="width:10%; text-align: center !important;">RFC</th>
+                                <th style="width:16%; text-align: center !important;">Nombre</th>
+                                <th style="width:15%; text-align: center !important;" title="Correo Electrónico">E-mail</th>
+                                <th style="width:5%; text-align: center !important;">XML</th>
+                                <th style="width:5%; text-align: center !important;">PDF</th>
+                                <th style="width:5%; text-align: center !important;" title="Con Error">CE</th>
+                                <th style="width:6%; text-align: center !important;"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbFacturas" style="border-bottom:1px solid #c7c5c5;"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+ {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/table_sorter/js/jquery.tablesorter.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/table_sorter/js/jquery.tablesorter.widgets.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/table_sorter/js/addons/pager/jquery.tablesorter.pager.js")"></script>*@
+    <script type="text/javascript">
+        var rutaFacturasPorMes = '@Url.Action("GetFacturasPorMes", "Administrador")';
+        var rutaDescagaDocto = '@Url.Action("DescargarDocumento", "Administrador")';
+        var rutaCancelaFactura = '@Url.Action("CancelarFactura", "Administrador")';
+
+        $(document).ready(function () {
+            $('#cboMes').addClass('form-control').on('change', ShowFacturasPorMes);
+            $('#cboSerie').on('change', ShowFacturasPorMes);
+            $('#txtFolio').on('keypress', txtBuscaFactura);
+            $('#txtServicio').on('keypress', txtBuscaFactura);
+            $('#txtRFC').on('keypress', txtBuscaFactura);
+            $('#txtMail').on('keypress', txtBuscaFactura);
+
+            $("#tblFacturas")
+                .tablesorter({
+                    theme: 'bootstrap'
+                    , widthFixed: true
+                    , showProcessing: false
+                    , dateFormat: "mmddyyyy"
+                    , usNumberFormat: true
+                    , sortList: [ [0,1] ]
+                    , widgets: [ 'zebra' ]
+                });
+        });
+
+        function txtBuscaFactura(evt, hdl) {
+            if (evt.which == 13) {
+                evt.preventDefault();
+                ShowFacturasPorMes();
+            }
+        };
+
+        function GetFacturas(dtefecha, sserie, sfolio, sservicio, srfc, smail)
+        {
+            var lfacturas = {};
+            $.ajax({
+                type: "POST",
+                url: rutaFacturasPorMes,
+                cache: false,
+                dataType: 'json',
+                data: JSON.stringify({ fecha: dtefecha, serie: sserie, folio: sfolio, servicio: sservicio, rfc: srfc, mail: smail }),
+                async: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    lfacturas = data;
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+            return lfacturas;
+        }
+
+        function ShowFacturasPorMes(evt, hdl)
+        {
+            var dteSel = $('#cboMes').find('option:selected').val();
+            var sserie = $('#cboSerie').find('option:selected').val();
+            var sfolio = $('#txtFolio').val();
+            var sservicio = $('#txtServicio').val();
+            var srfc = $('#txtRFC').val();
+            var smail = $('#txtMail').val();
+
+            var lfacturas = GetFacturas(dteSel, sserie, sfolio, sservicio, srfc, smail);
+
+            var tb = $('#tbFacturas');
+            tb.empty();
+            $.each(lfacturas, function (idx, factura) {
+                var tr = $('<tr></tr>');
+                var td = $('<td class="linesboth" style="text-align: center;">' + factura.Serie + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth" style="text-align: center;">' + factura.Folio + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.Tickets + '</td>');
+                td.appendTo(tr);
+
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (factura.FacturacionLibre)
+                {
+                    var img_aux = $('<img src="@Url.Content("~/Images/check.gif")" alt="Facturación Libre" title="Facturación Libre" />');
+                    img_aux.appendTo(td);
+                }
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth">' + factura.FechaFactura + '</td>');
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: right;"> $ ' + parseFloat(factura.Total).formatMoney(2, ',', '.') + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.Receptor_RFC + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.Receptor_Nombre + '</td>');
+                td.appendTo(tr);
+                td = $('<td class="linesboth">' + factura.CorreoElectronico + '</td>');
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (!factura.ConError) {
+                    var img = $('<img src="@Url.Content("~/Images/xml.png")" alt="Descargar Archivo XML" title="Descarga el Archivo XML del CFDI" class="imgDescarga" />');
+                    img.data('factura', factura);
+                    img.data('tipo', 'xml');
+                    img.css('cursor', 'pointer');
+                    img.appendTo(td);
+                }
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (!factura.ConError) {
+                    img = $('<img src="@Url.Content("~/Images/pdf.png")" alt="Descargar Archivo PDF" title="Descarga el Archivo PDF del CFDI" class="imgDescarga" />');
+                    img.data('factura', factura);
+                    img.data('tipo', 'pdf');
+                    img.css('cursor', 'pointer');
+                    img.appendTo(td);
+                }
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (factura.ConError)
+                {
+                    var img_aux = $('<img src="@Url.Content("~/Images/error.png")" alt="' + factura.DetalleError + '" title="' + factura.DetalleError + '" />');
+                    img_aux.appendTo(td);
+                }
+                td.appendTo(tr);
+
+                td = $('<td class="linesboth" style="text-align: center;"></td>');
+                if (!factura.ConError)
+                {
+                    var btn = $('<button type="button" title="Cancela el CFDI" class="btn btn-default btn-md cmdCancelar">Cancelar</button></td>');
+                    btn.data('factura', factura);
+                    btn.appendTo(td);
+                }
+                td.appendTo(tr);
+                tr.appendTo(tb);
+            })
+            $('img.imgDescarga').on("click", DescargaDocto);
+            $('button.cmdCancelar').on("click", CancelaFactura);
+        }
+
+        function DescargaDocto(evt, hdl)
+        {
+            var factura = $(evt.target).data('factura');
+            var stipo = $(evt.target).data('tipo');
+            var scontent = "text/xml";
+            var sUrl = rutaDescagaDocto + '?token=' + factura.TokenFactura + '&tipo=' + stipo;
+            window.location = sUrl;
+        }
+
+        function CancelaFactura(evt, hdl)
+        {
+            var factura = $(evt.target).data('factura');
+            var b = confirm("Confirma la cancelación de la factura serie:"+ factura.Serie +" con el folio: " + factura.Folio);
+            if (b) {
+                $.ajax({
+                    type: "POST",
+                    url: rutaCancelaFactura,
+                    cache: false,
+                    dataType: 'json',
+                    data: JSON.stringify({ folio: factura.Folio, serie: factura.Serie }),
+                    async: false,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        alert(data.Mensaje);
+                        $('#cboMes').trigger('change');
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        }
+    </script>
+}

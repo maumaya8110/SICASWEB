@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" serie="B" folio="147026" fecha="2016-06-30T11:46:20" sello="rHV4QT9B6e5l5QCYk/T6oWax7sXnaA1ZTVPRAWqDxgKSXAxpV3VFh6wJFiysqmtw1WI955hs5E2hFoaun6UiglCMVWQYNJADUThS+Sltd+LNxOdbj978L+G5xDy8A5OLBdPTHWTuYSPdJaA6zypJS56m3xUgfHZYM8OKreWvmGw=" formaDePago="PAGO EN UNA SOLA EXHIBICION" noCertificado="00001000000202508313" certificado="MIIEqTCCA5GgAwIBAgIUMDAwMDEwMDAwMDAyMDI1MDgzMTMwDQYJKoZIhvcNAQEFBQAwggGVMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSEwHwYJKoZIhvcNAQkBFhJhc2lzbmV0QHNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxFDASBgNVBAcMC0N1YXVodMOpbW9jMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxPjA8BgkqhkiG9w0BCQIML1Jlc3BvbnNhYmxlOiBDZWNpbGlhIEd1aWxsZXJtaW5hIEdhcmPDrWEgR3VlcnJhMB4XDTEyMTIwNDIxMTM1MVoXDTE2MTIwNDIxMTM1MVowgeoxIzAhBgNVBAMTGkNBU0NPIFRSQU5TUE9SVEVTIFNBIERFIENWMSMwIQYDVQQpExpDQVNDTyBUUkFOU1BPUlRFUyBTQSBERSBDVjEjMCEGA1UEChMaQ0FTQ08gVFJBTlNQT1JURVMgU0EgREUgQ1YxJTAjBgNVBC0THENUUjAzMDEyM0lDQSAvIEdBR0E1OTAzMTU2STcxHjAcBgNVBAUTFSAvIEdBR0E1OTAzMTVITkxSUlAxNjEyMDAGA1UECxMpQ0FSUkVURVJBIE1JR1VFTCBBTEVNQU4gS00gMjQgQ09MLiBDRU5UUk8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMBYWFqB/fqt8n319XFhhEb6KjRBT23V3A9rxKdsQ/vi374RBxAsZTRhRCQniP6Lf7ludhiorWMKsVDfq0rsDVlgGDecfgCRgcEVSohcr2WZLuzlxpYunXSv5kel6X4xqpwrwTQR716ZTOGxiB3lYJYLnIvBly7oCE5stoF2myyXAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQBuKz3kUSnH9Z/6xVtAYrlPtFIlfHBpRH3yvGOjc6PttrsFS6GiQbvJoKIu7uaszjfylxdOfp+InnsC+MIaV83jKX73uVt/3QSEugDS4EHSz9KLRoKgtOYIVms+thh4DjwxBz9koPIGVpAIPcFYzNk3wHfdaBoXnreZd5+UCujM0QRx3qU8vNULfmZZyiwhTkd/kTxRVuXfgXWkKiXlrn3+14p/PD3SkdhsEJfyoVjS9l3lVInhH7Bphr4hpXyoKcWTRf50cKAw+kzjgwxBfDheCPYuJFPVNAptYuP/ID66E9v1XHXTLRQjM7QClvK/+RcnvWwt1OSaOjS0a64cCZxQ" subTotal="330.00" total="330.00" tipoDeComprobante="ingreso" metodoDePago="EFECTIVO" LugarExpedicion="APODACA">
+  <cfdi:Emisor rfc="CTR030123ICA" nombre="CASCO TRANSPORTES SA DE CV">
+    <cfdi:DomicilioFiscal calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:ExpedidoEn calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:RegimenFiscal Regimen="REGIMEN GENERAL DE LEY PERSONAS MORALES" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="APV110401B10" nombre="ADMINISTRACION PLAZAS PG S DE RL DE CV">
+    <cfdi:Domicilio calle="HUMBERTO JUNCO VOIGHT" colonia="VALLE OTE" localidad="SAN PEDRO GARZA GARCIA" municipio="SAN PEDRO GARZA GARCIA" estado="NUEVO LEON" pais="MEXICO" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1.00" unidad="NO APLICA" noIdentificacion="87816062205010035" descripcion="Transporte Público Terrestre de Personas. Servicio del 22/06/2016" valorUnitario="330.00" importe="330.00" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosRetenidos="0.00" totalImpuestosTrasladados="0.00">
+    <cfdi:Retenciones>
+      <cfdi:Retencion impuesto="IVA" importe="0.00" />
+    </cfdi:Retenciones>
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="0.00" importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="8ba78ed6-96ab-40fd-895a-ccda859537be" FechaTimbrado="2016-06-30T12:46:37" selloCFD="rHV4QT9B6e5l5QCYk/T6oWax7sXnaA1ZTVPRAWqDxgKSXAxpV3VFh6wJFiysqmtw1WI955hs5E2hFoaun6UiglCMVWQYNJADUThS+Sltd+LNxOdbj978L+G5xDy8A5OLBdPTHWTuYSPdJaA6zypJS56m3xUgfHZYM8OKreWvmGw=" noCertificadoSAT="00001000000202693892" selloSAT="ebB9gZENtkxZhMdyRVqyVp13FKZkggJjRT7JNHkjdySAwcdETC3WbIs3N4bYxECCaptk9j4IbB6mDfVFhbqcRH+4+ncRdl74ScCeSo9YtqEB27YIVzoCHt+9agObUXuRgvRdVRyqGuNAJf8l4ao8n+7voj40uQeChsTU6i0gdsU=" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

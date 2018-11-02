@@ -1,0 +1,279 @@
+﻿@{
+    ViewBag.Title = "Autorizacion";
+    Layout = "~/Views/Shared/_LayoutAbastecimientos.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1>
+                    <span class="glyphicon glyphicon-calendar"></span> &nbsp;@ViewBag.Title - @User.Identity.Name
+                    <button class="btn btn-link" title="Consultar" id="btnConsultar"><span class="glyphicon glyphicon-search"></span></button>
+                </h1>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group" id="divTblDetalle">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tblDetalle">
+                                <thead>
+                                </thead>
+                                <tbody class="tbodyDetalle"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-footer">
+                <div class="form-group" style="text-align:center;">
+                    <button class="btn btn-lg" id="btnRegresar" title="Regresar"><span class="glyphicon glyphicon-backward"></span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="divModalSol" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="titleSolicitud" aria-hidden="true">
+    <div class="modal-dialog modal-lg" id="divSolicitudImprimir">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="titleSolicitud" style="margin-bottom:0px;">Detalle de la Solicitud - Folio: <span id="lblFolio">0</span></h4>
+            </div>
+            <div class="modal-body" id="divModalBody">
+                <p></p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-log-out"></span> Regresar</button>
+                <button class="btn" id="btnComplementar"><span class="glyphicon glyphicon-refresh"></span> Complementar</button>
+                <button class="btn" id="btnCancelar"><span class="glyphicon glyphicon-remove"></span> Rechazar</button>
+                <button class="btn" id="btnImprimir"><span class="glyphicon glyphicon-print"></span> Imprimir</button>
+                <button class="btn btn-primary" id="btnAprobar"><span class="glyphicon glyphicon-ok"></span> Autorizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/General/SolicitudMaterial.js")
+    @Scripts.Render("~/Scripts/General/Funciones.js")
+    @Scripts.Render("~/Scripts/jquery.PrintArea.js")
+
+    <script type="text/javascript">
+        var rutaConsultaSolicitudesPendientes = '@Url.Action("ConsultaSolicitudesPorEstatus", "SolicitudMateriales")';
+        var rutaActualizaEstatusSolicitud = '@Url.Action("ActualizaEstatusSolicitud", "SolicitudMateriales")';
+        var rutaAddComentario = '@Url.Action("AgregaComentarioASolicitud", "SolicitudMateriales")';
+        var rutaHome = '@Url.Action("Index", "SolicitudMateriales")';
+        var lsolicitudes = [];
+
+        $(document).ready(function () {
+            var dteHoy = new Date();
+            $('#btnConsultar').on('click', ConsultaSolicitud).trigger('click');
+            $('#btnRegresar').on('click', function () { window.history.back(); });
+            $('#btnImprimir').on('click', function () { $("div#divSolicitudImprimir").printArea(); });
+            $('#btnAprobar').on('click', AutorizaSolicitud);
+            $('#btnCancelar').on('click', CancelarSolicitud);
+            $('#btnComplementar').on('click', ComplementarSolicitud);
+            hideLoading();
+        });
+
+        function ConsultaSolicitud(evt, hdl) {
+            if (evt != undefined)
+                evt.preventDefault();
+
+            $('#divTblDetalle .tbodyDetalle').empty();
+            var params = { estatus_id: 4 };
+            $.ajax({
+                type: "POST",
+                url: rutaConsultaSolicitudesPendientes,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(params),
+                success: function (data) {
+                    if (data.length <= 0)
+                        alert("Actualmente no existen Solicitudes por Autorizar.");
+                    else {
+                        lsolicitudes = data;
+                        RenderTable(lsolicitudes, $('#divTblDetalle'));
+                    }
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function RenderTable(lista, divtbl) {
+            divtbl.empty();
+            var divContainer = $('<div class="table-responsive"></div>');
+            var tbl = $('<table class="table table-striped table-hover" id="tblDetalle"></table>');
+            var th = $('<thead></thead>');
+            var tb = $('<tbody class="tbodyDetalle"></tbody>');
+            var tr = $('<tr style="font-weight:bold;"></tr>');
+
+            //Genera el encabezado
+            $('<td style="text-align:center;">Folio</td>').appendTo(tr);
+            $('<td>Division</td>').appendTo(tr);
+            $('<td>Empresa</td>').appendTo(tr);
+            $('<td>Departamento</td>').appendTo(tr);
+            $('<td>Almacen</td>').appendTo(tr);
+            $('<td>Monto</td>').appendTo(tr);
+            $('<td></td>').appendTo(tr);
+            tr.appendTo(th);
+
+            //Genera el cuerpo
+            $.each(lista, function (idx, obj) {
+                tr = $('<tr></tr>');
+                $('<td style="text-align:center;">' + obj.id + '</td>').appendTo(tr);
+                $('<td>' + obj.Division.descripcion + '</td>').appendTo(tr);
+                $('<td>' + obj.Empresa.descripcion + '</td>').appendTo(tr);
+                $('<td>' + obj.Departamento.descripcion + '</td>').appendTo(tr);
+                $('<td>' + obj.Almacen.descripcion + '</td>').appendTo(tr);
+                $('<td>' + accounting.formatMoney(obj.total) + '</td>').appendTo(tr);
+                var btn = $('<span class="glyphicon glyphicon-search" title="Ver" style="cursor:pointer;"></span>');
+                btn.data('solicitud', obj);
+                btn.data('divModal', 'divModalSol');
+                btn.on('click', function (evt, hdl) {
+                    if (evt != undefined)
+                        evt.preventDefault();
+                    var sol = $(this).data('solicitud');
+                    var sdiv = $(this).data('divModal');
+                    var div = $('#' + sdiv);
+                    $('#lblFolio').text(sol.id);
+                    RenderReqModalAutoriza(div, sol);
+                });
+                celda = $('<td></td>');
+                btn.appendTo(celda);
+                celda.appendTo(tr);
+                tr.appendTo(tb);
+            });
+
+            //Agrega el cuerpo y el encabezado
+            th.appendTo(tbl);
+            tb.appendTo(tbl);
+            tbl.appendTo(divContainer);
+            divContainer.appendTo(divtbl);
+        };
+
+        function AutorizaSolicitud(evt, hdl) {
+            var r = confirm("Confirma la Autorización de la Solicitud?");
+            if (r == true) {
+                var sol = $('#divModalSol').data('solicitud');
+
+                var params = { solicitud_id: sol.id, estatus_id: 5 };
+                $.ajax({
+                    type: "POST",
+                    url: rutaActualizaEstatusSolicitud,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    async: false,
+                    data: JSON.stringify(params),
+                    success: function (data) {
+                        if (data) {
+                            alert("La Solicitud se actualizó correctamente");
+                            $('#divModalSol').modal('toggle');
+                            $('#btnConsultar').trigger('click');
+                        }
+                        else
+                            alert("Ocurrió un error al actualizar la Solicitud, favor de intentarlo nuevamente.");
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        };
+
+        function CancelarSolicitud(evt, hdl) {
+            var r = confirm("Confirma la cancelación de la Solicitud?");
+            if (r == true) {
+                var sol = $('#divModalSol').data('solicitud');
+                var params = { solicitud_id: sol.id, estatus_id: 3 };
+                $.ajax({
+                    type: "POST",
+                    url: rutaActualizaEstatusSolicitud,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    async: false,
+                    data: JSON.stringify(params),
+                    success: function (data) {
+                        if (data) {
+                            alert("La Solicitud se canceló correctamente");
+                            $('#divModalSol').modal('toggle');
+                            $('#btnConsultar').trigger('click');
+                        }
+                        else
+                            alert("Ocurrió un error al cancelar la Solicitud, favor de intentarlo nuevamente.");
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        };
+
+        function ComplementarSolicitud(evt, hdl) {
+            var sol = $('#divModalSol').data('solicitud');
+            var r = confirm("Confirma la actualización de la Solicitud con Folio " + sol.id + " para que el departamento correspondiente la complemente?");
+            if (r == true) {
+                var params = { solicitud_id: sol.id, estatus_id: 1 };
+                $.ajax({
+                    type: "POST",
+                    url: rutaActualizaEstatusSolicitud,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    async: false,
+                    data: JSON.stringify(params),
+                    success: function (data) {
+                        if (data) {
+                            alert("La Solicitud fue enviada nuevamente al departamento para ser complementada.");
+                            $('#divModalSol').modal('toggle');
+                            $('#btnConsultar').trigger('click');
+                        }
+                        else
+                            alert("Ocurrió un error al actualizar la Solicitud, favor de intentarlo nuevamente.");
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        };
+
+        function AddComment(evt) {
+            if (evt != undefined)
+                evt.preventDefault();
+
+            var scomment = $('#txtAddComentario').val();
+            if (scomment.trim().length <= 0) {
+                alert("Es requerido introducir un comentario.");
+                $('#txtAddComentario').focus();
+                return;
+            };
+
+            var sol = $('#divModalSol').data('solicitud');
+            var params = { idSolicitud: sol.id, comentario: scomment };
+            $.ajax({
+                type: "POST",
+                url: rutaAddComentario,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(params),
+                success: function (data) {
+                    $('#txtComentariosSolicitud').text(data);
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+    </script>
+}

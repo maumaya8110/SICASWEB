@@ -1,0 +1,618 @@
+﻿@model CASCO.EN.Abastos.Usuario
+@{
+    ViewBag.Title = "Elaboración - Solicitud de Materiales";
+    Layout = "~/Views/Shared/_LayoutAbastecimientos.cshtml";
+}
+<style>
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .btn-file input[type=file] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        filter: alpha(opacity=0);
+        opacity: 0;
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <table style="width: 100%;">
+                    <tr>
+                        <td>
+                            <h1><span><span class="glyphicon glyphicon-calendar"></span> &nbsp;@ViewBag.Title</span></h1>
+                        </td>
+                        <td>
+                            <h1><span style="text-align:right;"><span>Folio: </span><span id="lblFolio">0</span></span></h1>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2" for="txtUsuario">Usuario:</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" id="txtUsuario" readonly value="@User.Identity.Name" data-usuario="" />
+                        </div>
+                        <div class="col-sm-2"></div>
+                        <label class="control-label col-sm-2" for="txtFechaElabora">Fecha</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control " id="txtFechaElabora" readonly />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="cmbDivision">División:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="cmbDivision" data-placeholder="Seleccione una División"></select>
+                        </div>
+                        <label class="control-label col-sm-2" for="cmbEmpresa">Empresa:</label>
+                        <div class="col-sm-4" id="divselectEmpresa">
+                            <select class="form-control" id="cmbEmpresa" data-placeholder="Seleccione una Empresa"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="cmbDepartamento">Departamento:</label>
+                        <div class="col-sm-4" id="divselectDeptos">
+                            <select class="form-control" id="cmbDepartamento" data-placeholder="Seleccione un departamento"></select>
+                        </div>
+                        <label class="control-label col-sm-2" for="cmbAlmacenes">Almacén:</label>
+                        <div class="col-sm-4" id="selectAlmacenes">
+                            <select class="form-control" id="cmbAlmacenes" data-placeholder="Seleccione un Almacén">
+                                <option value="1">Generico</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="cmbArticulo">Artículo:</label>
+                        <div class="col-sm-5" id="selectArticulos">
+                            <select class="form-control chosen1" id="cmbArticulo" data-placeholder="Seleccione un artículo"></select>
+                        </div>
+                        <label class="control-label col-sm-1" for="txtCantidad">Cantidad</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="txtCantidad" />
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-toolbar" title="Agregar Artículo" id="btnAdd"><span class="glyphicon glyphicon-plus"></span></button>
+                            <button class="btn btn-toolbar btnGuardar" id="btnGuardarIcon" title="Guarda la Solicitud"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+                            <button class="btn btn-toolbar btnTerminar" id="btnTerminarIcon" title="Termina Captura"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                            <button class="btn btn-toolbar btnCancel" title="Cancela la Solicitud" id="btnCancelIcon"><span class="glyphicon glyphicon-remove"></span></button>
+                        </div>
+                    </div>
+                </form>
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#solicitud">Artículos</a></li>
+                    <li><a data-toggle="pill" href="#soportes">Soportes</a></li>
+                    <li><a data-toggle="pill" href="#comentarios">Comentarios</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="solicitud" class="tab-pane fade in active">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover" id="tblDetalle">
+                                <thead>
+                                    <tr style="font-weight:bold; font-size: 1.2em;">
+                                        <td>#</td>
+                                        <td>Cantidad</td>
+                                        <td>Descripción</td>
+                                        <td title="Precio Unitario">P.U.</td>
+                                        <td>Monto</td>
+                                        <td></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td></td><td></td><td></td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div id="soportes" class="tab-pane">
+                        <table id="tblSoportes" class="table table-striped table-hover">
+                            <thead>
+                                <tr style="text-align:center; font-weight:bold;">
+                                    <td style="width:5%;">#</td>
+                                    <td style="width:25%;">Descripción</td>
+                                    <td style="width:10%;">Req.</td>
+                                    <td style="width:60%;"></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="comentarios" class="tab-pane">
+                        <form role="form" class="form-horizontal">
+                            <div class="form-group" style="text-align:center;">
+                                <label class="control-label col-sm-1" for="txtAddComentario">Comentario:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="txtAddComentario" value="" placeholder="Introduzca un comentario..." />
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-toolbar" title="Agregar Comentario" id="btnAddComment"><span class="glyphicon glyphicon-plus"></span></button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <textarea id="txtComentariosSolicitud" style="width:100%; height:100%" readonly></textarea>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="form-group" style="text-align:center;">
+                <button class="btn btn-lg btnRegresar" id="btnRegresarFoot" title="Regresar"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                <button class="btn btn-lg btnGuardar" id="btnGuardarFoot" title="Guarda la Solicitud"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+                <button class="btn btn-lg btnTerminar" id="btnTerminarFoot" title="Termina Captura"><span class="glyphicon glyphicon-floppy-save"></span></button>
+                <button class="btn btn-lg btnCancel" id="btnCancelFoot" title="Cancela la Solicitud"><span class="glyphicon glyphicon-remove"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="dialogFileViewer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="titleSolicitud" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="titleSolicitud" style="margin-bottom:0px;">Documento</h4>
+            </div>
+            <div class="modal-body" id="divModalBodyFile">
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-log-out"></span> Regresar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/General/SolicitudMaterial.js")
+
+    <script type="text/javascript">
+        var rutaInsertaSolicitud = '@Url.Action("InsertaSolicitud", "SolicitudMateriales")';
+        var rutaActualizaEstatusSolicitud = '@Url.Action("ActualizaEstatusSolicitud", "SolicitudMateriales")';
+        var rutaConsultaArticulos = '@Url.Action("ConsultaServiciosPorDivisionEmpresaDeptoAlmacen", "SolicitudMateriales")';
+        var rutaConsultaAlmacenes = '@Url.Action("ConsultaAlmacenesPorDivisionEmpresaDepto", "SolicitudMateriales")';
+        var rutaAddComentario = '@Url.Action("AgregaComentarioASolicitud", "SolicitudMateriales")';
+        var rutaConsultaSolicitud = '@Url.Action("ConsultaSolicitud", "SolicitudMateriales")';
+        var rutaConsultaSoportes = '@Url.Action("ConsultaSoportes", "SolicitudMateriales")';
+        var rutaEliminaDetalle = '@Url.Action("EliminaDetalle", "SolicitudMateriales")';
+        var rutaHome = '@Url.Action("Index", "SolicitudMateriales")';
+        var rutaUploads = '@Url.Content("~/Uploads")';
+
+        var larticulos = [];
+        var usuarioObj = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model));
+
+        $(document).ready(function () {
+            var dteHoy = new Date();
+            $('#txtFechaElabora').val(dteHoy.toLocaleDateString());
+            $('#btnAdd').on('click', AgregaArticulo);
+            $('.btnGuardar').on('click', GuardarSolicitud);
+            $('.btnTerminar').on('click', TerminaSolicitud);
+            $('.btnCancel').on('click', CancelarS);
+            $('#btnAddComment').on('click',AddComment);
+            $('.btnRegresar').on('click', function () { window.history.back(); });
+            var cmb = $('#cmbDivision');
+            var lDivisiones = [];
+            $.each(usuarioObj.divisiones, function(idx, division){
+                lDivisiones.push(division);
+            });
+            RenderOpcionesEnComboWithEvents($('#cmbDivision'), lDivisiones, SetEmpresas, true);
+            hideLoading();
+        });
+
+        function CancelarS(evt, hdl) {
+            CancelarSolicitud(rutaActualizaEstatusSolicitud, SetModelo);
+        };
+
+        function AddComment(evt, hdl){
+            if(evt != undefined)
+                evt.preventDefault();
+
+            var scomment = $('#txtAddComentario').val();
+            if(scomment.trim().length <= 0){
+                alert("Es requerido introducir un comentario.");
+                $('#txtAddComentario').focus();
+                return;
+            };
+
+            var modelo = SetModelo();
+            if(modelo.id <= 0){
+                alert("No se puede almacenar el comentario de la solicitud porque esta no cuenta aún con un Folio Asignado. Primero debe guardar la Solicitud");
+                return;
+            };
+            var params = { idSolicitud: modelo.id, comentario: scomment};
+            $.ajax({
+                type: "POST",
+                url: rutaAddComentario,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(params),
+                success: function (data) {
+                    $('#txtComentariosSolicitud').text(data);
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function SetEmpresas(evt, hdl){
+            var idivision = $('#cmbDivision').find(':selected').val();
+            var lEmpresas = [];
+            $.each(usuarioObj.divisiones, function(idx, division){
+                if(division.id == idivision){
+                    lEmpresas = division.empresas;
+                }
+            });
+
+            var divselect = $('#divselectEmpresa');
+            divselect.empty();
+            var cmb = $('<select class="form-control" id="cmbEmpresa" data-placeholder="Seleccione una Empresa"></select>');
+            cmb.appendTo(divselect);
+            RenderOpcionesEnComboWithEvents(cmb, lEmpresas, SetDepartamentos, true);
+        };
+
+        function SetDepartamentos(evt, hdl){
+            var idivision = $('#cmbDivision').find(':selected').val();
+            var iempresa = $('#cmbEmpresa').find(':selected').val();
+            var lDeptos = [];
+            $.each(usuarioObj.divisiones, function(idx, division){
+                if(division.id == idivision){
+                    $.each(division.empresas, function(idx, empresa){
+                        if(empresa.id == iempresa){
+                            lDeptos = empresa.departamentos;
+                        }
+                    });
+                }
+            });
+            var divselect = $('#divselectDeptos');
+            divselect.empty();
+            var cmb = $('<select class="form-control" id="cmbDepartamento" data-placeholder="Seleccione un departamento"></select>');
+            cmb.appendTo(divselect);
+            RenderOpcionesEnComboWithEvents(cmb, lDeptos, SetAlmacenes, true);
+        };
+
+        function SetAlmacenes(evt, hdl){
+            var idivision = $('#cmbDivision').find(':selected').val();
+            var iempresa = $('#cmbEmpresa').find(':selected').val();
+            var idepartamento = $('#cmbDepartamento').find(':selected').val();
+            var params = { division: idivision, empresa: iempresa, departamento: idepartamento };
+            var lalmacenes = ObtieneListaJson(params, rutaConsultaAlmacenes);
+
+            var selectAlmacenes = $('#selectAlmacenes');
+            selectAlmacenes.empty();
+            var cmb = $('<select class="form-control chosen1" id="cmbAlmacenes" data-placeholder="Seleccione un almacen"></select>');
+            cmb.appendTo(selectAlmacenes);
+            RenderOpcionesEnComboWithEvents(cmb, lalmacenes, SetArticulos, true);
+        };
+
+        function SetArticulos(evt, hdl) {
+            var idivision = $('#cmbDivision').find(':selected').val();
+            var iempresa = $('#cmbEmpresa').find(':selected').val();
+            var idepartamento = $('#cmbDepartamento').find(':selected').val();
+            var ialmacen = $('#cmbAlmacenes').find(':selected').val();
+            var params = { division: idivision, empresa: iempresa, departamento: idepartamento, almacen: ialmacen };
+            larticulos = ObtieneListaJson(params, rutaConsultaArticulos);
+
+            var selectArticulos = $('#selectArticulos');
+            selectArticulos.empty();
+            var cmb = $('<select class="form-control chosen1" id="cmbArticulo" data-placeholder="Seleccione un artículo"></select>');
+            cmb.appendTo(selectArticulos);
+            RenderOpcionesEnCombo(cmb, larticulos);
+            ConsultaSolicitud();
+        };
+
+        function ConsultaSolicitud(){
+            var model = SetModelo();
+            $.ajax({
+                type: "POST",
+                url: rutaConsultaSolicitud,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(model),
+                success: function (data) {
+                    var tblItems = $("#tblDetalle");
+                    var tblSoportes = $("#tblSoportes");
+
+                    if(data.length > 0){
+                        var m = data[0];
+                        $('#lblFolio').text(m.id);
+                        RenderTable(tblItems, m.articulos, EnableDisableCmbs, SetModelo, rutaEliminaDetalle);
+                        RenderSoportes(tblSoportes, m);
+                        $('#txtComentariosSolicitud').text(m.Comentarios);
+                    }
+                    else{
+                        var m = {};
+                        m.articulos = [];
+                        m.soportes = [];
+                        $('#lblFolio').text('0');
+                        m.soportes = GetSoportes();
+                        RenderTable(tblItems, m.articulos, EnableDisableCmbs, SetModelo, rutaEliminaDetalle);
+                        RenderSoportes(tblSoportes, m);
+                        $('#txtComentariosSolicitud').text('');
+                    }
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function GetSoportes(){
+            var modelo = SetModelo();
+            var params = { division: modelo.Division.id, empresa: modelo.Empresa.id, departamento: modelo.Departamento.id };
+            var soportes = [];
+            $.ajax({
+                type: "POST",
+                url: rutaConsultaSoportes,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(params),
+                success: function (data) {
+                    soportes = data;
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+            return soportes;
+        }
+
+        function SetModelo(evt, hdl)
+        {
+            var modelo = {};
+            var lblFolio = $('#lblFolio').text();
+            var itemDivision = $('#cmbDivision').find(':selected').data('item');
+            var itemEmpresa = $('#cmbEmpresa').find(':selected').data('item');
+            var itemDepto = $('#cmbDepartamento').find(':selected').data('item');
+            var itemAlmacen = $('#cmbAlmacenes').find(':selected').data('item');
+            var itemEstatus = { id : 1, descripcion : 'Elaborada', selected : '', aux : '' };
+            var suser = $('#txtUsuario').val();
+            var sComentarios = $('#txtComentariosSolicitud').val();
+
+            modelo.id = lblFolio;
+            if (modelo.Division == undefined) { modelo.Division = {}; }
+            if (modelo.Empresa == undefined) { modelo.Empresa = {}; }
+            if (modelo.Almacen == undefined) { modelo.Almacen = {}; }
+            if (modelo.Departamento == undefined) { modelo.Departamento = {}; }
+            if (modelo.articulos == undefined) { modelo.articulos = []; }
+            if (modelo.soportes == undefined) { modelo.soportes = []; }
+
+            var detalle = $('#tblDetalle').find('tbody').find('tr');
+            $.each(detalle, function(idx, fila){
+                var btn = $(fila).find('.btnEliminar');
+
+                if(btn.length > 0){
+                    var fila_aux = btn.data('fila');
+                    modelo.articulos.push(fila_aux);
+                }
+            });
+
+            var Soportes = $('#tblSoportes').find('tbody').find('tr');
+            $.each(Soportes, function(idx, fila){
+                var f = $(fila).data('fila');
+                if(f != undefined)
+                    modelo.soportes.push(f);
+            });
+
+            modelo.Division = itemDivision;
+            modelo.Empresa = itemEmpresa;
+            modelo.Almacen = itemAlmacen;
+            modelo.Departamento = itemDepto;
+            modelo.Estatus = itemEstatus;
+            modelo.Usuario = suser;
+            modelo.Comentarios = sComentarios;
+            return modelo;
+        };
+
+        function AgregaArticulo(evt, hdl) {
+            evt.preventDefault();
+            var articulo = $('#cmbArticulo').find(':selected').data('item');
+            var icantidad = $('#txtCantidad').val();
+
+            if (icantidad <= 0) {
+                alert('Es necesario indicar una cantidad mayor a 0');
+                return;
+            }
+
+            var modelo = SetModelo();
+            if (ExisteArticulo(modelo.articulos, articulo) >= 0) {
+                alert('El articulo indicado ya existe, para agregarlo nuevamente primero debe eliminarlo del detalle');
+                return;
+            }
+
+            var r = { id: modelo.articulos.length + 1, item: articulo, cantidad: icantidad, monto: icantidad * articulo.preciocompra };
+            modelo.articulos.push(r);
+            RenderTable($("#tblDetalle"), modelo.articulos, EnableDisableCmbs, SetModelo, rutaEliminaDetalle);
+        };
+
+        function EnableDisableCmbs(counter){
+            if(counter > 0){
+                $('#cmbDivision').prop( "disabled", true ).trigger("chosen:updated");
+                $('#cmbEmpresa').prop( "disabled", true ).trigger("chosen:updated");
+                $('#cmbDepartamento').prop( "disabled", true ).trigger("chosen:updated");
+            }
+            else{
+                $('#cmbDivision').prop( "disabled", false ).trigger("chosen:updated");
+                $('#cmbEmpresa').prop( "disabled", false ).trigger("chosen:updated");
+                $('#cmbDepartamento').prop( "disabled", false ).trigger("chosen:updated");
+            }
+        };
+
+        function GuardarSolicitud(evt, hdl) {
+            if(evt != undefined)
+                evt.preventDefault();
+            var modelo = SetModelo();
+            if(!Valida(modelo)){ return; }
+            $.ajax({
+                type: "POST",
+                url: rutaInsertaSolicitud,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(modelo),
+                success: function (data) {
+                    var tblItems = $("#tblDetalle");
+                    var tblSoportes = $("#tblSoportes");
+                    var m = data;
+                    $('#lblFolio').text(m.id);
+                    RenderTable(tblItems, m.articulos, EnableDisableCmbs, SetModelo, rutaEliminaDetalle);
+                    RenderSoportes(tblSoportes, m.soportes);
+                    alert("La Solicitud se guardó con éxito");
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        };
+
+        function RenderSoportes(tbl, solicitud){
+            var body = tbl.find('tbody').empty();
+            $.each(solicitud.soportes, function(idx, s){
+                var ccheck = s.soporte.Req_Para_Autorizacion ? 'checked':'';
+                var count = s.Orden > 0 ? s.Orden : s.soporte.Orden;
+                var fila = $('<tr></tr>');
+                var td = $('<td>' + count + '</td>');
+                td.appendTo(fila);
+                td = $('<td>' + s.soporte.descripcion + '</td>');
+                td.appendTo(fila);
+                td = $('<td><input style="width:100%;" type="checkbox" ' + ccheck +' disabled /></td>');
+                td.appendTo(fila);
+                td = $('<td></td>');
+                var btnFileUp = $('<span><label class="btn btn-default btn-file">Seleccionar<input type="file" class="FileUpCustom" accept="application/pdf" hidden></label></span>');
+                btnFileUp.on('change', UploadFile);
+                btnFileUp.data('solicitud_id',solicitud.id);
+                btnFileUp.data('soportesolicitud_id',s.id);
+                btnFileUp.data('soporte_id',s.soporte.id);
+                btnFileUp.appendTo(td);
+
+                if(s.Ruta_Documento.length > 0){
+                    var btn = $('<span class="btnView"><label class="btn btn-default">Ver</label></span>');
+                    debugger;
+                    btn.data('ruta', rutaUploads + s.Ruta_Documento);
+                    btn.on('click',ViewPDF);
+                    btn.appendTo(td);
+                }
+
+                td.appendTo(fila);
+                fila.appendTo(body);
+            });
+        };
+
+        function ViewPDF(ect, hdl){
+            $("#divModalBodyFile").empty();
+            var ruta = $(this).data('ruta');
+            var object = $('<object data="'+ruta+'" type="application/pdf" width="100%" height="450px"></object>');
+            var spanLeyenda = $('<span>Si no puede visualizar el archivo, puede descargarlo desde <a href ="'+ruta+'">aquí</a> o descarga <a target ="_blank" href=http://get.adobe.com/reader/">Adobe PDF Reader</a> para visualizar el archivo.</span>');
+            spanLeyenda.appendTo(object);
+            object.appendTo($("#divModalBodyFile"));
+            $("#dialogFileViewer").modal('show');
+        };
+
+        function UploadFile(event) {
+            var solicitud_id = $(this).data('solicitud_id');
+            var soportesolicitud_id = $(this).data('soportesolicitud_id');
+            var soporte_id = $(this).data('soporte_id');
+            var files = event.target.files;
+
+            event.stopPropagation();
+            event.preventDefault();
+            var padre = $(event.currentTarget.parentNode);
+            var formdata = new FormData();
+            if (window.FormData !== undefined) {
+                $.each(files, function (key, value) {
+                    formdata.append("File", value);
+                    formdata.append("Solicitud_ID", solicitud_id);
+                    formdata.append("SoporteSolicitud_ID", soportesolicitud_id);
+                    formdata.append("Soporte_ID", soporte_id);
+                });
+            }
+
+            $.ajax({
+                url: '@Url.Action("Upload", "SolicitudMateriales")',
+                type: 'POST',
+                data: formdata,
+                cache: false,
+                dataType: 'json',
+                processData: false,
+                contentType: false,
+                async:false,
+                success: function (data, textStatus, jqXHR) {
+                    if (data != undefined && data.length > 0) {
+                        alert("Carga de Archivo OK");
+                        padre.find('.btnView').remove();
+                        var btn = $('<span class="btnView"><label class="btn btn-default btnShow">Ver</label></span>');
+                        btn.data('ruta', rutaUploads + data);
+                        btn.on('click',ViewPDF);
+                        btn.appendTo(padre);
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log('ERRORS: ' + textStatus);
+                }
+            });
+        };
+
+        function TerminaSolicitud(evt, hdl){
+            evt.preventDefault();
+            var r = confirm("Dese enviar la solicitud para su aprobación?");
+            if(r){
+                var modelo = SetModelo();
+                if(!Valida(modelo)){ return; }
+                $.ajax({
+                    type: "POST",
+                    url: rutaInsertaSolicitud,
+                    cache: false,
+                    dataType: 'json',
+                    contentType: "application/json",
+                    async: false,
+                    data: JSON.stringify(modelo),
+                    success: function (data) {
+                        var params = { solicitud_id: modelo.id, estatus_id: 2 };
+                        $.ajax({
+                            type: "POST",
+                            url: rutaActualizaEstatusSolicitud,
+                            cache: false,
+                            dataType: 'json',
+                            contentType: "application/json",
+                            async: false,
+                            data: JSON.stringify(params),
+                            success: function (data) {
+                                alert("La solicitud ha sido actualizada para su aprobación.");
+                                location.href= rutaHome;
+                            },
+                            error: function (xhr, status, errormsg) {
+                                alert(errormsg);
+                            }
+                        });
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        };
+    </script>
+
+}

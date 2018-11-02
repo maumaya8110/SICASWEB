@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<cfdi:Comprobante xmlns:xsi="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="3.2" serie="D" folio="30" fecha="2016-07-14T15:45:19.849" sello="Fn43QBH0Q+TGmClYc/kR8gmUlLiNsnC0KupsAJil6UJh7AupMcgeo6cuyuXchfsUypokawNrAdArBJDJwqjnh8KiIdEJJIFjKNkvIut5zwVgpAY7SO+1AH5Pwf85VrceKIisr7beq+5qcBPhG2Hl1P4uKxHwQ6EInWG0Ms6r6hI=" formaDePago="PAGO EN UNA SOLA EXHIBICION" noCertificado="00001000000202508313" certificado="MIIEqTCCA5GgAwIBAgIUMDAwMDEwMDAwMDAyMDI1MDgzMTMwDQYJKoZIhvcNAQEFBQAwggGVMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSEwHwYJKoZIhvcNAQkBFhJhc2lzbmV0QHNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxFDASBgNVBAcMC0N1YXVodMOpbW9jMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxPjA8BgkqhkiG9w0BCQIML1Jlc3BvbnNhYmxlOiBDZWNpbGlhIEd1aWxsZXJtaW5hIEdhcmPDrWEgR3VlcnJhMB4XDTEyMTIwNDIxMTM1MVoXDTE2MTIwNDIxMTM1MVowgeoxIzAhBgNVBAMTGkNBU0NPIFRSQU5TUE9SVEVTIFNBIERFIENWMSMwIQYDVQQpExpDQVNDTyBUUkFOU1BPUlRFUyBTQSBERSBDVjEjMCEGA1UEChMaQ0FTQ08gVFJBTlNQT1JURVMgU0EgREUgQ1YxJTAjBgNVBC0THENUUjAzMDEyM0lDQSAvIEdBR0E1OTAzMTU2STcxHjAcBgNVBAUTFSAvIEdBR0E1OTAzMTVITkxSUlAxNjEyMDAGA1UECxMpQ0FSUkVURVJBIE1JR1VFTCBBTEVNQU4gS00gMjQgQ09MLiBDRU5UUk8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMBYWFqB/fqt8n319XFhhEb6KjRBT23V3A9rxKdsQ/vi374RBxAsZTRhRCQniP6Lf7ludhiorWMKsVDfq0rsDVlgGDecfgCRgcEVSohcr2WZLuzlxpYunXSv5kel6X4xqpwrwTQR716ZTOGxiB3lYJYLnIvBly7oCE5stoF2myyXAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQBuKz3kUSnH9Z/6xVtAYrlPtFIlfHBpRH3yvGOjc6PttrsFS6GiQbvJoKIu7uaszjfylxdOfp+InnsC+MIaV83jKX73uVt/3QSEugDS4EHSz9KLRoKgtOYIVms+thh4DjwxBz9koPIGVpAIPcFYzNk3wHfdaBoXnreZd5+UCujM0QRx3qU8vNULfmZZyiwhTkd/kTxRVuXfgXWkKiXlrn3+14p/PD3SkdhsEJfyoVjS9l3lVInhH7Bphr4hpXyoKcWTRf50cKAw+kzjgwxBfDheCPYuJFPVNAptYuP/ID66E9v1XHXTLRQjM7QClvK/+RcnvWwt1OSaOjS0a64cCZxQ" condicionesDePago="CONTADO" subTotal="320.00" Moneda="MXP" total="320.00" tipoDeComprobante="ingreso" metodoDePago="28" LugarExpedicion="Monterrey, N.L." NumCtaPago="NO IDENTIFICADO" xmlns:cfdi="http://www.sat.gob.mx/cfd/3">
+  <cfdi:Emisor rfc="CTR030123ICA" nombre="CASCO TRANSPORTES SA DE CV">
+    <cfdi:DomicilioFiscal calle="CARR. MIGUEL ALEMAN KM. 24" noExterior="S/N" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:RegimenFiscal Regimen="REGIMEN GENERAL DE LEY PERSONAS MORALES" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="MEDG8011028R5" nombre="GALDINO MELCHOR DIAZ">
+    <cfdi:Domicilio calle="SEVILLA" noExterior="939" colonia="PEDREGAL DE APODACA" localidad="APODACA" municipio="APODACA" estado="NUEVO LEÓN" pais="MEXICO" codigoPostal="66605" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1" unidad="NO APLICA" descripcion="Transporte Público Terrestre de Personas.   Servicio del 02/07/2016 #020260916070202310079" valorUnitario="320" importe="320" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos>
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="0" importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigital.xsd" selloSAT="YugnsfkorUHM72OO77nEjhLFo8O028RysO9ZD4/bRAXXGv+gw2JQQtJGCQ5cazhHwSd0uvrhw0Nxe9DyvRCSB07EF4oyZdHSIpZAf8hpy+/NvE/Aj/V74uyznyOL/WVqXTJlyMB46NhFnEBg51n52yMuvMFdeHN8dwC3usXyxpc=" noCertificadoSAT="00001000000202693892" selloCFD="Fn43QBH0Q+TGmClYc/kR8gmUlLiNsnC0KupsAJil6UJh7AupMcgeo6cuyuXchfsUypokawNrAdArBJDJwqjnh8KiIdEJJIFjKNkvIut5zwVgpAY7SO+1AH5Pwf85VrceKIisr7beq+5qcBPhG2Hl1P4uKxHwQ6EInWG0Ms6r6hI=" FechaTimbrado="2016-07-14T15:45:30" UUID="9bc87afc-9d35-4f94-be5f-146e8f08ef2a" version="1.0" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

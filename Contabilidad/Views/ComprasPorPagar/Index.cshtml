@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @{
+        if (((Dictionary<string, bool>)ViewBag.Permisos)["VerPreValidacion"])
+        {
+            <div class="col-md-3">
+                <h2>Doctos a Entregar</h2>
+                <p>
+                    Documentos de Compras por pagar.
+                </p>
+                <p><a class="btn btn-default" href="@Url.Action("PreValidacion", "ComprasPorPagar")">Ir &raquo;</a></p>
+            </div>
+        }
+    }
+    @{
+        if (((Dictionary<string, bool>)ViewBag.Permisos)["VerValidacion"])
+        {
+            <div class="col-md-2">
+                <h2>Por Validar</h2>
+                <p>
+                    Compras a validar CFDI
+                </p>
+                <p><a class="btn btn-default" href="@Url.Action("PorValidar", "ComprasPorPagar")">Ir &raquo;</a></p>
+            </div>
+        }
+    }
+    @{
+        if (((Dictionary<string, bool>)ViewBag.Permisos)["VerPorProgramar"])
+        {
+            <div class="col-md-3">
+                <h2>Programar Pago</h2>
+                <p>
+                    Compras a programar fecha de Pago
+                </p>
+                <p><a class="btn btn-default" href="@Url.Action("ProgramacionPago", "ComprasPorPagar")">Ir &raquo;</a></p>
+            </div>
+        }
+    }
+    @{
+        if (((Dictionary<string, bool>)ViewBag.Permisos)["VerProgramados"])
+        {
+            <div class="col-md-2">
+                <h2>Por Pagar</h2>
+                <p>
+                    Compras con fecha de pago programado
+                </p>
+                <p><a class="btn btn-default" href="@Url.Action("PorPagar","ComprasPorPagar")">Ir &raquo;</a></p>
+            </div>
+        }
+    }
+    <div class="col-md-2">
+        <h2>Consultas</h2>
+        <p>
+            Consulta Compras
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Consultas","ComprasPorPagar")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-2">
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            showLoading();
+            hideLoading();
+        });
+    </script>
+}

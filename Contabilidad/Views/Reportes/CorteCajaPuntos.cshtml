@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Corte de Caja por Puntos";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1><span class="glyphicon glyphicon-calendar"></span> &nbsp;Cortes de Caja</h1>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group" style="text-align:center;">
+                        <label class="control-label col-sm-2" for="txtFecha">Fecha:</label>
+                        <div class="col-sm-2">
+                            <div class='input-group date' id='txtFecha'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-8"></div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="cmbEmpresa">Empresa:</label>
+                        <div class="col-sm-3" id="selectArticulos">
+                            <select class="form-control chosen1" id="cmbEmpresa" data-placeholder="Seleccione un artículo">
+                                @foreach(CASCO.EN.General.Empresa e in ViewBag.Empresas)
+                                {
+                                    <option value="@e.id">@e.descripcion</option>
+                                }
+                            </select>
+                        </div>
+                        <label class="control-label col-sm-2" for="cmbPunto">Caja:</label>
+                        <div class="col-sm-3" id="selectArticulos">
+                            <select class="form-control chosen1" id="cmbPunto" data-placeholder="Seleccione un artículo">
+                                @foreach (CASCO.EN.General.Caja c in ViewBag.Cajas)
+                                {
+                                    <option value="@c.id">@c.descripcion</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="col-sm-2">
+                            <button class="btn btn-lg" title="Consultar" id="btnConsulta"><span class="glyphicon glyphicon-search"></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table id="gridConsulta"></table>
+        <div id="pagerConsulta"></div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Contabilidad/Generales.js")
+    <script type="text/javascript">
+        var rutaCortesPorPunto = '@Url.Action("GetCortesPorPunto", "Reportes")';
+        var lCortes = [];
+
+        $(document).ready(function () {
+            showLoading();
+            var dteActual = new Date();
+            $('#txtFecha').datetimepicker({ defaultDate: dteActual, format: 'DD/MM/YYYY' });
+            $('#btnConsulta').on('click', ConsultaReporte);
+            hideLoading();
+        });
+
+        function ConsultaReporte(evt, hdl) {
+            showLoading();
+            evt.preventDefault();
+            var dteFecha = $("#txtFecha").find("input").val();
+            var vEmpresa = $("#cmbEmpresa").find(':selected').val();
+            var vPunto = $("#cmbPunto").find(':selected').val();
+            var params = { fechainicio: dteFecha, fechafin: dteFecha, empresa_id: vEmpresa, caja_id: vPunto };
+            lCortes = ObtieneListaJson(params, rutaCortesPorPunto);
+            RenderTable($('#gridConsulta'), lCortes);
+            hideLoading();
+        }
+
+        function RenderTable(tbl, litems) {
+            $.each(litems, function (idx, item) {
+                item.FechaFinal = ConvertToDate(item.FechaFinal);
+                item.FechaInicial = ConvertToDate(item.FechaInicial);
+                item.FechaCorte = ConvertToDate(item.FechaCorte);
+            });
+
+            $('#gridConsulta').jqGrid(
+                {
+                    data: litems
+                    , datatype: "local"
+                    , rowNum: 10
+                    , rowList: [10, 20, 30]
+                    , colNames: ['Fecha', 'Empresa', 'Estacion', 'Caja', 'Estatus Corte', 'Ingresos Efv', 'Estatus Traslado']
+                    , colModel: [
+                        { name: 'FechaCorte', index: 'FechaCorte', width: 60 }
+                        , { name: 'Empresa.descripcion', index: 'Empresa', width: 90, sorttype: "text" }
+                        , { name: 'Estacion.descripcion', index: 'Estacion', width: 100 }
+                        , { name: 'Caja.descripcion', index: 'Caja', width: 80, align: "right", sorttype: "text" }
+                        , { name: 'Estatus.descripcion', index: 'EstatusCorte', width: 80, align: "right", sorttype: "text" }
+                        , { name: 'TotalIngresosEfectivo', index: 'TotalIngresosEfectivo', width: 80, align: "right", sorttype: "float" }
+                        , { name: 'EstatusTraslado.descripcion', index: 'EstatusTraslado', width: 150, sortable: false }
+                    ]
+                    , viewrecords: true
+                    , caption: "Cortes de Caja"
+                    , height: '100%'
+                    , pager: "#pagerConsulta"
+                });
+        };
+
+    </script>    
+}

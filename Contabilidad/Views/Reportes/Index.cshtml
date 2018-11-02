@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "Reportes";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Cortes de Caja por Punto</h2>
+        <p>
+            Estatus actual del corte de caja por punto.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("CorteCajaPuntos","Reportes")">Ir &raquo;</a></p>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            hideLoading();
+        });
+    </script>
+}

@@ -1,0 +1,67 @@
+﻿@model List<FacturacionCAT.Models.Estado>
+
+<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="txtAlias"> Alias: </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtAlias" placeholder="Alias" title="Nombre con el que se identificarán los datos de facturación" required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="txtRazonSocial"> Razón Social </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=200 id="txtRazonSocial" placeholder="Razón Social" title="Razón social o Nombre al cual se factura." required/>
+        </div>
+        <label class="control-label col-sm-2 lblSmall" for="txtRFC"> RFC </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=16 id="txtRFC" placeholder="RFC" title="RFC al cual se factura." required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="txtCalle"> Calle </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtCalle" placeholder="Calle" title="Calle del domicilio fiscal al cual se factura." required/>
+        </div>
+        <label class="control-label col-sm-1 lblSmall" for="txtNumeroExt"> #Ext. </label>
+        <div class="col-sm-2">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtNumeroExt" placeholder="Número Exterior" title="Número Exterior del domicilio fiscal al cual se factura." required/>
+        </div>
+        <label class="control-label col-sm-1 lblSmall" for="txtNumeroInt"> #Int. </label>
+        <div class="col-sm-2">
+            <input class="form-control upper" type="text" maxlength=150 id="txtNumeroInt" placeholder="Número Interior" title="Número Interior del domicilio fiscal al cual se factura."/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="txtColonia"> Colonia </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtColonia" placeholder="Colonia" title="Colonia del domicilio fiscal al cual se factura." required/>
+        </div>
+        <label class="control-label col-sm-2 lblSmall" for="txtCP"> C.P. </label>
+        <div class="col-sm-4">
+            <input class="form-control requerido" type="text" maxlength=150 id="txtCP" placeholder="Código Postal" title="Código Postal del domicilio fiscal al cual se factura." required/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="txtCiudad"> Ciudad </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtCiudad" placeholder="Ciudad" title="Ciudad del domicilio fiscal al cual se factura." required/>
+        </div>
+        <label class="control-label col-sm-2 lblSmall" for="txtLocalidad"> Localidad </label>
+        <div class="col-sm-4">
+            <input class="form-control upper requerido" type="text" maxlength=150 id="txtLocalidad" placeholder="Localidad" title="Localidad del domicilio fiscal al cual se factura." />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2 lblSmall" for="cmbEstado"> Estado </label>
+        <div class="col-sm-4">
+            <select class="form-control" id="cmbEstado" title="Estado del domicilio fiscal al cual se factura.">
+                @foreach (FacturacionCAT.Models.Estado e in Model)
+                {
+                    <option value="@e.Id" @if (e.Id == 19) { @Html.Raw("selected"); }>@e.Descripcion.ToUpper()</option>
+                }
+            </select>
+        </div>
+    </div>
+    <input type="hidden" id="txtToken" />
+</form>
+<div id="lblError"></div>

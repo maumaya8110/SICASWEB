@@ -1,0 +1,86 @@
+﻿@model CASCO.EN.Abastos.Usuario
+@{
+    ViewBag.Title = "Solicitud de Material";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-sm-3" id="btnElaboracion" style="cursor:pointer;">
+        <div class="panel panel-default text-center">
+            <div class="panel-heading">
+                <h1>Elaboración</h1>
+            </div>
+            <div class="panel-body">
+                <span class="glyphicon glyphicon-calendar logo"></span>
+                <p>Elaboración Solicitud de Materiales por área</p>
+            </div>
+            <div class="panel-footer">
+                <button class="btn btn-lg">Ir</button>
+            </div>
+        </div>
+    </div>
+    @if (Model.NivelAcceso <= 2)
+    {
+        <div class="col-sm-3" id="btnAprobacion" style="cursor:pointer;">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Aprobación</h1>
+                </div>
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-check logo"></span>
+                    <p>Aprobación de las Solcitudes de Material</p>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-lg">Ir</button>
+                </div>
+            </div>
+        </div>
+    }
+    @if (Model.NivelAcceso == 1)
+    {
+        <div class="col-sm-3" id="btnAutorizacion" style="cursor:pointer;">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Autorización</h1>
+                </div>
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-check logo"></span>
+                    <p>Flujo de Autorización</p>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-lg">Ir</button>
+                </div>
+            </div>
+        </div>
+    }
+        <div class="col-sm-3" id="btnConsultas" style="cursor:pointer;">
+            <div class="panel panel-default text-center">
+                <div class="panel-heading">
+                    <h1>Consultas</h1>
+                </div>
+                <div class="panel-body">
+                    <span class="glyphicon glyphicon-search logo"></span>
+                    <p>Consultas Estatus Solicitudes</p>
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-lg">Ir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @section Scripts {
+        <script type="text/javascript">
+            var rutaElabora = '@Url.Action("Elaboracion", "SolicitudMateriales")';
+            var rutaAprueba = '@Url.Action("Aprobacion", "SolicitudMateriales")';
+            var rutaConsultas = '@Url.Action("Consulta", "SolicitudMateriales")';
+            var rutaAutoriza = '@Url.Action("Autorizacion", "SolicitudMateriales")';
+
+            $(document).ready(function () {
+                $('#btnElaboracion').on('click', function () { window.location = rutaElabora; });
+                $('#btnAprobacion').on('click', function () { window.location = rutaAprueba; });
+                $('#btnConsultas').on('click', function () { window.location = rutaConsultas; });
+                $('#btnAutorizacion').on('click', function () { window.location = rutaAutoriza; });
+                hideLoading();
+            });
+        </script>
+    }

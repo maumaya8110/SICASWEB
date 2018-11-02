@@ -1,0 +1,36 @@
+﻿<form class="form-horizontal" role="form">
+    <div class="form-group">
+        <label class="control-label col-sm-6 lblSmall" for="txtContrasenaActual"> Contraseña Actual: </label>
+        <div class="col-sm-4">
+            <input type="password" id="txtContrasenaActual" placeholder="Contraseña Actual para ingresar al sitio" title="Contraseña que utiliza Actualmente para ingresar al sitio" class="form-control requerido"/>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-6 lblSmall" for="txtContrasenaNueva"> Nueva Contraseña: </label>
+        <div class="col-sm-4">
+            <input type="password" id="txtContrasenaNueva" placeholder="Nueva Contraseña" title="Contraseña para ingresar al sitio, debe tener entre 6 y 20 caracteres y contener por lo menos un número del 0 al 9, una letra mayúsula y una letra minúscula." class="form-control requerido" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-6 lblSmall" for="txtConfirmacionContrasenaNueva"> Confirmación de Contraseña: </label>
+        <div class="col-sm-4">
+            <input type="password" id="txtConfirmacionContrasenaNueva" placeholder="Confirmación de Nueva Contraseña" title="Confirmación de la nueva contraseña para ingresar al sitio" class="form-control requerido" />
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#txtContrasenaActual');
+        $('#txtContrasenaNueva').on("blur", ValidaPwd);
+        $('#txtConfirmacionContrasenaNueva').on("blur", ValidaPwd).on("blur", function () {
+            if ($(this).val() != $('#txtContrasenaNueva').val()) {
+                alert("Las contraseñas no coinciden, favor de verificar.");
+                this.focus();
+                return;
+            }
+        }); ;
+
+        $("input.requerido").on("blur", CampoRequerido);
+    });
+</script>

@@ -1,0 +1,184 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/site.css")
+    <link href="@Url.Content("~/Content/LoginDlg.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container body-content">
+        <div class="jumbotron">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <img src="http://aerocontaxi.com.mx/wp-content/uploads/2015/09/logo.png" class="img-responsive">
+                        </td>
+                        <td>
+                            <h2 style="font-weight:bold;">Facturación Electrónica (CFDI)</h2>
+                        </td>
+                    </tr>
+                </table>
+                <div class="right menus clearfix">
+                    <p class="lead" style="font-weight:bold;">Bienvenido</p>
+                    <p>
+                        Te informamos que en este sitio podrás generar la factura de los servicios realizados durante el mes en curso.
+                        Para los servicios realizados los últimos días del mes, tendrás como plazo máximo para generar la factura hasta el día 7 del mes inmediato siguiente.
+                    </p>
+                    <button type="button" id="btnSinRegistro" class="btn btn-outline btn-default btn-lg">Usuarios Sin Registro</button>
+                    <button type="button" id="btnConRegistro" class="btn btn-outline btn-default btn-lg">Usuarios Registrados</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
+                <strong style="color:red">NOTA:</strong>
+                Esta página está diseñada para facturar los servicios adquiridos a partir del 15 de Julio del 2016. Cualquier servicio previo deberá facturarse mediante el proceso anterior.
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <footer>
+            <p>&copy; 2016 - AeroContaxi</p>
+        </footer>
+    </div>
+
+
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" align="center">
+                    <img class="img-responsive" id="img_logo" src="http://aerocontaxi.com.mx/wp-content/uploads/2015/09/logo.png">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <!-- Begin # DIV Form -->
+                <div id="div-forms">
+
+                    <!-- Begin # Login Form -->
+                    <form id="login-form">
+                        <div class="modal-body">
+                            <div id="div-login-msg">
+                                <div id="icon-login-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-login-msg">Introduce tu E-mail y contraseña.</span>
+                            </div>
+                            <input id="login_username" class="form-control" type="text" placeholder="E-mail" required>
+                            <input id="login_password" class="form-control" type="password" placeholder="Contraseña" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+                            </div>
+                            <div>
+                                <button id="login_lost_btn" type="button" class="btn btn-link">Olvidaste tu contraseña?</button>
+                                <button id="login_register_btn" type="button" class="btn btn-link">Registrarse</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End # Login Form -->
+                    <!-- Begin | Lost Password Form -->
+                    <form id="lost-form" style="display:none;">
+                        <div class="modal-body">
+                            <div id="div-lost-msg">
+                                <div id="icon-lost-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-lost-msg">Introduce tú correo electrónico.</span>
+                            </div>
+                            <input id="lost_email" class="form-control" type="text" placeholder="E-Mail" required>
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Recuperar Contraseña</button>
+                            </div>
+                            <div>
+                                <button id="lost_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="lost_register_btn" type="button" class="btn btn-link">Registrarse</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Lost Password Form -->
+                    <!-- Begin | Register Form -->
+                    <form id="register-form" style="display:none;">
+                        <div class="modal-body">
+                            <div id="div-register-msg">
+                                <div id="icon-register-msg" class="glyphicon glyphicon-chevron-right"></div>
+                                <span id="text-register-msg">Registrar una nueva Cuenta.</span>
+                            </div>
+                            <input id="register_email" class="form-control" type="text" placeholder="E-Mail" required title="Correo electrónico que usó para solicitar su servicio, será el mismo para recibir las facturas">
+                            <input id="register_password" class="form-control" type="password" placeholder="Password" required title="La contraseña para ingresar al sitio, debe tener entre 6 y 20 caracteres y contener por lo menos un número del 0 al 9, una letra mayúsula y una letra minúscula.">
+                            <input id="register_confirmpassword" class="form-control" type="password" placeholder="Confirm Password" required title="La contraseña para ingresar al sitio, debe tener entre 6 y 20 caracteres y contener por lo menos un número del 0 al 9, una letra mayúsula y una letra minúscula.">
+                        </div>
+                        <div class="modal-footer">
+                            <div>
+                                <button type="submit" class="btn btn-primary btn-lg btn-block">Crear Cuenta</button>
+                            </div>
+                            <div>
+                                <button id="register_login_btn" type="button" class="btn btn-link">Log In</button>
+                                <button id="register_lost_btn" type="button" class="btn btn-link">Olvidaste tu contraseña?</button>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- End | Register Form -->
+
+                </div>
+                <!-- End # DIV Form -->
+
+            </div>
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/tableExport.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/funciones.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/LoginDlg.js")"></script>
+
+    <script type="text/javascript">
+        var rutaSinRegistro = '@Url.Action("Index", "FacturacionLibre")';
+        var rutaIngresa = '@Url.Action("IngresaUsuario", "Cuenta")';
+        var rutaRecupera = "@Url.Action("Recuperacion","Cuenta")";
+        var rutaRegistra = "@Url.Action("RegistraUsuarioSimple", "Cuenta")";
+
+        $(document).ready(function () {
+            var dteHoraActual = new Date();
+            var hrActual = dteHoraActual.getHours();
+            var minHr = 8;
+            var maxHr = 23;
+            if (hrActual < minHr || hrActual > maxHr) {
+                var msg = 'El horario de servicio para facturación en línea es de ' + minHr + ' a ' + maxHr + ' Hrs';
+                var dlg = $('<div class="modal fade" role="dialog"><div class="modal-dialog modal-lg" role="document"><div class="modal-content"><div class="modal-header" style="padding:15px 50px;background-color: yellow;"><h1><span class="glyphicon glyphicon-warning-sign"></span> Atención</h1></div><div class="modal-body" style="padding:10px 40px;font-size:1.5em;">' + msg + '</div></div></div>');
+                dlg.modal({ backdrop: 'static', keyboard: false });
+            }
+
+            $('#btnSinRegistro').on('click', function (evt) { window.location = rutaSinRegistro; });
+            $('#btnConRegistro').on('click', function (evt) { $('#login-modal').modal(); });
+            $('#register_email').on("blur", ValidEmail);
+            $('#register_password').on("blur", ValidaPwd);
+            $('#register_confirmpassword').on('blur', function (evt, hdl) {
+                var pwd = $('#register_password').val();
+                var cpwd = $('#register_confirmpassword').val();
+
+                if (cpwd.length > 0 && pwd != cpwd) {
+                    alert('Las contraseñas no coinciden. Favor de verificar.');
+                    $('#register_confirmpassword').focus();
+                    return false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

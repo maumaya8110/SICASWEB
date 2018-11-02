@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BDAFB7AE-AD1A-481E-972F-78C078FE4100}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FacturacionCAT</RootNamespace>
+    <AssemblyName>FacturacionCAT</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="diFirmaSatNet, Version=7.3.0.28436, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\FirmaSAT\diFirmaSatNet.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Dependencias\Referencias\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa, Version=5.5.5.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Dependencias\Referencias\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="MessagingToolkit.Barcode, Version=1.7.0.1, Culture=neutral, PublicKeyToken=4d44dd7196d3c1ac, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Dependencias\Referencias\MessagingToolkit.Barcode.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MKSLibrary, Version=1.8.6.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\Dependencias\Referencias\MKSLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Abstractions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Routing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Services">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20710.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.2.0.20710.0\lib\net40\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.20710.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.2.0.20710.0\lib\net40\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.0.3.12153\lib\net40-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.0.3.12153\lib\net40-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdministradorController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CuentaController.cs" />
+    <Compile Include="Controllers\FacturacionLibreController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DatosFiscales.cs" />
+    <Compile Include="Models\Estados.cs" />
+    <Compile Include="Models\Funciones.cs" />
+    <Compile Include="Models\InformacionCuenta.cs" />
+    <Compile Include="Models\opensslkey.cs" />
+    <Compile Include="Models\RegistroUsuario.cs" />
+    <Compile Include="Models\Seguridad.cs" />
+    <Compile Include="Models\ServicioFactura.cs" />
+    <Compile Include="Models\ServicioHistoria.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Data\Certificados\contraseña.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Data\CFDIS_TEMP\Vacio.txt" />
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\images\16x16_Close.png" />
+    <Content Include="Content\images\BoletoCASCO.PNG" />
+    <Content Include="Content\images\BoletoEBSA.PNG" />
+    <Content Include="Content\images\error.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\pdf.png" />
+    <Content Include="Content\images\xml.png" />
+    <Content Include="Content\images\zip.png" />
+    <Content Include="Content\LoginDlg.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="http _www.sat.gob.mx_sitio_internet_cfd_3_cfdv32.xsd Archivos\viewsource.css" />
+    <Content Include="http _www.sat.gob.mx_sitio_internet_cfd_3_cfdv32.xsd.xml" />
+    <Content Include="Images\16x16_Close.png" />
+    <Content Include="Images\16x16_Info.png" />
+    <Content Include="Images\check.gif" />
+    <Content Include="Images\encabezado.jpg" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\fondotitulo.jpg" />
+    <Content Include="Images\header.jpg" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\nuevo.png" />
+    <Content Include="Images\pdf.png" />
+    <Content Include="Images\pie.jpg" />
+    <Content Include="Images\transparente.png" />
+    <Content Include="Images\urgi2x.png" />
+    <Content Include="Images\xml.png" />
+    <Content Include="Images\zip.png" />
+    <Content Include="Scripts\date.format.js" />
+    <Content Include="Scripts\FacturacionUsuarios.js" />
+    <Content Include="Scripts\FacturacionLibre.js" />
+    <Content Include="Scripts\FileSaver\FileSaver.min.js" />
+    <Content Include="Scripts\funciones.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-2.2.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-2.2.1.js" />
+    <Content Include="Scripts\jquery-2.2.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.js" />
+    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
+    <Content Include="Scripts\jquery.numeric.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-2.1.0.debug.js" />
+    <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\LoginDlg.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\tableExport.js" />
+    <Content Include="Scripts\table_sorter\css\dragtable.mod.min.css" />
+    <Content Include="Scripts\table_sorter\css\filter.formatter.min.css" />
+    <Content Include="Scripts\table_sorter\css\images\black-asc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\black-desc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\black-unsorted.gif" />
+    <Content Include="Scripts\table_sorter\css\images\bootstrap-black-unsorted.png" />
+    <Content Include="Scripts\table_sorter\css\images\bootstrap-white-unsorted.png" />
+    <Content Include="Scripts\table_sorter\css\images\dragtable-handle.png" />
+    <Content Include="Scripts\table_sorter\css\images\dragtable-handle.svg" />
+    <Content Include="Scripts\table_sorter\css\images\dropbox-asc-hovered.png" />
+    <Content Include="Scripts\table_sorter\css\images\dropbox-asc.png" />
+    <Content Include="Scripts\table_sorter\css\images\dropbox-desc-hovered.png" />
+    <Content Include="Scripts\table_sorter\css\images\dropbox-desc.png" />
+    <Content Include="Scripts\table_sorter\css\images\first.png" />
+    <Content Include="Scripts\table_sorter\css\images\green-asc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\green-desc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\green-header.gif" />
+    <Content Include="Scripts\table_sorter\css\images\green-unsorted.gif" />
+    <Content Include="Scripts\table_sorter\css\images\ice-asc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\ice-desc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\ice-unsorted.gif" />
+    <Content Include="Scripts\table_sorter\css\images\last.png" />
+    <Content Include="Scripts\table_sorter\css\images\loading.gif" />
+    <Content Include="Scripts\table_sorter\css\images\metro-black-asc.png" />
+    <Content Include="Scripts\table_sorter\css\images\metro-black-desc.png" />
+    <Content Include="Scripts\table_sorter\css\images\metro-loading.gif" />
+    <Content Include="Scripts\table_sorter\css\images\metro-unsorted.png" />
+    <Content Include="Scripts\table_sorter\css\images\metro-white-asc.png" />
+    <Content Include="Scripts\table_sorter\css\images\metro-white-desc.png" />
+    <Content Include="Scripts\table_sorter\css\images\next.png" />
+    <Content Include="Scripts\table_sorter\css\images\prev.png" />
+    <Content Include="Scripts\table_sorter\css\images\white-asc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\white-desc.gif" />
+    <Content Include="Scripts\table_sorter\css\images\white-unsorted.gif" />
+    <Content Include="Scripts\table_sorter\css\jquery.tablesorter.pager.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.blackice.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.blue.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.bootstrap.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.bootstrap_2.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.dark.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.default.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.dropbox.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.green.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.grey.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.ice.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.jui.min.css" />
+    <Content Include="Scripts\table_sorter\css\theme.metro-dark.min.css" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\icons\first.png" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\icons\last.png" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\icons\loading.gif" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\icons\next.png" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\icons\prev.png" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\jquery.tablesorter.pager.css" />
+    <Content Include="Scripts\table_sorter\js\addons\pager\jquery.tablesorter.pager.js" />
+    <Content Include="Scripts\table_sorter\js\extras\jquery.dragtable.mod.min.js" />
+    <Content Include="Scripts\table_sorter\js\extras\jquery.metadata.min.js" />
+    <Content Include="Scripts\table_sorter\js\extras\jquery.tablesorter.pager.min.js" />
+    <Content Include="Scripts\table_sorter\js\extras\semver-mod.min.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.combined.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.combined.min.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.min.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.widgets.js" />
+    <Content Include="Scripts\table_sorter\js\jquery.tablesorter.widgets.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-extract.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-iso8601.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-month.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-range.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-two-digit-year.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date-weekday.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-date.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-duration.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-feet-inch-fraction.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-file-type.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-globalize.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-huge-numbers.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-ignore-articles.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-image.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-input-select.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-metric.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-named-numbers.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-network.min.js" />
+    <Content Include="Scripts\table_sorter\js\parsers\parser-roman.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-alignChar.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-build-table.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-chart.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-columns.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-columnSelector.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-cssStickyHeaders.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-editable.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-filter-formatter-html5.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-filter-formatter-jui.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-filter-formatter-select2.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-filter-type-insideRange.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-filter.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-formatter.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-grouping.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-headerTitles.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-lazyload.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-math.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-output.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-pager.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-print.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-reflow.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-repeatheaders.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-resizable.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-saveSort.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-scroller.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-sort2Hash.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-sortTbodies.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-staticRow.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-stickyHeaders.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-storage.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-toggle.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-uitheme.min.js" />
+    <Content Include="Scripts\table_sorter\js\widgets\widget-view.min.js" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\icons\first.png" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\icons\last.png" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\icons\loading.gif" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\icons\next.png" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\icons\prev.png" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\jquery.tablesorter.pager.css" />
+    <Content Include="Scripts\table_sorter\old\addons\pager\jquery.tablesorter.pager.js" />
+    <Content Include="Scripts\table_sorter\old\extras\jquery.dragtable.mod.js" />
+    <Content Include="Scripts\table_sorter\old\extras\jquery.metadata.js" />
+    <Content Include="Scripts\table_sorter\old\extras\semver-mod.js" />
+    <Content Include="Scripts\table_sorter\old\extras\semver.js" />
+    <Content Include="Scripts\table_sorter\old\jquery.tablesorter.combined.js" />
+    <Content Include="Scripts\table_sorter\old\jquery.tablesorter.js" />
+    <Content Include="Scripts\table_sorter\old\jquery.tablesorter.widgets.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-extract.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-iso8601.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-month.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-range.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-two-digit-year.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date-weekday.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-date.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-duration.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-feet-inch-fraction.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-file-type.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-globalize.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-huge-numbers.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-ignore-articles.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-image.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-input-select.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-metric.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-named-numbers.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-network.js" />
+    <Content Include="Scripts\table_sorter\old\parsers\parser-roman.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-alignChar.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-build-table.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-chart.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-columns.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-columnSelector.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-cssStickyHeaders.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-editable.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-filter-formatter-html5.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-filter-formatter-jui.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-filter-formatter-select2.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-filter-type-insideRange.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-filter.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-formatter.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-grouping.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-headerTitles.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-lazyload.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-math.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-output.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-pager.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-print.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-reflow.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-repeatheaders.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-resizable.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-saveSort.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-scroller.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-sort2Hash.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-sortTbodies.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-staticRow.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-stickyHeaders.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-storage.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-toggle.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-uitheme.js" />
+    <Content Include="Scripts\table_sorter\old\widgets\widget-view.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Cliente\Perfil.cshtml" />
+    <Content Include="Views\Cliente\Historial.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\CFDIS_GENERADOS\" />
+    <Folder Include="App_Data\Facturas\" />
+    <Folder Include="App_Data\Logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App_Data\Certificados\00001000000202508313.cer" />
+    <None Include="App_Data\Certificados\AAA010101AAA.cer" />
+    <None Include="App_Data\Certificados\AAA010101AAA.key" />
+    <None Include="App_Data\Certificados\CTR030123ICA.pfx" />
+    <None Include="App_Data\Certificados\CTR030123ICA_1212041103S.key" />
+    <None Include="App_Data\Certificados\ECO920703QY9.cer" />
+    <None Include="App_Data\Certificados\ECO920703QY9.key" />
+    <None Include="App_Data\Certificados\NICL891222MM7.cer" />
+    <None Include="App_Data\Certificados\NICL891222MM7.key" />
+    <None Include="App_Data\Certificados\RSE921123DU9.cer" />
+    <None Include="App_Data\Certificados\RSE921123DU9.key" />
+    <None Include="App_Data\Certificados\TEM9211234J0.cer">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="App_Data\Certificados\TEM9211234j0.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="App_Data\Certificados\TEM9211234J0.sdg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Content\bootstrap-theme.css.map" />
+    <None Include="Content\bootstrap-theme.min.css.map" />
+    <None Include="Content\bootstrap.css.map" />
+    <None Include="Content\bootstrap.min.css.map" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="Properties\PublishProfiles\Local.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\FileSaver\LICENSE.md" />
+    <None Include="Scripts\jquery-2.2.1.min.map" />
+    <Content Include="Views\Shared\_LayoutCliente.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cuenta\Validar.cshtml" />
+    <Content Include="Views\Cuenta\RegistroOK.cshtml" />
+    <Content Include="Views\Cliente\CambiarContrasena.cshtml" />
+    <Content Include="Views\Cliente\EditarDatosFiscales.cshtml" />
+    <Content Include="Views\Cliente\Facturar.cshtml" />
+    <Content Include="Views\FacturacionLibre\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\FacturacionLibre\ConfirmaFactura.cshtml" />
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+    <Content Include="Views\Administrador\Index.cshtml" />
+    <Content Include="Views\Administrador\FacturasCanceladas.cshtml" />
+    <Content Include="Views\Administrador\CancelacionDeFactura.cshtml" />
+    <Content Include="Views\FacturacionLibre\DescargaFactura.cshtml" />
+    <Content Include="Scripts\table_sorter\css\less\bootstrap.less" />
+    <Content Include="Scripts\table_sorter\css\less\metro.less" />
+    <Content Include="Scripts\table_sorter\css\less\theme.less" />
+    <Content Include="Views\Administrador\ActualizaServicio.cshtml" />
+    <None Include="Views\Home\Mantenimiento.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CascoFacturacionLib\CascoFacturacionLib.vbproj">
+      <Project>{34cf7e36-c2cc-4a01-a0b7-9b9adec2d78b}</Project>
+      <Name>CascoFacturacionLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CoreFacturacion\CoreFacturacion.vbproj">
+      <Project>{1f153433-252c-400a-85fb-508877e7cdd7}</Project>
+      <Name>CoreFacturacion</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SelloCFDI\SelloCFDI.csproj">
+      <Project>{A8557E59-2D1A-4BD1-A64C-DF79A5FF4CD5}</Project>
+      <Name>SelloCFDI</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>12700</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,194 @@
+﻿@model List<FacturacionCAT.Models.ServicioHistoria>
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+<style>
+    .imgDescarga {
+        cursor: pointer;
+    }
+    .panel-heading{font-weight:bold !important;}
+</style>
+
+    <!--Renglón para header del Historial-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @ViewBag.Message
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Acontinuación se presentan todos los archivos de sus Comprobantes Fiscales Digitales registrados en esta cuenta de usuario.
+                    </p><p>
+                        Usted puede filtrar los Comprobantes por Año o por mes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Renglón para grid de servicios-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    @ViewBag.Message
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-1 lblSmall" for="ddYear">Año: </label>
+                            <div class="col-sm-2">
+                                <select id="ddYear" class="form-control">
+                                    <option value='2015' @(DateTime.Now.Year == 2015 ? "Selected" : "")>2015</option>
+                                    <option value='2016' @(DateTime.Now.Year == 2016 ? "Selected" : "")>2016</option>
+                                    <option value='2017' @(DateTime.Now.Year == 2017 ? "Selected" : "")>2017</option>
+                                </select>
+                            </div>
+                            <label class="control-label col-sm-1" for="ddMonth"> Mes:</label>
+                            <div class="col-sm-2">
+                                <select id="ddMonth" class="form-control">
+                                    <option value='1' @(DateTime.Now.Month == 1 ? "Selected" : "")>Enero</option>
+                                    <option value='2' @(DateTime.Now.Month == 2 ? "Selected" : "")>Febrero</option>
+                                    <option value='3' @(DateTime.Now.Month == 3 ? "Selected" : "")>Marzo</option>
+                                    <option value='4' @(DateTime.Now.Month == 4 ? "Selected" : "")>Abril</option>
+                                    <option value='5' @(DateTime.Now.Month == 5 ? "Selected" : "")>Mayo</option>
+                                    <option value='6' @(DateTime.Now.Month == 6 ? "Selected" : "")>Junio</option>
+                                    <option value='7' @(DateTime.Now.Month == 7 ? "Selected" : "")>Julio</option>
+                                    <option value='8' @(DateTime.Now.Month == 8 ? "Selected" : "")>Agosto</option>
+                                    <option value='9' @(DateTime.Now.Month == 9 ? "Selected" : "")>Septiembre</option>
+                                    <option value='10' @(DateTime.Now.Month == 10 ? "Selected" : "")>Octubre</option>
+                                    <option value='11' @(DateTime.Now.Month == 11 ? "Selected" : "")>Noviembre</option>
+                                    <option value='12' @(DateTime.Now.Month == 12 ? "Selected" : "")>Diciembre</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="dCFDI" class="table-responsive" style="margin-top:10px;">
+                        <table id="tblCFDI" class="table-striped table-hover" style="width:100%;">
+                            <thead>
+                                <tr style="text-align:center; font-weight:bold;">
+                                    <th>Fecha</th>
+                                    <th>Folio</th>
+                                    <th>RFC</th>
+                                    <th>Cliente</th>
+                                    <th>Total($)</th>
+                                    <th>Descargar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbCFDI">
+                                @foreach (FacturacionCAT.Models.ServicioHistoria sh in Model)
+                                {
+                                    <tr>
+                                        <td>@sh.FechaFactura.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                                        <td>@sh.Folio</td>
+                                        <td>@sh.Receptor_RFC</td>
+                                        <td>@sh.Cliente</td>
+                                        <td>@sh.Total.ToString("C2")</td>
+                                        <td>
+                                            <img src="@Url.Content("~/Images/xml.png")" alt="Descargar Archivo XML" title="Descarga el Archivo XML del CFDI" data-servicio='@(new HtmlString(Json.Encode(sh)))' data-tipo='xml' class="imgDescarga" />
+                                            <img src="@Url.Content("~/Images/pdf.png")" alt="Descargar Archivo PDF" title="Descarga el Archivo PDF del CFDI" data-servicio='@(new HtmlString(Json.Encode(sh)))' data-tipo='pdf' class="imgDescarga" />
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts
+ {
+    <script type="text/javascript">
+        var rutaObtieneServ = '@Url.Action("GetServHistByUser", "Cliente")';
+        var rutaDescagaDocto = '@Url.Action("DescargarDocumento","Cliente")';
+
+        $(document).ready(function () {
+            AplicaZebra('tblCFDs');
+            $('#ddMonth').on('change', GetServicios);
+            $('#ddYear').on('change', GetServicios);
+            $('img.imgDescarga').on("click", DescargaDocto);
+        });
+
+        function GetServicios() {
+            var mes = $('#ddMonth option:selected').val();
+            var año = $('#ddYear option:selected').val();
+
+            $.ajax({
+                type: "POST",
+                url: rutaObtieneServ,
+                cache: false,
+                data: { year: año, month: mes },
+                success: function (data) {
+                    RefreshHistServ(data);
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+
+        function RefreshHistServ(data) {
+            var tblname = 'tblCFDs';
+            var tbl = $('#' + tblname + '');
+            var tblBody = tbl.find("tbody");
+            tblBody.empty();
+
+            $.each(data, function (i, o) {
+                var dte = formatDate(formatJSONDate(o.FechaFactura));
+                var money = '$' + parseFloat(o.Total).formatMoney(2, ',', '.');
+
+                var tmpTR = $('<tr style="text-align:center;"></tr>');
+                var tmpTD = $('<td>' + dte + '</td>');
+                tmpTD.appendTo(tmpTR);
+
+                tmpTD = $('<td>' + o.Folio + '</td>');
+                tmpTD.appendTo(tmpTR);
+
+                tmpTD = $('<td>' + o.Receptor_RFC + '</td>');
+                tmpTD.appendTo(tmpTR);
+
+                tmpTD = $('<td>' + o.Cliente + '</td>');
+                tmpTD.appendTo(tmpTR);
+
+                tmpTD = $('<td>' + money + '</td>');
+                tmpTD.appendTo(tmpTR);
+
+                tmpTD = $('<td></td>');
+                tmpInput = $('<img src="@Url.Content("~/Images/xml.png")" alt="Descargar Archivo XML" title="Descarga el Archivo XML del CFDI" class="imgDescarga" />');
+                tmpInput.data('servicio', o);
+                tmpInput.data('tipo', 'xml');
+                tmpInput.appendTo(tmpTD);
+
+                tmpInput = $('<img src="@Url.Content("~/Images/pdf.png")" alt="Descargar Archivo PDF" title="Descarga el Archivo PDF del CFDI"  class="imgDescarga" />');
+                tmpInput.data('servicio', o);
+                tmpInput.data('tipo', 'pdf');
+                tmpInput.appendTo(tmpTD);
+                tmpTD.appendTo(tmpTR);
+
+                tmpTR.appendTo(tblBody);
+            });
+            $('img.imgDescarga').on("click", DescargaDocto);
+            //AplicaZebra(tblname);
+        }
+
+        function AplicaZebra(tbl) {
+            $('#' + tbl + ' tbody tr:odd').css('background-color', 'silver');
+            $('#' + tbl + ' tbody tr:even').css('background-color', 'white');
+            $('#' + tbl + ' tbody tr').hover(
+                function () { $(this).addClass('hover'); }
+                , function () { $(this).removeClass('hover'); }
+            );
+        }
+
+        function DescargaDocto(evt, hdl) {
+            var servicio = $(evt.target).data('servicio');
+            var stipo = $(evt.target).data('tipo');
+            var scontent = "text/xml";
+            var sUrl = rutaDescagaDocto + '?token=' + servicio.TokenFactura + '&tipo=' + stipo;
+            window.location = sUrl;
+        }
+    </script>
+}

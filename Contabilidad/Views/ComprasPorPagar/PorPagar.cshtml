@@ -1,0 +1,483 @@
+﻿@{
+    ViewBag.Title = "Por Pagar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 style="font-size:28px !important;"><span class="glyphicon glyphicon-calendar"></span> &nbsp; Por Pagar</h1>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="dteFechaPagoProg">Fecha Pago Programado:</label>
+                        <div class="col-sm-2">
+                            <div class='input-group date' id='dteFechaPagoProg'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <input type="checkbox" id="chkTodas" />Ver Todas
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Consultar" id="btnConsulta"><span class="glyphicon glyphicon-search"></span>Consultar</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Exporta contenido de la Grid a Excel" id="btnExpGrid"><span class="glyphicon glyphicon-cloud-download"></span>Excel</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Genera Reporte de Pagos Programados" id="btnPagosProgRpt"><span class="glyphicon glyphicon-cloud-download"></span>Excel PP</button>
+                        </div>
+                        <label class="control-label col-sm-4" for="txtTotMontoProgPago"><span id="lblTotProgPagar">Total Programado para Pago el :</span></label>
+                    </div>
+                    <div class="form-group">
+                        <label for="cmbEmpresa" class="control-label col-sm-1">Empresa:</label>
+                        <div class="input-group col-sm-10" id="selectEmpresas">
+                            <select id="cmbEmpresa" class="form-control" multiple data-placeholder="Seleccione una empresa"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cmbProveedor" class="control-label col-sm-1">Proveedor:</label>
+                        <div class="input-group col-sm-10" id="selectProveedor">
+                            <select id="cmbProveedor" class="form-control" multiple data-placeholder="Seleccione un Proveedor"></select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" data-select2-open="cmbProveedor">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label class="control-label col-sm-2" for="dteFechaPago">Fecha Pago:</label>
+                            <div class="col-sm-2">
+                                <div class='input-group date' id='dteFechaPago'>
+                                    <input type='text' class="form-control" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-1">
+                                <button class="btn btn-sm" title="Fecha Pago" id="btnSetFechaPago"><span class="glyphicon glyphicon-check"></span>Actualizar Fecha</button>
+                            </div>
+                            <label class="control-label col-sm-3" for="txtTotMontoPagado"><span id="lblTotPagar">Total Pagado :</span></label>
+                            <div class="col-sm-2">
+                                <input id="txtTotMontoPagado" type='text' class="form-control" disabled style="text-align:right; font-weight: bold;" />
+                            </div>
+                        </div>*@
+
+                    <style lang="cs">
+                        #show, #hide {
+                            display: none;
+                        }
+
+                        div#content {
+                            display: none;
+                            padding: 10px;
+                            background-color: #f6f6f6;
+                            width: 200px;
+                            cursor: pointer;
+                        }
+
+                        input#show:checked ~ div#columnas {
+                            display: block;
+                        }
+
+                        input#hide:checked ~ div#columnas {
+                            display: none;
+                        }
+                    </style>
+
+                    
+                        <label for="show" style="cursor:pointer;"> 
+                            <span class="glyphicon glyphicon-eye-open">Mostrar     </span>
+                        </label>
+                        <input type="radio" id="show" name="group">
+
+                        <label for="hide" style="cursor:pointer;">
+                            <span class="glyphicon glyphicon-eye-close">Ocultar</span>
+                        </label>
+                        <input type="radio" id="hide" name="group">
+
+                        <div class="form-group" id="columnas">
+                            <label for="selectColumnas" class="control-label col-sm-1">Columnas:</label>
+                            <div class="input-group col-sm-10" id="selectColumnas">
+                                <select id="cmbColumnas" class="form-control" multiple data-placeholder="Indique las columnas a Visualizar en la grid"></select>
+                            </div>
+                        </div>
+                  
+                                
+                       
+
+
+
+
+
+                    @*<div id="content">Contenido a mostrar</div>*@
+
+
+
+
+
+                 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="gj-margin-top-10" id="grid">
+            <table id="gridConsulta"></table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Funciones/General.js")
+    <script type="text/javascript">
+        var rutaConsultaEmpresas = "@Url.Action("ObtieneListaEmpresas", "ComprasPorPagar")";
+        var rutaConsultaTiposProveedor = "@Url.Action("ObtieneListaTiposDeProveedor", "ComprasPorPagar")";
+        var rutaConsultaProveedoresPorEmpresa = "@Url.Action("ObtieneListaProveedores", "ComprasPorPagar")";
+        var rutaComprasPorPagarConsulta = "@Url.Action("ConsultaPorFechaProgPago", "ComprasPorPagar")";
+        var rutaComprasPorPagarSetFechaPago = "@Url.Action("SetFechaPago", "ComprasPorPagar")";
+        var rutaComprasPorPagarGetMontoPagado = "@Url.Action("GetMontoPagado", "ComprasPorPagar")";
+        var rutaComprasPorPagarGetMontoProgPago = "@Url.Action("GetMontoProgPago", "ComprasPorPagar")";
+        var rutaComprasPorPagarReportePagosProgramados = "@Url.Action("GetPagosProgramados", "ComprasPorPagar")";
+        var lCompras = [];
+        var aColsAux = [];
+        var aColumnas = [
+                    { title: 'Empresa', field: 'Empresa', width: 20, sortable: true },
+                    { title: 'Serie', field: 'CSERIEDOCUMENTO', width: 15 },
+                    { title: 'Folio', field: 'CFOLIO', width: 15 },
+                    { title: 'Proveedor', field: 'CRAZONSOCIAL', width: 100, nowrap: "nowrap" },
+                    { title: 'Fecha', field: 'CFECHA', width: 25, type: 'date', renderer: RenderNotNullDate },
+                    { title: 'F. Venc', field: 'CFECHAVENCIMIENTO', width: 25, type: 'date', renderer: RenderNotNullDate },
+                    { title: 'Total', field: 'CTOTAL', width: 25, renderer: fncCurrency },
+                    { title: 'Pago', field: 'CPAGOPARCIALIDAD', width: 25, renderer: fncCurrency },
+                    { title: 'S. Pend', field: 'CPENDIENTE', width: 25, renderer: fncCurrency },
+                    { title: 'Usuario', field: 'CTEXTOEXTRA1', width: 50, nowrap: "nowrap" },
+                    { title: 'Referencia', field: 'CREFERENCIA', width: 25, nowrap: "nowrap" },
+                    { title: 'Fecha PP', field: 'FechaProgPago', type: 'date', width: 25, nowrap: "nowrap", renderer: RenderNotNullDate }
+                    //,{ title: 'Fecha P', field: 'FechaPago', type: 'date', width: 25, nowrap: "nowrap", renderer: RenderNotNullDate }
+        ];
+
+        $(document).ready(function () {
+            showLoading();
+            $('#btnConsulta').on('click', Consultar);
+            var dteFProgPago = $('#dteFechaPagoProg').datetimepicker({ defaultDate: new Date(), format: 'DD/MM/YYYY' });//.on('dp.change', Consultar);
+            //var dteFPP = $('#dteFechaPago').datetimepicker({ defaultDate: new Date(), format: 'DD/MM/YYYY' }).on('dp.change', SetMontoPagado);
+            //$('#btnSetFechaPago').on('click', SetFechaPago);
+            $('#btnPagosProgRpt').on('click', ReportePagosProgramados);
+            $('#btnExpGrid').on('click', ExportaGrid);
+
+            var lclasificacionProveedor = ObtieneListaJson(null, rutaConsultaTiposProveedor);
+            RenderOpcionesEnComboWithEvents($("#cmbTipoProveedor"), lclasificacionProveedor, null, false);
+
+            var lempresas = ObtieneListaJson(null, rutaConsultaEmpresas);
+            RenderOpcionesEnComboWithEvents($("#cmbEmpresa"), lempresas, SetProveedores, true);
+
+            var cmbCols = $('#cmbColumnas').empty();
+            $.each(aColumnas, function (idx, acol) {
+                var opt = $('<option value="' + acol.field + '" selected>' + acol.title + '</option>');
+                opt.data('item', acol);
+                opt.appendTo(cmbCols);
+            });
+            cmbCols.select2();
+            cmbCols.on('change', ShowHideCol);
+            aColsAux = $.extend(true, [], aColumnas);
+
+            dteFProgPago.trigger('dp.change');
+            //dteFPP.trigger('dp.change');
+            hideLoading();
+            $('#btnConsulta').trigger('click');
+        });
+
+        function ShowHideCol(e, h) {
+            if (e.removed != undefined) {
+                $('#gridConsulta').grid().hideColumn(e.removed.id);
+                for (idx = 0; idx < aColsAux.length; idx++) {
+                    if (aColsAux[idx].field == e.removed.id) {
+                        aColsAux.splice(idx, 1);
+                        break;
+                    }
+                }
+            }
+            if (e.added != undefined) {
+                for (idx = 0; idx < aColumnas.length; idx++) {
+                    if (aColumnas[idx].field == e.added.id) {
+                        aColsAux.splice(idx, 0, aColumnas[idx]);
+                        break;
+                    }
+                }
+                $('#gridConsulta').grid().showColumn(e.added.id);
+            }
+        }
+
+        function SetProveedores(evt, hdl) {
+            var empresas = GetSelectedvalues('cmbEmpresa');
+            var params = { empresas: empresas };
+            lproveedores = ObtieneListaJson(params, rutaConsultaProveedoresPorEmpresa);
+            var selectProveedor = $('#selectProveedor');
+            selectProveedor.empty();
+            var cmb = $('<select id="cmbProveedor" class="form-control" multiple data-placeholder="Seleccione un Proveedor">');
+            cmb.appendTo(selectProveedor);
+            RenderOpcionesEnComboOptionsGroupWithEvents(cmb, lproveedores, null, false);
+            var btnSearch = $('<span class="input-group-btn" data-select2-open="cmbProveedor"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>');
+            btnSearch.on('click', function () { $("#" + $(this).data("select2-open")).select2("open"); });
+            btnSearch.appendTo(selectProveedor);
+        }
+
+        function GetSelectedvalues(cmb) {
+            var items = $('#' + cmb).find(':selected');
+            var arr = [];
+            if (items.length == 1) {
+                arr.push($(items[0]).data('item'));
+            }
+            else {
+                if (items.length > 1) {
+                    $.each(items, function (idx, obj) {
+                        arr.push($(obj).data('item'));
+                    });
+                }
+            }
+            return arr;
+        }
+
+        function GetParams() {
+            var aempresas = GetSelectedvalues('cmbEmpresa');
+            var aproveedores = GetSelectedvalues('cmbProveedor');
+            var atiposproveedor = GetSelectedvalues('cmbTipoProveedor');
+            var params = { empresa: aempresas, proveedor: aproveedores, estatus: [{ id: 3 }, { id: 4 }], tiposproveedor: atiposproveedor };
+            return params;
+        }
+
+        function Consultar(evt, hdl) {
+            showLoading();
+            evt.preventDefault();
+            var params = GetParams();
+            params.FechaProgPago = $("#dteFechaPagoProg").find("input").val();
+            params.Todas = $("#chkTodas").is(':checked');
+            lCompras = ObtieneListaJson(params, rutaComprasPorPagarConsulta);
+            var arrsizes = [];
+            var auxInc = 15;
+            var iinc = auxInc;
+            if (lCompras.length > 0) {
+                while (iinc <= 90 && iinc < lCompras.length) {
+                    arrsizes.push(iinc);
+                    iinc = iinc + 15;
+                }
+            }
+            if (lCompras.length > iinc) {
+                arrsizes.push(lCompras.length);
+            }
+            var grid = $('#grid');
+            var dgrid = $('<table id="gridConsulta"></table>')
+            grid.empty();
+            dgrid.grid({
+                uiLibrary: 'bootstrap'
+                , title: 'Compras por Pagar'
+                , primaryKey: 'CIDDOCUMENTO'
+                , dataSource: lCompras
+                , resizableColumns: true
+                , notFoundText: 'No hay información con los parámetros indicados'
+                , columns: aColsAux
+                , pager: { limit: auxInc, sizes: arrsizes }
+                , responsive: true
+                , selectionMethod: 'checkbox'
+                , selectionType: 'multiple'
+            }).appendTo(grid);
+            $('#dteFechaPagoProg').on('dp.change', SetMontoProgramado);
+            hideLoading();
+        };
+
+        function SetMontoProgramado(e, h) {
+            e.preventDefault();
+            var valor = 0;
+            var params = GetParams();
+            params.FechaProgPago = $('#dteFechaPagoProg').data('date');
+            $.ajax({
+                method: 'POST',
+                url: rutaComprasPorPagarGetMontoProgPago,
+                cache: false,
+                dataType: 'json',
+                contentType: "application/json",
+                async: false,
+                data: JSON.stringify(params),
+                success: function (data) {
+                    if (data != undefined) {
+                        $.each(data, function (idx, obj) {
+                            valor = parseFloat(obj.aux);
+                        });
+                    }
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+            var msg = 'Total Pago Programado para el día ' + params.FechaProgPago + ': ' + fncCurrency(valor);
+            $('#lblTotProgPagar').text(msg);
+        }
+
+        function ReportePagosProgramados(e, h) {
+            e.preventDefault();
+            var ret = ObtieneListaJson(null, rutaComprasPorPagarReportePagosProgramados);
+            if (ret == "null" || ret == null) {
+                alert('No existen pagos programados');
+                return;
+            }
+            var lpagos = JSON.parse(ret);
+            if (lpagos.length == 0) {
+                alert('No existen pagos programados');
+                return;
+            }
+
+            // Obtiene lo nombres de columnas
+            var aCols = [];
+            for (var index in lpagos[0]) {
+                aCols.push(index);
+            }
+            var aColsDte = [];
+            var rowTotals = $.extend(true, {}, lpagos[0]);
+            //Obtiene columnas cuyo encabezado es una fecha
+            $.each(aCols, function (idx, obj) {
+                if (moment(obj, 'YYYY-MM-DD', true).isValid())
+                    aColsDte.push(obj);
+            });
+            var aTotales = [];
+            //Recorre las filas para calcular totales
+            $.each(lpagos, function (idx, fila) {
+                $.each(aColsDte, function (idj, ofecha) {
+                    if (fila[ofecha] == null)
+                        fila[ofecha] = 0;
+                    if (aTotales[ofecha] == undefined) {
+                        aTotales[ofecha] = fila[ofecha];
+                    }
+                    else
+                        aTotales[ofecha] += fila[ofecha];
+                });
+            });
+            //Set total en la fila de totales
+            $.each(aColsDte, function (idj, ofecha) {
+                rowTotals[ofecha] = aTotales[ofecha];
+            });
+            $.each(aCols, function (idx, obj) {
+                if (!moment(obj, 'YYYY-MM-DD', true).isValid())
+                    rowTotals[obj] = '';
+            });
+            var lcols = aCols.length;
+            lcols = lcols - aColsDte.length;
+            rowTotals.Proveedor = 'TOTAL x DIA';
+            lpagos.splice(0, 0, rowTotals);
+
+            JSONToCSVConvertor(lpagos, "Pagos Programados", true);
+        }
+
+        function ExportaGrid(e, h) {
+            e.preventDefault();
+            if (lCompras == "null" || lCompras == null || lCompras.length == 0) {
+                alert('No hay información para exportar');
+                return;
+            }
+
+            var ret = [];
+            var extra_ColsAux = $.extend(true, [], aColsAux);
+            //var extracol = { field: 'Empresa', title: 'Empresa' };
+            //extra_ColsAux.splice(0, 0, extracol);
+            $.each(lCompras, function (ixdx, xrow) {
+                var filaaux_n = {};
+                for (jdx = 0; jdx < extra_ColsAux.length; jdx++) {
+                    var sncampo = extra_ColsAux[jdx].field;
+                    var sncolumna = extra_ColsAux[jdx].title;
+                    var xxooo = xrow[sncampo];
+                    if (extra_ColsAux[jdx].type == "date") {
+                        var moment_campofecha = moment(xxooo);
+                        var moment_minfecha = moment(new Date(-62135575200000));
+                        if (!moment_campofecha.isSame(moment_minfecha))
+                            xxooo = moment(xxooo).format("DD/MM/YYYY");
+                        else
+                            xxooo = "";
+                    }
+                    filaaux_n[sncolumna] = xxooo;
+                };
+                ret.push(filaaux_n);
+            });
+            alert(ret);
+            console.log("Exportar")
+            JSONToCSVConvertor(ret, "Compras Por Pagar", true);
+        }
+
+        //function SetFechaPago(e, h) {
+        //    e.preventDefault();
+        //    var grid = $('#gridConsulta').grid();
+        //    var selections = grid.getSelections();
+
+        //    $.each(selections, function (idx, obj) {
+        //        var data = grid.getById(obj);
+        //        var params = GetParams();
+        //        params.CIDDOCUMENTO = data.CIDDOCUMENTO;
+        //        params.empresa = [];
+        //        params.empresa.push(data.empresa);
+        //        params.proveedor = [];
+        //        params.proveedor.push({ id: data.CIDPROVEEDOR });
+        //        params.FechaPago = $('#dteFechaPago').data('date');
+        //        params.MontoPagado = data.MontoPagado;
+        //        $.ajax({
+        //            method: 'POST',
+        //            url: rutaComprasPorPagarSetFechaPago,
+        //            cache: false,
+        //            dataType: 'json',
+        //            contentType: "application/json",
+        //            async: false,
+        //            data: JSON.stringify(params),
+        //            success: function (data) {
+        //                if (!data) {
+        //                    alert('Ocurrió un error al actualizar la Fecha de Pago');
+        //                    return;
+        //                }
+        //                $('#btnSetFechaPago').trigger('dp.change');
+        //            },
+        //            error: function (xhr, status, errormsg) {
+        //                alert(errormsg);
+        //            }
+        //        });
+        //    });
+        //    $('#btnConsulta').trigger('click');
+        //}
+
+        //function SetMontoPagado(e, h) {
+        //    e.preventDefault();
+        //    var valor = 0;
+        //    var params = GetParams();
+        //    params.FechaPago = $('#dteFechaPago').data('date');
+        //    $.ajax({
+        //        method: 'POST',
+        //        url: rutaComprasPorPagarGetMontoPagado,
+        //        cache: false,
+        //        dataType: 'json',
+        //        contentType: "application/json",
+        //        async: false,
+        //        data: JSON.stringify(params),
+        //        success: function (data) {
+        //            if (data != undefined) {
+        //                $.each(data, function (idx, obj) {
+        //                    valor = parseFloat(obj.aux);
+        //                });
+        //            }
+        //        },
+        //        error: function (xhr, status, errormsg) {
+        //            alert(errormsg);
+        //        }
+        //    });
+        //    $('#lblTotPagar').text('Total Pagado el ' + params.FechaPago + ':');
+        //    $('#txtTotMontoPagado').val(fncCurrency(valor));
+        //}
+
+    </script>
+}

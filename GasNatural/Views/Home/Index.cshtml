@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Inicio";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Alta de Equipos</h2>
+        <p>
+            Catálogo de Equipos de Gas. En esta opción se pueden consultar los equipos de gas existentes en sistema y adicionalmente dar de Alta de equipos de Gas.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Contact", "Home")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Inventarios</h2>
+        <p>Levantamiento de Inventario en los diferentes almacenes / bodegas.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Inventarios")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Master</h2>
+        <p>Muestra el total de los equipos de gas y en que unidad se encuentra instalado cada uno de ellos.</p>
+        <p><a class="btn btn-default" href="@Url.Action("Index", "Master")">Ir &raquo;</a></p>
+    </div>
+</div>

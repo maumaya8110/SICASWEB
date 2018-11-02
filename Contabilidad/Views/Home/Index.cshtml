@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Flujo Cortes de Caja</h2>
+        <p>
+            Estatus correspondiente a los corte de caja por punto.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","CortesDeCaja")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-3">
+        <h2>Cuentas por Pagar</h2>
+        <p>
+            Consulta y Actualización de estatus, para las compras pendientes
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","ComprasPorPagar")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-3">
+        <h2>Reportes</h2>
+        <p>
+            Información de procesos contables.
+        </p>
+        <p><a class="btn btn-default" href="@Url.Action("Index","Reportes")">Ir &raquo;</a></p>
+    </div>
+    <div class="col-md-3">
+        <h2>Listado de Facturación</h2>
+        <p>Listado de Facturas emitidas de CAT y URGI</p>
+        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Ir &raquo;</a></p>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            hideLoading();
+        });
+    </script>
+}

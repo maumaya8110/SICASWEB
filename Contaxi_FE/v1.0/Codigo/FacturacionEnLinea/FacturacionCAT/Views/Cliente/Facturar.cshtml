@@ -1,0 +1,128 @@
+﻿@model FacturacionCAT.Models.DatosFiscales
+@{
+    ViewBag.Title = "Confirmar Facturación";
+    Layout = "~/Views/Shared/_LayoutCliente.cshtml";
+}
+<style type="text/css">
+    .panel-heading{font-weight:bold !important;}
+</style>
+<div class="container body-content" style="margin-top:5px;">
+    <!--Renglón para confirmación de factura-->
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Favor de Verificar la Información
+                </div>
+                <div class="panel-body">
+                    <form class="form-horizontal" role="form">
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Razón Social</span>: @Model.RazonSocial </label>
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">RFC</span>: @Model.RFC </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Calle:</span> @Model.Calle </label>
+                            <label class="control-label col-sm-3"> <span style="font-weight:normal;">#Ext.:</span> @Model.NumeroExterior </label>
+                            <label class="control-label col-sm-3"> <span style="font-weight:normal;">#Int.:</span> @Model.NumeroInterior</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Colonia:</span> @Model.Colonia</label>
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">C.P.:</span> @Model.Cp </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Ciudad:</span> @Model.Ciudad </label>
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Localidad:</span> @Model.Localidad </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-6"> <span style="font-weight:normal;">Estado:</span> @Model.Estado </label>
+                            <label class="control-label col-sm-6"><span style="font-weight:normal;"> País:</span> @Model.Pais </label>
+                        </div>
+                    </form>
+                    <br />
+                    <ul>
+                        <li>Si está de acuerdo en los datos presentados haga click en el botón de Facturar para generar su factura.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-mod-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Servicios incluidos en la Factura
+                </div>
+                <div class="panel-body">
+                    <div id="dTickets" class="table-responsive">
+                        <table id="tblTickets" class="table-striped table-hover" width="100%">
+                            <thead>
+                                <tr>
+                                    <th style="width:10%;">Folio</th>
+                                    <th style="width:15%;">Fecha/Hora</th>
+                                    <th style="width:40%;">Producto</th>
+                                    <th style="width:10%;">Unidad</th>
+                                    <th style="width:9%;" title="Metódo de Pago">M. P.</th>
+                                    <th style="width:8%;">Precio</th>
+                                    <th style="width:8%;">Importe</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbTickets">
+                                @foreach (FacturacionCAT.Models.ServicioFactura sf in (List<FacturacionCAT.Models.ServicioFactura>)ViewBag.ServiciosPendientes)
+                                {
+                                    <tr style="text-align:center;">
+                                        <td>@sf.Folio</td>
+                                        <td>@sf.Fecha</td>
+                                        <td>@sf.Producto</td>
+                                        <td>@sf.Unidad</td>
+                                        <td>@sf.MetodoPago</td>
+                                        <td>@sf.Precio.ToString("C2")</td>
+                                        <td>@sf.Importe.ToString("C2")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button type="button" id="cmdRegresar" title="Regresa a la página anterior" class="btn btn-default btn-md">Regresar</button>
+                <button type="button" id="cmdFacturar" title="Genera la factura con los servicios indicados" class="btn btn-default btn-md">Facturar</button>
+            </div>
+        </div>
+    </div>
+    <div id="lblError">
+    </div>
+    @section scripts
+ {
+        <script type="text/javascript">
+            var rutaFacturar = '@Url.Action("Index","Cliente")';
+            var rutaFacturaConfirmada = '@Url.Action("FacturaConfirmada","Cliente")';
+            var tmToken = '@Model.Token';
+
+            $(document).ready(function () {
+                $('#cmdRegresar').on('click', function () { window.location = rutaFacturar });
+                $('#cmdFacturar').on('click', Facturar);
+            });
+
+            function Facturar() {
+                $.ajax({
+                    type: "POST",
+                    url: rutaFacturaConfirmada,
+                    cache: false,
+                    data: { token: tmToken },
+                    success: function (data) {
+                        if (data.indexOf('/') == 0) {
+                            window.location = data;
+                        }
+                        else {
+                            alert(data.Mensaje);
+                            window.location = rutaFacturar;
+                        }
+                    },
+                    error: function (xhr, status, errormsg) {
+                        alert(errormsg);
+                    }
+                });
+            }
+        </script>
+    }

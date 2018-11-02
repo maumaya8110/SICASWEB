@@ -1,0 +1,195 @@
+﻿@model FacturacionCAT.Models.DatosFiscales
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/bootstrap.css")
+    @Styles.Render("~/Content/site.css")
+    <link href="@Url.Content("~/Content/LoginDlg.css")" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .lblSmall {
+            font-size: small;
+        }
+
+        .mayusculas, .upper {
+            text-transform: uppercase;
+        }
+
+        #dTickets.table-responsive tbody tr,
+        #dTickets.table-responsive thead tr {
+            font-size: small;
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+
+        #dTickets.table-responsive thead th {
+            text-align: center;
+        }
+
+        .panel-heading {
+            font-weight: bold !important;
+        }
+    </style>
+
+</head>
+<body>
+    <header class="row">
+        <div class="container" style="border-bottom: 1px solid black; padding-bottom:5px;">
+            <div id="logo" class="float-left">
+                <a href="@Url.Action("Index", "Home")">
+                    <img src="@Url.Content("~/Content/images/logo.png")" class="img-responsive" style="width:130px; height:60px;" />
+                </a>
+            </div>
+            <div class="float-left">
+                <h2>Facturación Sin Registro</h2>
+            </div>
+        </div>
+    </header>
+    <div class="container body-content" style="margin-top:5px;">
+        <!--Renglón para confirmación de factura-->
+        <div class="row">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Favor de Verificar la Información
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Razón Social</span>: @Model.RazonSocial </label>
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">RFC</span>: @Model.RFC </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Calle:</span> @Model.Calle </label>
+                                <label class="control-label col-sm-3"> <span style="font-weight:normal;">#Ext.:</span> @Model.NumeroExterior </label>
+                                <label class="control-label col-sm-3"> <span style="font-weight:normal;">#Int.:</span> @Model.NumeroInterior</label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Colonia:</span> @Model.Colonia</label>
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">C.P.:</span> @Model.Cp </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Ciudad:</span> @Model.Ciudad </label>
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Localidad:</span> @Model.Localidad </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-6"> <span style="font-weight:normal;">Estado:</span> @Model.Estado </label>
+                                <label class="control-label col-sm-6"><span style="font-weight:normal;"> País:</span> @Model.Pais </label>
+                            </div>
+                        </form>
+                        <br />
+                        <ul>
+                            <li>Si está de acuerdo en los datos presentados haga click en el botón de Facturar para generar su factura.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-mod-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Servicios incluidos en la Factura
+                    </div>
+                    <div class="panel-body">
+                        <div id="dTickets" class="table-responsive">
+                            <table id="tblTickets" class="table-striped table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width:10%;">Folio</th>
+                                        <th style="width:15%;">Fecha/Hora</th>
+                                        <th style="width:40%;">Producto</th>
+                                        <th style="width:10%;">Unidad</th>
+                                        <th style="width:9%;" title="Metódo de Pago">M. P.</th>
+                                        <th style="width:8%;">Precio</th>
+                                        <th style="width:8%;">Importe</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbTickets">
+                                    @foreach (FacturacionCAT.Models.ServicioFactura sf in (List<FacturacionCAT.Models.ServicioFactura>)ViewBag.ServiciosPendientes)
+                                    {
+                                        <tr style="text-align:center;">
+                                            <td>@sf.Folio</td>
+                                            <td>@sf.Fecha</td>
+                                            <td>@sf.Producto</td>
+                                            <td>@sf.Unidad</td>
+                                            <td>@sf.MetodoPago</td>
+                                            <td>@sf.Precio.ToString("C2")</td>
+                                            <td>@sf.Importe.ToString("C2")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" id="cmdRegresar" title="Regresa a la página anterior" class="btn btn-default btn-md">Regresar</button>
+                    <button type="button" id="cmdFacturar" title="Genera la factura con los servicios indicados" class="btn btn-default btn-md">Facturar</button>
+                </div>  
+            </div>
+        </div>
+        <!--fin confirmación de factura-->
+        <footer>
+            <p>&copy; 2016 - AeroContaxi</p>
+        </footer>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryui")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/moment.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/tableExport.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/LoginDlg.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/funciones.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/FacturacionLibre.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.numeric.js")"></script>
+
+    <script type="text/javascript">
+        var rutaFacturar = '@Url.Action("Index", "FacturacionLibre")';
+        var rutaFacturaConfirmada = '@Url.Action("FacturaConfirmada", "FacturacionLibre")';
+        var rutaHome = '@Url.Action("Index", "Home")';
+        var rutaDescarga = '@Url.Action("DescargaFactura", "FacturacionLibre")';
+        var tmToken = '@Model.Token';
+
+        $(document).ready(function () {
+            $('#cmdRegresar').button().on('click', function () { window.location = rutaFacturar });
+            $('#cmdFacturar').button().on('click', Facturar);
+        });
+
+        function Facturar() {
+            $.ajax({
+                type: "POST",
+                url: rutaFacturaConfirmada,
+                cache: false,
+                data: { token: tmToken },
+                success: function (data) {
+                    if (data.Resultado) {
+                        alert("La factura se generó correctamente, en breve recibirá un e-mail con su CFDI.");
+                        rutaDescarga = rutaDescarga + '?token=' + data.Valor;
+                        window.location = rutaDescarga;
+                    }
+                    else {
+                        alert(data.Mensaje);
+                        window.location = rutaFacturar;
+                    }
+                },
+                error: function (xhr, status, errormsg) {
+                    alert(errormsg);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

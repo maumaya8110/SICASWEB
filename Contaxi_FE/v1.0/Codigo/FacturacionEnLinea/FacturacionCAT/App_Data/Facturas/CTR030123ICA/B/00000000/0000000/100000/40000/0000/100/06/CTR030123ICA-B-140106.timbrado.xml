@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cfdi:Comprobante xmlns:cfdi="http://www.sat.gob.mx/cfd/3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv32.xsd" version="3.2" serie="B" folio="140106" fecha="2016-05-27T12:06:09" sello="Ok2tvJi8Tax3KMNg0JpRLUpKSnjaTbLdm7wa7B2gFPVX3CedXCk6QqgfdQ9M5ZxYtdNI3oAil8Q9keP0q1Upng8v8IpGzPot6p20kmjGlfDXygQOaa8DT3fi6pHug5zlMfoIbOYou5a6MFIqUnAUhjWbbdhvnLZPhCmyKlnh5r4=" formaDePago="PAGO EN UNA SOLA EXHIBICION" noCertificado="00001000000202508313" certificado="MIIEqTCCA5GgAwIBAgIUMDAwMDEwMDAwMDAyMDI1MDgzMTMwDQYJKoZIhvcNAQEFBQAwggGVMTgwNgYDVQQDDC9BLkMuIGRlbCBTZXJ2aWNpbyBkZSBBZG1pbmlzdHJhY2nDs24gVHJpYnV0YXJpYTEvMC0GA1UECgwmU2VydmljaW8gZGUgQWRtaW5pc3RyYWNpw7NuIFRyaWJ1dGFyaWExODA2BgNVBAsML0FkbWluaXN0cmFjacOzbiBkZSBTZWd1cmlkYWQgZGUgbGEgSW5mb3JtYWNpw7NuMSEwHwYJKoZIhvcNAQkBFhJhc2lzbmV0QHNhdC5nb2IubXgxJjAkBgNVBAkMHUF2LiBIaWRhbGdvIDc3LCBDb2wuIEd1ZXJyZXJvMQ4wDAYDVQQRDAUwNjMwMDELMAkGA1UEBhMCTVgxGTAXBgNVBAgMEERpc3RyaXRvIEZlZGVyYWwxFDASBgNVBAcMC0N1YXVodMOpbW9jMRUwEwYDVQQtEwxTQVQ5NzA3MDFOTjMxPjA8BgkqhkiG9w0BCQIML1Jlc3BvbnNhYmxlOiBDZWNpbGlhIEd1aWxsZXJtaW5hIEdhcmPDrWEgR3VlcnJhMB4XDTEyMTIwNDIxMTM1MVoXDTE2MTIwNDIxMTM1MVowgeoxIzAhBgNVBAMTGkNBU0NPIFRSQU5TUE9SVEVTIFNBIERFIENWMSMwIQYDVQQpExpDQVNDTyBUUkFOU1BPUlRFUyBTQSBERSBDVjEjMCEGA1UEChMaQ0FTQ08gVFJBTlNQT1JURVMgU0EgREUgQ1YxJTAjBgNVBC0THENUUjAzMDEyM0lDQSAvIEdBR0E1OTAzMTU2STcxHjAcBgNVBAUTFSAvIEdBR0E1OTAzMTVITkxSUlAxNjEyMDAGA1UECxMpQ0FSUkVURVJBIE1JR1VFTCBBTEVNQU4gS00gMjQgQ09MLiBDRU5UUk8wgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMBYWFqB/fqt8n319XFhhEb6KjRBT23V3A9rxKdsQ/vi374RBxAsZTRhRCQniP6Lf7ludhiorWMKsVDfq0rsDVlgGDecfgCRgcEVSohcr2WZLuzlxpYunXSv5kel6X4xqpwrwTQR716ZTOGxiB3lYJYLnIvBly7oCE5stoF2myyXAgMBAAGjHTAbMAwGA1UdEwEB/wQCMAAwCwYDVR0PBAQDAgbAMA0GCSqGSIb3DQEBBQUAA4IBAQBuKz3kUSnH9Z/6xVtAYrlPtFIlfHBpRH3yvGOjc6PttrsFS6GiQbvJoKIu7uaszjfylxdOfp+InnsC+MIaV83jKX73uVt/3QSEugDS4EHSz9KLRoKgtOYIVms+thh4DjwxBz9koPIGVpAIPcFYzNk3wHfdaBoXnreZd5+UCujM0QRx3qU8vNULfmZZyiwhTkd/kTxRVuXfgXWkKiXlrn3+14p/PD3SkdhsEJfyoVjS9l3lVInhH7Bphr4hpXyoKcWTRf50cKAw+kzjgwxBfDheCPYuJFPVNAptYuP/ID66E9v1XHXTLRQjM7QClvK/+RcnvWwt1OSaOjS0a64cCZxQ" subTotal="540.00" total="540.00" tipoDeComprobante="ingreso" metodoDePago="EFECTIVO" LugarExpedicion="APODACA">
+  <cfdi:Emisor rfc="CTR030123ICA" nombre="CASCO TRANSPORTES SA DE CV">
+    <cfdi:DomicilioFiscal calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:ExpedidoEn calle="CARRETERA MIGUEL ALEMAN" noExterior="KM 24" colonia="CENTRO" localidad="APODACA" municipio="APODACA" estado="NUEVO LEON" pais="MEXICO" codigoPostal="66600" />
+    <cfdi:RegimenFiscal Regimen="REGIMEN GENERAL DE LEY PERSONAS MORALES" />
+  </cfdi:Emisor>
+  <cfdi:Receptor rfc="PME920206F94" nombre="Portenntum de Mexico SA de CV">
+    <cfdi:Domicilio calle="avenida Revolucion" noExterior="111" colonia="Buenos Aires" localidad="monterrey" municipio="monterrey" estado="NUEVO LEON" pais="MEXICO" codigoPostal="64800" />
+  </cfdi:Receptor>
+  <cfdi:Conceptos>
+    <cfdi:Concepto cantidad="1.00" unidad="NO APLICA" noIdentificacion="18416051707330235" descripcion="Transporte Público Terrestre de Personas. Servicio del 17/05/2016" valorUnitario="270.00" importe="270.00" />
+    <cfdi:Concepto cantidad="1.00" unidad="NO APLICA" noIdentificacion="83016051707330236" descripcion="Transporte Público Terrestre de Personas. Servicio del 17/05/2016" valorUnitario="270.00" importe="270.00" />
+  </cfdi:Conceptos>
+  <cfdi:Impuestos totalImpuestosRetenidos="0.00" totalImpuestosTrasladados="0.00">
+    <cfdi:Retenciones>
+      <cfdi:Retencion impuesto="IVA" importe="0.00" />
+    </cfdi:Retenciones>
+    <cfdi:Traslados>
+      <cfdi:Traslado impuesto="IVA" tasa="0.00" importe="0.00" />
+    </cfdi:Traslados>
+  </cfdi:Impuestos>
+  <cfdi:Complemento>
+    <tfd:TimbreFiscalDigital xmlns:tfd="http://www.sat.gob.mx/TimbreFiscalDigital" xsi:schemaLocation="http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigital.xsd" version="1.0" UUID="0689bf59-48d1-45f9-8001-1eb69420dff5" FechaTimbrado="2016-05-27T13:06:21" selloCFD="Ok2tvJi8Tax3KMNg0JpRLUpKSnjaTbLdm7wa7B2gFPVX3CedXCk6QqgfdQ9M5ZxYtdNI3oAil8Q9keP0q1Upng8v8IpGzPot6p20kmjGlfDXygQOaa8DT3fi6pHug5zlMfoIbOYou5a6MFIqUnAUhjWbbdhvnLZPhCmyKlnh5r4=" noCertificadoSAT="00001000000202693892" selloSAT="V2nkMDghKpIJnEoaSNUxSJQXVxkH+TqSnJFPCvvfds4y7AHhl3uG7DSJg9qM2ckcUaMhVLKNnoFRpSvaBmU6kcuNbUPhPBIR8owJjRoDVaa8Om/gMIAAWPcIZ36R/EyxyELiZ8K1Wy8TEaEIiAz9eXUKJ/1iDgsOYweoCNWeaZY=" />
+  </cfdi:Complemento>
+</cfdi:Comprobante>

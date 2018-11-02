@@ -1,0 +1,362 @@
+﻿
+@{
+    ViewBag.Title = "Consultas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 style="font-size:28px !important;"><span class="glyphicon glyphicon-calendar"></span> &nbsp;Consultas</h1>
+            </div>
+            <div class="panel-body">
+                <form role="form" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label col-sm-1" for="dteFechaDesde">Fecha Desde:</label>
+                        <div class="col-sm-2">
+                            <div class='input-group date' id='dteFechaDesde'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="control-label col-sm-1" for="dteFechaHasta">Fecha Hasta:</label>
+                        <div class="col-sm-2">
+                            <div class='input-group date' id='dteFechaHasta'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <label class="control-label col-sm-1" for="cmbEstatus">Estatus:</label>
+                        <div class="col-sm-1" id="selectEstatus">
+                            <select class="form-control" id="cmbEstatus" multiple data-placeholder="Seleccione un Estatus"></select>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Consultar" id="btnConsulta"><span class="glyphicon glyphicon-search"></span>Consultar</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Exporta contenido de la Grid a Excel" id="btnExpGrid"><span class="glyphicon glyphicon-cloud-download"></span>Excel</button>
+                        </div>
+                        <div class="col-sm-1">
+                            <button class="btn btn-sm" title="Genera Reporte de Pagos Programados" id="btnPagosProgRpt"><span class="glyphicon glyphicon-cloud-download"></span>Excel PP</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cmbEmpresa" class="control-label col-sm-1">Empresa:</label>
+                        <div class="input-group col-sm-10" id="selectEmpresas">
+                            <select id="cmbEmpresa" class="form-control" multiple data-placeholder="Seleccione una empresa"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cmbProveedor" class="control-label col-sm-1">Proveedor:</label>
+                        <div class="input-group col-sm-10" id="selectProveedor">
+                            <select id="cmbProveedor" class="form-control" multiple data-placeholder="Seleccione un Proveedor"></select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" data-select2-open="cmbProveedor">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                  
+                    <style lang="cs">
+                        #show, #hide {
+                            display: none;
+                        }
+
+                        div#content {
+                            display: none;
+                            padding: 10px;
+                            background-color: #f6f6f6;
+                            width: 200px;
+                            cursor: pointer;
+                        }
+
+                        input#show:checked ~ div#columnas {
+                            display: block;
+                        }
+
+                        input#hide:checked ~ div#columnas {
+                            display: none;
+                        }
+                    </style>
+
+
+                    <label for="show" style="cursor:pointer;">
+                        <span class="glyphicon glyphicon-eye-open">Mostrar     </span>
+                    </label>
+                    <input type="radio" id="show" name="group">
+
+                    <label for="hide" style="cursor:pointer;">
+                        <span class="glyphicon glyphicon-eye-close">Ocultar</span>
+                    </label>
+                    <input type="radio" id="hide" name="group">
+
+                    <div class="form-group" id="columnas">
+
+                        @*<div class="form-group">*@
+                        <label for="selectColumnas" class="control-label col-sm-1">Columnas:</label>
+                        <div class="input-group col-sm-10" id="selectColumnas">
+                            <select id="cmbColumnas" class="form-control" multiple data-placeholder="Indique las columnas a Visualizar en la grid"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="gj-margin-top-10" id="grid">
+            <table id="gridConsulta"></table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/Scripts/Funciones/General.js")
+    <script type="text/javascript">
+
+        var rutaConsultaEmpresas = "@Url.Action("ObtieneListaEmpresas", "ComprasPorPagar")";
+        var rutaConsultaProveedoresPorEmpresa = "@Url.Action("ObtieneListaProveedores", "ComprasPorPagar")";
+        var rutaComprasPorPagarConsulta = "@Url.Action("Consulta", "ComprasPorPagar")";
+        var rutaEstatusComprasPorPagar = "@Url.Action("ObtieneListaEstatusComprasPorPagar", "ComprasPorPagar")";
+        var rutaActualizaNoModificable = "@Url.Action("ActualizaNoModificable", "ComprasPorPagar")";
+        var rutaComprasPorPagarReportePagosProgramados = "@Url.Action("GetPagosProgramados", "ComprasPorPagar")";
+        var lCompras = [];
+        var aColsAux = [];
+        var aColumnas = [
+                    { title: 'Empresa', field: 'Empresa', width: 20, sortable: true },
+                    { title: 'Serie', field: 'CSERIEDOCUMENTO', width: 20, sortable: true },
+                    { title: 'Folio', field: 'CFOLIO', width: 15, sortable: true },
+                    { title: 'Proveedor', field: 'CRAZONSOCIAL', width: 100, nowrap: "nowrap", sortable: true },
+                    { title: 'Fecha', field: 'CFECHA', width: 25, type: 'date', renderer: RenderNotNullDate, sortable: true },
+                    { title: 'F. Venc', field: 'CFECHAVENCIMIENTO', width: 25, type: 'date', renderer: RenderNotNullDate, sortable: true },
+                    { title: 'Prog. Pago', field: 'FechaProgPago', width: 25, type: 'date', renderer: RenderNotNullDate, sortable: true },
+                    { title: 'Pagada', field: 'FechaPago', width: 25, type: 'date', renderer: RenderNotNullDate, sortable: true },
+                    { title: 'Importe', field: 'CNETO', width: 25, renderer: fncCurrency },
+                    { title: 'IVA', field: 'CIMPUESTO1', width: 25, renderer: fncCurrency },
+                    { title: 'Total', field: 'CTOTAL', width: 25, renderer: fncCurrency },
+                    { title: 'S. Pend', field: 'CPENDIENTE', width: 25, renderer: fncCurrency, sortable: true },
+                    { title: 'Referencia', field: 'CREFERENCIA', width: 25, nowrap: "nowrap", sortable: true },
+                    { title: 'Usuario', field: 'CTEXTOEXTRA1', width: 50, nowrap: "nowrap", sortable: true },
+                    { title: 'Estatus', field: 'Estatus', width: 30, sortable: true }
+        ];
+
+        $(document).ready(function () {
+            hideLoading();
+            $('#dteFechaDesde').datetimepicker({ defaultDate: new Date(), format: 'DD/MM/YYYY' });//.on('dp.change', Consultar);
+            $('#dteFechaHasta').datetimepicker({ defaultDate: new Date(), format: 'DD/MM/YYYY' });//.on('dp.change', Consultar);
+            $('#btnPagosProgRpt').on('click', ReportePagosProgramados);
+            $('#btnConsulta').on('click', Consultar);
+            $('#btnExpGrid').on('click', ExportaGrid);
+
+            var lestatus = ObtieneListaJson(null, rutaEstatusComprasPorPagar);
+            var cmbe = $("#cmbEstatus");
+            RenderOpcionesEnComboWithEvents(cmbe, lestatus, null, false);
+
+            var lempresas = ObtieneListaJson(null, rutaConsultaEmpresas);
+            var cmb = $("#cmbEmpresa");
+            RenderOpcionesEnComboWithEvents(cmb, lempresas, SetProveedores, true);
+
+            var cmbCols = $('#cmbColumnas').empty();
+            $.each(aColumnas, function (idx, acol) {
+                var opt = $('<option value="' + acol.field + '" selected>' + acol.title + '</option>');
+                opt.data('item', acol);
+                opt.appendTo(cmbCols);
+            });
+            cmbCols.select2();
+            cmbCols.on('change', ShowHideCol);
+            aColsAux = $.extend(true, [], aColumnas);
+
+            hideLoading();
+            $('#btnConsulta').trigger('click');
+        });
+
+        function ShowHideCol(e, h) {
+            if (e.removed != undefined) {
+                $('#gridConsulta').grid().hideColumn(e.removed.id);
+                for (idx = 0; idx < aColsAux.length; idx++) {
+                    if (aColsAux[idx].field == e.removed.id) {
+                        aColsAux.splice(idx, 1);
+                        break;
+                    }
+                }
+            }
+            if (e.added != undefined) {
+                for (idx = 0; idx < aColumnas.length; idx++) {
+                    if (aColumnas[idx].field == e.added.id) {
+                        aColsAux.splice(idx, 0, aColumnas[idx]);
+                        break;
+                    }
+                }
+                $('#gridConsulta').grid().showColumn(e.added.id);
+            }
+        }
+
+        function SetProveedores(evt, hdl) {
+            var empresas = GetSelectedvalues('cmbEmpresa');
+            var params = { empresas: empresas };
+            lproveedores = ObtieneListaJson(params, rutaConsultaProveedoresPorEmpresa);
+            var selectProveedor = $('#selectProveedor');
+            selectProveedor.empty();
+            var cmb = $('<select id="cmbProveedor" class="form-control" multiple data-placeholder="Seleccione un Proveedor">');
+            cmb.appendTo(selectProveedor);
+            RenderOpcionesEnComboOptionsGroupWithEvents(cmb, lproveedores, null, false);
+            var btnSearch = $('<span class="input-group-btn" data-select2-open="cmbProveedor"><button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button></span>');
+            btnSearch.on('click', function () { $("#" + $(this).data("select2-open")).select2("open"); });
+            btnSearch.appendTo(selectProveedor);
+        }
+
+        function GetSelectedvalues(cmb) {
+            var items = $('#' + cmb).find(':selected');
+            var arr = [];
+            if (items.length == 1) {
+                arr.push($(items[0]).data('item'));
+            }
+            else {
+                if (items.length > 1) {
+                    $.each(items, function (idx, obj) {
+                        arr.push($(obj).data('item'));
+                    });
+                }
+            }
+            return arr;
+        }
+
+        function GetParams() {
+            var dteFechaDesde = $("#dteFechaDesde").find("input").val();
+            var dteFechaHasta = $("#dteFechaHasta").find("input").val();
+            var aempresas = GetSelectedvalues('cmbEmpresa');
+            var aproveedores = GetSelectedvalues('cmbProveedor');
+            var bstatus = ($('#chkTodas').is(':checked')) ? 0 : 1;
+            var astatus = GetSelectedvalues('cmbEstatus');
+            var params = { fechainicio: dteFechaDesde, fechafin: dteFechaHasta, empresa: aempresas, proveedor: aproveedores, estatus: astatus };
+            return params;
+        }
+
+        function Consultar(evt, hdl) {
+            showLoading();
+            evt.preventDefault();
+            var params = GetParams();
+            params.Todas = false;
+            lCompras = ObtieneListaJson(params, rutaComprasPorPagarConsulta);
+            var arrsizes = [];
+            var auxInc = 15;
+            var iinc = auxInc;
+            if (lCompras.length > 0) {
+                while (iinc <= 90 && iinc < lCompras.length) {
+                    arrsizes.push(iinc);
+                    iinc = iinc + 15;
+                }
+            }
+            if (lCompras.length > iinc) {
+                arrsizes.push(lCompras.length);
+            }
+            var grid = $('#grid');
+            var dgrid = $('<table id="gridConsulta"></table>')
+            grid.empty();
+            dgrid.grid({
+                uiLibrary: 'bootstrap'
+                , title: 'Compras por Pagar'
+                , primaryKey: 'CIDDOCUMENTO'
+                , dataSource: lCompras
+                , resizableColumns: true
+                , notFoundText: 'No hay información con los parámetros indicados'
+                , columns: aColsAux
+                , pager: { limit: auxInc, sizes: arrsizes }
+                , responsive: true
+            }).appendTo(grid);
+            hideLoading();
+        };
+
+        function ExportaGrid(e, h) {
+            e.preventDefault();
+            if (lCompras == "null" || lCompras == null || lCompras.length == 0) {
+                alert('No hay información para exportar');
+                return;
+            }
+
+            var ret = [];
+            var extra_ColsAux = $.extend(true, [], aColsAux);
+            $.each(lCompras, function (ixdx, xrow) {
+                var filaaux_n = {};
+                for (jdx = 0; jdx < extra_ColsAux.length; jdx++) {
+                    var sncampo = extra_ColsAux[jdx].field;
+                    var sncolumna = extra_ColsAux[jdx].title;
+                    var xxooo = xrow[sncampo];
+                    if (extra_ColsAux[jdx].type == "date") {
+                        var moment_campofecha = moment(xxooo);
+                        var moment_minfecha = moment(new Date(-62135575200000));
+                        if (!moment_campofecha.isSame(moment_minfecha))
+                            xxooo = moment(xxooo).format("DD/MM/YYYY");
+                        else
+                            xxooo = "";
+                    }
+                    filaaux_n[sncolumna] = xxooo;
+                };
+                ret.push(filaaux_n);
+            });
+            JSONToCSVConvertor(ret, "Compras Por Pagar", true);
+        }
+
+        function ReportePagosProgramados(e, h) {
+            e.preventDefault();
+            var ret = ObtieneListaJson(null, rutaComprasPorPagarReportePagosProgramados);
+            if (ret == "null" || ret == null) {
+                alert('No existen pagos programados');
+                return;
+            }
+            var lpagos = JSON.parse(ret);
+            if (lpagos.length == 0) {
+                alert('No existen pagos programados');
+                return;
+            }
+
+            // Obtiene lo nombres de columnas
+            var aCols = [];
+            for (var index in lpagos[0]) {
+                aCols.push(index);
+            }
+            var aColsDte = [];
+            var rowTotals = $.extend(true, {}, lpagos[0]);
+            //Obtiene columnas cuyo encabezado es una fecha
+            $.each(aCols, function (idx, obj) {
+                if (moment(obj, 'YYYY-MM-DD', true).isValid())
+                    aColsDte.push(obj);
+            });
+            var aTotales = [];
+            //Recorre las filas para calcular totales
+            $.each(lpagos, function (idx, fila) {
+                $.each(aColsDte, function (idj, ofecha) {
+                    if (fila[ofecha] == null)
+                        fila[ofecha] = 0;
+                    if (aTotales[ofecha] == undefined) {
+                        aTotales[ofecha] = fila[ofecha];
+                    }
+                    else
+                        aTotales[ofecha] += fila[ofecha];
+                });
+            });
+            //Set total en la fila de totales
+            $.each(aColsDte, function (idj, ofecha) {
+                rowTotals[ofecha] = aTotales[ofecha];
+            });
+            $.each(aCols, function (idx, obj) {
+                if (!moment(obj, 'YYYY-MM-DD', true).isValid())
+                    rowTotals[obj] = '';
+            });
+            var lcols = aCols.length;
+            lcols = lcols - aColsDte.length;
+            rowTotals.Proveedor = 'TOTAL x DIA';
+            lpagos.splice(0, 0, rowTotals);
+
+            JSONToCSVConvertor(lpagos, "Pagos Programados", true);
+        }
+    </script>
+}
